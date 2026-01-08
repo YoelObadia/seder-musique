@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette Officielle "Oriental Mediterranean Premium" */
+
+  /* Fond & texte */
+  --color-background: #0C1B2A;
+  /* Bleu nuit profond */
+  --color-foreground: #F5F1E8;
+  /* Ivoire */
+
+  /* Accents */
+  --color-accent-primary: #C9A24D;
+  /* Or doux */
+  --color-accent-secondary: #C9A24D;
+  /* OR = CTA principal */
+  --color-accent-muted: #A38A4B;
+  /* or atténué (hover / border) */
+
+  --glow-gold: 0 0 10px rgba(201, 162, 77, 0.35);
+
+  /* Typographies Premium */
+  --font-display: "Cinzel", "Playfair Display", serif;
+  --font-mono: "Inter", "Montserrat", sans-serif;
+
+  /* Mouvement */
+  --ease-antigravity: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 1. Reset et Fond de Base */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  .display-text {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+}
+
+/* 2. Grille de structure */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  padding: 0 1rem;
+  opacity: 0.04;
+}
+
+.grid-column {
+  border-left: 1px solid var(--color-foreground);
+  border-right: 1px solid var(--color-foreground);
+  height: 100%;
+}
+
+/* 3. Texte doré premium */
+.neon-text {
+  color: var(--color-accent-primary);
+  text-shadow:
+    0 0 6px rgba(201, 162, 77, 0.4),
+    0 0 18px rgba(201, 162, 77, 0.25);
+}
+
+/* 4. Boutons */
+.btn-premium {
+  position: relative;
+  padding: 1rem 2rem;
+  border: 1px solid var(--color-accent-primary);
+  color: var(--color-accent-primary);
+  transition: all 0.4s var(--ease-antigravity);
+  overflow: hidden;
+}
+
+.btn-premium:hover {
+  background-color: var(--color-accent-primary);
+  color: var(--color-background);
+}
+
+/* CTA principal (booking) */
+.btn-primary {
+  background: var(--color-accent-secondary);
+  color: var(--color-foreground);
+  box-shadow: var(--glow-gold);
+  transition: transform 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+}

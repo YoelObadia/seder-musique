@@ -1,0 +1,381 @@
+{
+    "nav": {
+        "agency": "Agency",
+        "services": "Services",
+        "submenu": {
+            "production": "Event Production",
+            "influence": "Influencer Marketing",
+            "booking": "Booking",
+            "talents": "Talents"
+        },
+        "billetterie": "Ticketing",
+        "blog": "Blog",
+        "contact": "Contact"
+    },
+    "contact": {
+        "title": "Let's build the exceptional.",
+        "subtitle": "Fill out this form to start your project.",
+        "form": {
+            "name": "Full Name",
+            "email": "Email",
+            "phone": "Phone",
+            "message": "Message",
+            "submit": "SEND REQUEST",
+            "projectType": {
+                "label": "Nature of your request",
+                "options": {
+                    "booking_seder": "Seder Music — International Booking (Stars & DJs)",
+                    "booking_rd": "R&D Records — Confirmed Artists Booking (Musicians, Composers)",
+                    "talents_rd": "R&D Records — Join Label (Mediterranean & Oriental Talents)",
+                    "production": "Event Production (Concert, Gala)",
+                    "marketing": "Influencer Marketing"
+                }
+            },
+            "dynamicFields": {
+                "artistType": {
+                    "label": "What artist profile are you looking for?",
+                    "options": [
+                        "Singer / Voice",
+                        "Musician / Instrumentalist",
+                        "Orchestra",
+                        "Composer / Arranger"
+                    ]
+                },
+                "demo": "Link to your demo or socials (YouTube, SoundCloud, etc.)",
+                "productionNote": "Production logistics are handled by Seder Events."
+            }
+        },
+        "info": {
+            "location": "Jerusalem, Israel",
+            "management": "Seder Music is a department of Seder Group. Our production logistics are handled by Seder Events."
+        },
+        "errors": {
+            "name_required": "Name is required.",
+            "email_invalid": "Invalid email address.",
+            "required": "This field is required.",
+            "message_too_short": "Message must be at least 10 characters long."
+        },
+        "success": {
+            "title": "Message Sent",
+            "message": "Thank you for contacting us. We will get back to you within 48h.",
+            "reset_btn": "Send another message"
+        }
+    },
+    "home": {
+        "hero_title": "The Architect of Your Events.",
+        "hero_subtitle": "Global Agency: Production, Influence, Booking & Talents.",
+        "cta_primary": "Discover Our Services",
+        "cta_secondary": "Contact Us"
+    },
+    "services_section": {
+        "title": "Our Pillars of Excellence",
+        "subtitle": "A global approach to elevate your projects.",
+        "cards": {
+            "production": {
+                "title": "Production",
+                "desc": "Designing bespoke sonic and visual experiences."
+            },
+            "influence": {
+                "title": "Influence",
+                "desc": "Boost your visibility by merging your image with that of the stars."
+            },
+            "booking": {
+                "title": "Booking",
+                "desc": "The best artistic selection for your events."
+            },
+            "talents": {
+                "title": "Talents",
+                "desc": "Management and deployment of exceptional creative profiles."
+            }
+        }
+    },
+    "production": {
+        "hero_title": "Event Production",
+        "hero_text": "From concept to execution, we transform your visions into unforgettable experiences.",
+        "services_bento": {
+            "record": "Corporate Events",
+            "mix": "Concerts & Festivals",
+            "beat": "Launches & Parties",
+            "visual": "Audiovisual Production"
+        },
+        "comparison_title": "Why Seder?"
+    },
+    "booking": {
+        "hero_title": "Booking & Management",
+        "hero_subtitle": "Connecting unique talents to global audiences.",
+        "filters": {
+            "all": "All",
+            "dj": "DJs",
+            "live": "Live Acts"
+        },
+        "wizard_steps": {
+            "role_selection": "What is your role?",
+            "organizer": "Organizer",
+            "artist": "Artist",
+            "details": "Project Details",
+            "success": "Request Received"
+        },
+        "cta": "Start a Request",
+        "process": {
+            "contact": {
+                "title": "Contact Us",
+                "desc": "Send your brief via our smart wizard."
+            },
+            "quote": {
+                "title": "Proposal & Quote",
+                "desc": "Receive a tailored offer within 24h."
+            },
+            "contract": {
+                "title": "Contracting",
+                "desc": "Secure electronic signature and deposit."
+            },
+            "show": {
+                "title": "Showtime",
+                "desc": "Logistics coordination and unforgettable performance."
+            }
+        }
+    },
+    "marketing": {
+        "hero_title": "Influencer Marketing",
+        "hero_subtitle": "Amplify your message with the right voices.",
+        "services": {
+            "influence": "Influence Campaigns",
+            "social": "Social Media Strategy",
+            "content": "Content Creation",
+            "pr": "Press Relations"
+        }
+    },
+    "talents": {
+        "hero_title": "Talents & Curation",
+        "hero_subtitle": "We scout and shape the icons of tomorrow."
+    },
+    "billetterie": {
+        "hero_title": "Ticketing",
+        "hero_subtitle": "Manage your events from A to Z.",
+        "cta": "Access Ticketing"
+    },
+    "blog": {
+        "hero_title": "News",
+        "hero_subtitle": "The latest from the Seder universe.",
+        "read_more": "Read More"
+    },
+    "artist": {
+        "book_btn": "Book this Artist",
+        "stats_label": "Statistics",
+        "biography_label": "Biography",
+        "releases_label": "Discography",
+        "followers": "Followers",
+        "streams": "Monthly Listeners"
+    },
+    "agency": {
+        "hero_title": "Based in Israel. A Global Stage.",
+        "hero_subtitle": "International Booking & Artistic Production",
+        "vision_title": "The Origin",
+        "vision_text": "Born in Jerusalem, at the crossroads of cultures and exacting standards, Seder Music is a booking and production agency conceived as a creative house. We don't just organize; we build artistic bridges between Israel and the rest of the world.",
+        "leadership_title": "The Standard",
+        "leadership_bio": "From musical direction to technical execution, we accompany the most demanding institutions and families in creating immersive experiences. Our international network allows us to break boundaries: inviting the exceptional to Israel, and bringing Israeli excellence to global stages.",
+        "signature": "Operational excellence in the service of radical emotion."
+    },
+    "expert": {
+        "name": "Raphaël Skouri",
+        "role": "Director",
+        "stats": {
+            "experience": "Years Experience"
+        }
+    },
+    "service_pages": {
+        "production": {
+            "hero_title": "The Engineering of Emotion.",
+            "hero_subtitle": "When Seder Music's vision meets the organization of Seder Events.",
+            "synergy_title": "The Power of the Group",
+            "synergy_text": "For every major production, Seder Music mobilizes the expertise of Seder Events. Our clients gain access to a universe of prestigious services, complex logistics, and international coordination.",
+            "pillars": {
+                "music": "Music",
+                "business": "Business",
+                "event": "Event"
+            },
+            "uhnwi_title": "The UHNWI Standard",
+            "uhnwi_text": "Every gala, every concert is treated with the standards of the most demanding private concierge services.",
+            "pillars_details": {
+                "music_sub": "Core Expertise",
+                "project_title": "Your Project",
+                "project_sub": "The Convergence",
+                "event_sub": "Strategic Logistics"
+            },
+            "concierge_btn": "Concierge Access",
+            "signature": "Seder Group: One signature, total mastery."
+        },
+        "booking": {
+            "hero_title": "Access to Excellence.",
+            "hero_subtitle": "World-renowned Singers, Musicians, and DJs for your stages.",
+            "core_text": "We provide access to major artists by guaranteeing complete management: from contract negotiation to technical logistics (travel, accommodation, riders). We understand the expectations of a global audience and connect the biggest stages with the rarest talents.",
+            "points_title": "Services",
+            "points": [
+                "Artist Selection",
+                "Contract Management",
+                "Technical Riders",
+                "Artistic Support"
+            ],
+            "marquee": [
+                "World Class",
+                "Talents",
+                "Exclusive",
+                "Performances"
+            ],
+            "book_btn": "Book a Talent",
+            "wow_fact": "The promise of pure emotion, from the first note to the final encore."
+        },
+        "talents": {
+            "slug": "talents",
+            "title": "R&D Records",
+            "tag": "Records & Development",
+            "subtitle": "From creative spark to global stage. We develop talents and produce musical excellence.",
+            "audition_btn": "Auditions & Scouting",
+            "booking_btn": "Production & Booking",
+            "sections": {
+                "incubation": {
+                    "title": "Talent Development",
+                    "text": "We scout and propel the new generation of Mediterranean and Oriental music. R&D Records provides global and bespoke support: from studio production to image coaching, music videos, and social media management. Our team puts its expertise at the service of your takeoff.",
+                    "bullets": [
+                        "Music Production & Artistic Direction",
+                        "Visual Identity & Professional Video Clips",
+                        "Image Strategy & Social Media",
+                        "Booking on our events and concerts"
+                    ]
+                },
+                "production": {
+                    "title": "Production & Pro Booking",
+                    "text": "The label also supports established artists and musicians. We put our production power and booking network at your disposal for your stage projects or recordings, whether you are a singer, composer, or instrumentalist.",
+                    "bullets": [
+                        "Booking & Image Representation",
+                        "High-end Studio Session Production",
+                        "Technical Coordination for your concerts",
+                        "Access to the Seder Music network"
+                    ]
+                },
+                "who": {
+                    "title": "For Whom?",
+                    "text": "We are not just looking for voices, we are looking for signatures. Singers, solo musicians, composers: if you have raw talent, we have the structure to refine it."
+                }
+            }
+        },
+        "influence": {
+            "title": "Influencer Marketing",
+            "subtitle": "Today, attention is earned with content, faces, and a credible story. Seder Music activates the power of artists, creators, and talents to give your brand strong visibility—and above all, real impact.",
+            "step_labels": {
+                "expertise": "Expertise",
+                "process": "Process",
+                "activation": "Activation"
+            },
+            "sections": {
+                "whatWeDo": {
+                    "title": "What We Do",
+                    "text": "We design and pilot bespoke influence campaigns around your product or service, transforming the image and audience of talents into high-performing content and activations.",
+                    "bullets": [
+                        "Artists & Creators (music, lifestyle, entertainment, targeted niches)",
+                        "Premium Content (Reels, TikTok, YouTube, Stories, Shorts)",
+                        "Event Activations (showcases, launches, pop-ups, brand moments)",
+                        "Artistic Placements (music videos, studio behind-the-scenes, live performance, musical universe)"
+                    ]
+                },
+                "ourApproach": {
+                    "title": "Our Approach",
+                    "text": "We don’t do “influence just for noise”. We build campaigns consistent with your image, with a clear strategy and mastered execution.",
+                    "steps": [
+                        {
+                            "title": "Positioning & Objective",
+                            "desc": "Awareness, acquisition, sales, launch, rebranding."
+                        },
+                        {
+                            "title": "Talent Casting",
+                            "desc": "Selection of artists consistent with your audience, values, and DNA."
+                        },
+                        {
+                            "title": "Creative Direction",
+                            "desc": "Concept, scripts, tone, visual universe, guidelines, and validations."
+                        },
+                        {
+                            "title": "Production & Distribution",
+                            "desc": "Filming, editing, scheduling, publishing, and coordination."
+                        },
+                        {
+                            "title": "Tracking & Optimization",
+                            "desc": "Reporting, performance, adjustments, and recommendations."
+                        }
+                    ]
+                },
+                "whatYouGet": {
+                    "title": "What You Get",
+                    "bullets": [
+                        "A campaign consistent with your identity",
+                        "Content that generates reach + desirability",
+                        "Clean and secure execution (contracts, image rights, deliverables)",
+                        "Measurable results: views, engagement, clicks, conversions"
+                    ]
+                },
+                "formats": {
+                    "title": "Available Formats",
+                    "items": [
+                        {
+                            "title": "1 to 3 Talent Campaigns",
+                            "desc": "Fast, effective, targeted."
+                        },
+                        {
+                            "title": "Multi-Talent Campaigns",
+                            "desc": "Mass reach + repeated presence."
+                        },
+                        {
+                            "title": "Brand Content",
+                            "desc": "Ad-level quality, premium brand content."
+                        },
+                        {
+                            "title": "Events + Coverage",
+                            "desc": "Offline activation + online amplification."
+                        },
+                        {
+                            "title": "Ambassadors",
+                            "desc": "Image and content over several months."
+                        }
+                    ]
+                },
+                "forWho": {
+                    "title": "For Whom?",
+                    "text": "Brands, startups, institutions, events, hospitality, dining, lifestyle, luxury, tech, real estate, tourism… If you have a product to make known, we find the right voice to carry it."
+                },
+                "cta": {
+                    "title": "Work With Us",
+                    "text": "Tell us about your brand, your goal, and your budget. We send you a clear proposal: concept + talents + calendar + deliverables.",
+                    "primaryButton": {
+                        "label": "Contact Us",
+                        "href": "/contact"
+                    }
+                }
+            }
+        }
+    },
+    "manifesto": {
+        "content": "Seder is a creative house. We don't follow trends, we create them. Our approach is radical, our aesthetic is timeless. We are the architect of your vision.",
+        "signature": "Seder Music Group"
+    },
+    "cta_final": {
+        "text": "Collaborate with the Agency",
+        "sub": "Bring your vision to life"
+    },
+    "footer": {
+        "description": "Music Agency · Booking · Production · Influencer Marketing · Talent Management\nIsrael · International",
+        "headings": {
+            "services": "Services",
+            "legal": "Legal"
+        },
+        "links": {
+            "agency": "Agency",
+            "booking": "Booking",
+            "production": "Production",
+            "marketing": "Marketing",
+            "talents": "Talents",
+            "legal_notice": "Legal Notice",
+            "contact": "Contact"
+        },
+        "copyright": "© 2026 Seder Music Group. All rights reserved."
+    }
+}

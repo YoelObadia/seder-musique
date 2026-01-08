@@ -1,0 +1,381 @@
+{
+    "nav": {
+        "agency": "סוכנות",
+        "services": "שירותים",
+        "submenu": {
+            "production": "הפקת אירועים",
+            "influence": "שיווק משפיענים",
+            "booking": "בוקינג",
+            "talents": "ניהול טאלנטים"
+        },
+        "billetterie": "כרטוס",
+        "blog": "בלוג",
+        "contact": "צור קשר"
+    },
+    "contact": {
+        "title": "Let's build the exceptional.",
+        "subtitle": "Fill out this form to start your project.",
+        "form": {
+            "name": "Full Name",
+            "email": "Email",
+            "phone": "Phone",
+            "message": "Message",
+            "submit": "SEND REQUEST",
+            "projectType": {
+                "label": "Nature of your request",
+                "options": {
+                    "booking_seder": "Seder Music — International Booking (Stars & DJs)",
+                    "booking_rd": "R&D Records — Confirmed Artists Booking (Musicians, Composers)",
+                    "talents_rd": "R&D Records — Join Label (Mediterranean & Oriental Talents)",
+                    "production": "Event Production (Concert, Gala)",
+                    "marketing": "Influencer Marketing"
+                }
+            },
+            "dynamicFields": {
+                "artistType": {
+                    "label": "What artist profile are you looking for?",
+                    "options": [
+                        "Singer / Voice",
+                        "Musician / Instrumentalist",
+                        "Orchestra",
+                        "Composer / Arranger"
+                    ]
+                },
+                "demo": "Link to your demo or socials (YouTube, SoundCloud, etc.)",
+                "productionNote": "Production logistics are handled by Seder Events."
+            }
+        },
+        "info": {
+            "location": "Jerusalem, Israel",
+            "management": "Seder Music is a department of Seder Group. Our production logistics are handled by Seder Events."
+        },
+        "errors": {
+            "name_required": "שם חובה.",
+            "email_invalid": "כתובת אימייל לא חוקית.",
+            "required": "שדה זה חובה.",
+            "message_too_short": "ההודעה חייבת להכיל לפחות 10 תווים."
+        },
+        "success": {
+            "title": "הודעה נשלחה",
+            "message": "תודה שיצרתם איתנו קשר. נחזור אליכם תוך 48 שעות.",
+            "reset_btn": "שלח הודעה נוספת"
+        }
+    },
+    "home": {
+        "hero_title": "האדריכל של האירועים שלך.",
+        "hero_subtitle": "סוכנות גלובלית: הפקה, שיווק, בוקינג וטאלנטים.",
+        "cta_primary": "גלה את השירותים שלנו",
+        "cta_secondary": "צור קשר"
+    },
+    "services_section": {
+        "title": "עמודי התווח שלנו",
+        "subtitle": "גישה גלובלית כדי לשדרג את הפרויקטים שלך.",
+        "cards": {
+            "production": {
+                "title": "הפקה",
+                "desc": "יצירת חוויות קוליות וויזואליות בהתאמה אישית."
+            },
+            "influence": {
+                "title": "השפעה",
+                "desc": "שפרו את הנראות שלכם על ידי מיזוג התמונה שלכם עם זו של הכוכבים."
+            },
+            "booking": {
+                "title": "בוקינג",
+                "desc": "הבחירה האמנותית הטובה ביותר לאירועים שלכם."
+            },
+            "talents": {
+                "title": "טאלנטים",
+                "desc": "ניהול ופריסת פרופילים יצירתיים יוצאי דופן."
+            }
+        }
+    },
+    "production": {
+        "hero_title": "הפקת אירועים",
+        "hero_text": "מהקונספט ועד לביצוע, אנו הופכים את החזון שלך לחוויות בלתי נשכחות.",
+        "services_bento": {
+            "record": "אירועים עסקיים",
+            "mix": "קונצרטים ופסטיבלים",
+            "beat": "השקות ומסיבות",
+            "visual": "הפקה אודיו-וויזואלית"
+        },
+        "comparison_title": "למה סדר?"
+    },
+    "booking": {
+        "hero_title": "בוקינג וניהול",
+        "hero_subtitle": "חיבור כישרונות ייחודיים לקהלים גלובליים.",
+        "filters": {
+            "all": "הכל",
+            "dj": "תקליטנים",
+            "live": "הופעות חיות"
+        },
+        "wizard_steps": {
+            "role_selection": "מה התפקיד שלך?",
+            "organizer": "מארגן",
+            "artist": "אמן",
+            "details": "פרטי הפרויקט",
+            "success": "בקשה התקבלה"
+        },
+        "cta": "התחל בקשה",
+        "process": {
+            "contact": {
+                "title": "יצירת קשר",
+                "desc": "שלח את הבריף שלך דרך האשף החכם שלנו."
+            },
+            "quote": {
+                "title": "הצעה ומחיר",
+                "desc": "קבל הצעה מותאמת אישית תוך 24 שעות."
+            },
+            "contract": {
+                "title": "חתימת חוזה",
+                "desc": "חתימה דיגיטלית מאובטחת ומקדמה."
+            },
+            "show": {
+                "title": "המופע",
+                "desc": "תיאום לוגיסטי והופעה בלתי נשכחת."
+            }
+        }
+    },
+    "marketing": {
+        "hero_title": "שיווק משפיענים",
+        "hero_subtitle": "הגבר את המסר שלך עם הקולות הנכונים.",
+        "services": {
+            "influence": "קמפיינים של משפיענים",
+            "social": "אסטרטגיית רשתות חברתיות",
+            "content": "יצירת תוכן",
+            "pr": "יחסי ציבור"
+        }
+    },
+    "talents": {
+        "hero_title": "ניהול טאלנטים",
+        "hero_subtitle": "אנחנו מגלים ומעצבים את האייקונים של המחר."
+    },
+    "billetterie": {
+        "hero_title": "כרטוס",
+        "hero_subtitle": "נהל את האירועים שלך מא' ועד ת'.",
+        "cta": "גש לכרטוס"
+    },
+    "blog": {
+        "hero_title": "חדשות",
+        "hero_subtitle": "העדכונים האחרונים מעולם סדר.",
+        "read_more": "קרא עוד"
+    },
+    "artist": {
+        "book_btn": "הזמן אמן זה",
+        "stats_label": "סטטיסטיקה",
+        "biography_label": "ביוגרפיה",
+        "releases_label": "דיסקוגרפיה",
+        "followers": "עוקבים",
+        "streams": "מאזינים חודשיים"
+    },
+    "agency": {
+        "hero_title": "בסיס בישראל. במוֹת עולם.",
+        "hero_subtitle": "International Booking & Artistic Production",
+        "vision_title": "המקור",
+        "vision_text": "נולדה בירושלים, בצומת של תרבויות וסטנדרטים גבוהים, Seder Music היא סוכנות בוקינג והפקה שתוכננה כבית יצירה. אנו לא רק מארגנים; אנו בונים גשרים אמנותיים בין ישראל לעולם.",
+        "leadership_title": "הסטנדרט",
+        "leadership_bio": "מניהול מוזיקלי ועד ביצוע טכני, אנו מלווים את המוסדות והמשפחות התובענייים ביותר ביצירת חוויות סוחפות. הרשת הבינלאומית שלנו מאפשרת לנו לפרוץ גבולות: להזמין את יוצא הדופן לישראל, ולהביא את המצוינות הישראלית לבמות העולם.",
+        "signature": "מצוינות תפעולית בשירות רגש טוטאלי."
+    },
+    "expert": {
+        "name": "רפאל סקורי",
+        "role": "מנהל",
+        "stats": {
+            "experience": "שנות ניסיון"
+        }
+    },
+    "service_pages": {
+        "production": {
+            "hero_title": "הנדסת הרגש.",
+            "hero_subtitle": "כשהחזון של סדר מיוזיק פוגש את הארגון של סדר אירועים.",
+            "synergy_title": "כוחה של הקבוצה",
+            "synergy_text": "עבור כל הפקה גדולה, סדר מיוזיק מגייסת את המומחיות של סדר אירועים. לקוחותינו זוכים לגישה לעולם של שירותי יוקרה, לוגיסטיקה מורכבת ותיאום בינלאומי.",
+            "pillars": {
+                "music": "מוזיקה",
+                "business": "עסקים",
+                "event": "אירועים"
+            },
+            "uhnwi_title": "סטנדרט UHNWI",
+            "uhnwi_text": "כל גאלה וכל קונצרט מטופלים בסטנדרטים של שירותי הקונסיירז' הפרטיים התובעניים ביותר.",
+            "pillars_details": {
+                "music_sub": "מומחיות ליבה",
+                "project_title": "הפרויקט שלך",
+                "project_sub": "ההתכנסות",
+                "event_sub": "לוגיסטיקה אסטרטגית"
+            },
+            "concierge_btn": "גישה לקונסיירז'",
+            "signature": "קבוצת סדר: חתימה אחת, שליטה מלאה."
+        },
+        "booking": {
+            "hero_title": "גישה למצוינות.",
+            "hero_subtitle": "זמרים, נגנים ודי-ג'ays בעלי שם עולמי לבמות שלכם.",
+            "core_text": "אנו מספקים גישה לאמנים מובילים תוך הבטחת ניהול מלא: ממשא ומתן על חוזים ועד לוגיסטיקה טכנית (נסיעות, לינה, מפרטים טכניים). אנו מבינים את הציפיות של קהל גלובלי ומחברים את הבמות הגדולות ביותר לכישרונות הנדירים ביותר.",
+            "points_title": "שירותים",
+            "points": [
+                "בחירת אמנים",
+                "ניהול חוזים",
+                "מפרטים טכניים",
+                "ליווי אמנותי"
+            ],
+            "marquee": [
+                "World Class",
+                "Talents",
+                "Exclusive",
+                "Performances"
+            ],
+            "book_btn": "הזמן טאלנט",
+            "wow_fact": "ההבטחה לרגש טהור, מהתו הראשון ועד להדרן האחרון."
+        },
+        "talents": {
+            "slug": "talents",
+            "title": "R&D Records",
+            "tag": "Records & Development",
+            "subtitle": "From creative spark to global stage. We develop talents and produce musical excellence.",
+            "audition_btn": "אודישנים וסקאוטינג",
+            "booking_btn": "הפקה ובוקינג",
+            "sections": {
+                "incubation": {
+                    "title": "Talent Development",
+                    "text": "We scout and propel the new generation of Mediterranean and Oriental music. R&D Records provides global and bespoke support: from studio production to image coaching, music videos, and social media management. Our team puts its expertise at the service of your takeoff.",
+                    "bullets": [
+                        "Music Production & Artistic Direction",
+                        "Visual Identity & Professional Video Clips",
+                        "Image Strategy & Social Media",
+                        "Booking on our events and concerts"
+                    ]
+                },
+                "production": {
+                    "title": "Production & Pro Booking",
+                    "text": "The label also supports established artists and musicians. We put our production power and booking network at your disposal for your stage projects or recordings, whether you are a singer, composer, or instrumentalist.",
+                    "bullets": [
+                        "Booking & Image Representation",
+                        "High-end Studio Session Production",
+                        "Technical Coordination for your concerts",
+                        "Access to the Seder Music network"
+                    ]
+                },
+                "who": {
+                    "title": "For Whom?",
+                    "text": "We are not just looking for voices, we are looking for signatures. Singers, solo musicians, composers: if you have raw talent, we have the structure to refine it."
+                }
+            }
+        },
+        "influence": {
+            "title": "שיווק משפיענים",
+            "subtitle": "כיום, תשומת לב מרוויחים עם תוכן, פנים וסיפור אמין. Seder Music מפעילה את הכוח של אמנים, יוצרים וכישרונות כדי לתת למותג שלך נראות חזקה - ומעל לכל, השפעה אמיתית.",
+            "step_labels": {
+                "expertise": "מומחיות",
+                "process": "תהליך",
+                "activation": "הפעלה"
+            },
+            "sections": {
+                "whatWeDo": {
+                    "title": "מה אנו עושים",
+                    "text": "אנו מעצבים ומנהלים קמפיינים משפיענים בהתאמה אישית סביב המוצר או השירות שלך, תוך הפיכת התדמית והקהל של הכישרונות לתוכן והפעלות בעלי ביצועים גבוהים.",
+                    "bullets": [
+                        "אמנים ויוצרים (מוזיקה, לייף סטייל, בידור, נישות ממוקדות)",
+                        "תוכן פרימיום (Reels, TikTok, YouTube, Stories, Shorts)",
+                        "הפעלות באירועים (השקות, פופ-אפ, רגעי מותג)",
+                        "שילובים אמנותיים (קליפים, מאחורי הקלעים באולפן, הופעה חיה)"
+                    ]
+                },
+                "ourApproach": {
+                    "title": "הגישה שלנו",
+                    "text": "אנחנו לא עושים \"השפעה רק בשביל הרעש\". אנו בונים קמפיינים התואמים לתדמית שלך, עם אסטרטגיה ברורה וביצוע מוקפד.",
+                    "steps": [
+                        {
+                            "title": "מיצוב ומטרה",
+                            "desc": "מודעות, רכישה, מכירות, השקה, מיתוג מחדש."
+                        },
+                        {
+                            "title": "ליהוק כישרונות",
+                            "desc": "בחירת אמנים התואמים לקהל, לערכים ול-DNA שלך."
+                        },
+                        {
+                            "title": "ניהול קריאייטיב",
+                            "desc": "קונספט, תסריטים, טון, שפה ויזואלית ואישורים."
+                        },
+                        {
+                            "title": "הפקה והפצה",
+                            "desc": "צילום, עריכה, תכנון, פרסום ותיאום."
+                        },
+                        {
+                            "title": "מעקב ואופטימיזציה",
+                            "desc": "דיווח, ביצועים, התאמות והמלצות."
+                        }
+                    ]
+                },
+                "whatYouGet": {
+                    "title": "מה אתם מקבלים",
+                    "bullets": [
+                        "קמפיין עקבי עם הזהות שלכם",
+                        "תוכן שמייצר חשיפה + נחשקות",
+                        "ביצוע נקי ומאובטח (חוזים, זכויות תמונה, תוצרים)",
+                        "תוצאות מדידות: צפיות, מעורבות, קליקים, המרות"
+                    ]
+                },
+                "formats": {
+                    "title": "פורמטים זמינים",
+                    "items": [
+                        {
+                            "title": "קמפיינים 1 עד 3 כישרונות",
+                            "desc": "מהיר, יעיל, ממוקד."
+                        },
+                        {
+                            "title": "קמפיינים מרובי כישרונות",
+                            "desc": "חשיפה המונית + נוכחות חוזרת."
+                        },
+                        {
+                            "title": "תוכן מותג",
+                            "desc": "רמת פרסומת, תוכן מותג פרימיום."
+                        },
+                        {
+                            "title": "אירועים + סיקור",
+                            "desc": "הפעלה אופליין + הגברה אונליין."
+                        },
+                        {
+                            "title": "שגרירים",
+                            "desc": "תדמית ותוכן למשך מספר חודשים."
+                        }
+                    ]
+                },
+                "forWho": {
+                    "title": "למי זה מתאים?",
+                    "text": "מותגים, סטארטאפים, מוסדות, אירועים, מלונאות, מסעדות, לייף סטייל, יוקרה, טק, נדל\"ן, תיירות... אם יש לכם מוצר לפרסם, אנו מוצאים את הקול הנכון לשאת אותו."
+                },
+                "cta": {
+                    "title": "עבדו איתנו",
+                    "text": "ספרו לנו על המותג, המטרה והתקציב שלכם. אנו נשלח לכם הצעה ברורה: קונספט + כישרונות + לוח זמנים + תוצרים.",
+                    "primaryButton": {
+                        "label": "צור קשר",
+                        "href": "/contact"
+                    }
+                }
+            }
+        }
+    },
+    "manifesto": {
+        "content": "סדר הוא בית יצירה. אנחנו לא עוקבים אחרי טרנדים, אנחנו יוצרים אותם. הגישה שלנו רדיקלית, האסתטיקה שלנו על-זמנית. אנחנו האדריכלים של החזון שלכם.",
+        "signature": "Seder Music Group"
+    },
+    "cta_final": {
+        "text": "ליצור קשר עם סוכנות",
+        "sub": "תנו חיים לחזון שלכם"
+    },
+    "footer": {
+        "description": "סוכנות מוזיקה · בוקינג · הפקה · שיווק משפיענים · ניהול טאלנטים\nישראל · בינלאומי",
+        "headings": {
+            "services": "שירותים",
+            "legal": "משפטי"
+        },
+        "links": {
+            "agency": "סוכנות",
+            "booking": "בוקינג",
+            "production": "הפקה",
+            "marketing": "שיווק",
+            "talents": "טאלנטים",
+            "legal_notice": "הצהרה משפטית",
+            "contact": "צור קשר"
+        },
+        "copyright": "© 2026 Seder Music Group. כל הזכויות שמורות."
+    }
+}
