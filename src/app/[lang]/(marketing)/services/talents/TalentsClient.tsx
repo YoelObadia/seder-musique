@@ -85,8 +85,8 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
 
             {/* ASYMMETRIC HERO */}
             <section className="flex flex-col lg:flex-row min-h-screen">
-                <div className="left-panel lg:w-5/12 relative min-h-[50vh] lg:min-h-screen lg:h-auto bg-[#1a1a1a] overflow-hidden">
-                    <div className="absolute inset-0">
+                <div className="left-panel lg:w-5/12 relative flex flex-col justify-start items-start bg-[#1a1a1a] overflow-hidden mt-24 h-[calc(100vh-6rem)] w-full">
+                    <div className="w-full h-full">
                         <Turntable className="w-full h-full" />
                     </div>
                     <div className="absolute inset-0 bg-blue-900/40 mix-blend-multiply pointer-events-none" />

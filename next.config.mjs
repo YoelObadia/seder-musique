@@ -1,9 +1,9 @@
-import type { NextConfig } from "next";
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   experimental: {
-    viewTransition: true,
+    // viewTransition: true, // Removed for Next.js 14 compatibility
   },
   images: {
     remotePatterns: [

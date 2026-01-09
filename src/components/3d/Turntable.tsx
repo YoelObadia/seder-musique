@@ -238,7 +238,7 @@ export default function Turntable({ className }: { className?: string }) {
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[5, 10, 7]} intensity={2} />
                     <spotLight position={[0, 5, 0]} intensity={1} angle={0.5} penumbra={1} />
-                    <group rotation={[0, 0, 0]} position={[0, 0.5, 0]}> {/* Shifted up to reduce top gap */}
+                    <group rotation={[0, 0, 0]} position={[0, 0.8, 0]}> {/* Shifted up to fill top gap */}
                         <Vinyl isScratching={isScratching} />
                         <ToneArm isPlaying={isPlaying} />
                         <FloatingNotes isPlaying={isPlaying} />
