@@ -8,8 +8,34 @@ import Footer from '@/components/layout/Footer';
 import ScrollReset from '@/components/utils/ScrollReset';
 
 export const metadata: Metadata = {
-    title: 'Seder Music Group',
-    description: 'R&D Records, Production Studio & Booking Agency.',
+    metadataBase: new URL('https://www.seder-music.com'),
+    title: {
+        default: 'Seder Music Group | Event Production & Artist Management',
+        template: '%s | Seder Music Group',
+    },
+    description: 'Agence de production événementielle, booking d\'artistes et label musical. Jérusalem, Paris, International.',
+    openGraph: {
+        type: 'website',
+        locale: 'fr_FR',
+        url: 'https://www.seder-music.com',
+        siteName: 'Seder Music Group',
+        images: [
+            {
+                url: '/images/og/default.jpg',
+                width: 1200,
+                height: 630,
+                alt: 'Seder Music Group',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        site: '@sedermusic',
+        creator: '@sedermusic',
+    },
+    icons: {
+        icon: '/favicon.ico',
+    },
 };
 
 import { getDictionary } from '@/get-dictionary';

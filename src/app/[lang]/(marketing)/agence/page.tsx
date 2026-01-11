@@ -2,10 +2,55 @@ import { getDictionary } from '@/get-dictionary';
 import { Locale } from '@/i18n-config';
 import Image from 'next/image';
 
-export const metadata = {
-    title: 'Agence | Seder Music',
-    description: 'Maison de Création Globale.',
-};
+import { Metadata } from 'next';
+import SchemaOrg, { SederOrganizationSchema } from '@/components/seo/SchemaOrg';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
+    const { lang } = await params;
+    const isFr = lang === 'fr';
+    const isHe = lang === 'he';
+
+    const title = isFr
+        ? "Agence Événementielle & Gestion de Délégations (Jérusalem) | Seder Music"
+        : isHe
+            ? "סוכנות הפקה וניהול משלחות (ירושלים) | Seder Music"
+            : "International Event Agency & Delegation Management (Jerusalem) | Seder Music";
+
+    const description = isFr
+        ? "Votre partenaire de confiance en Israël. Organisation de délégations d'entreprise, séminaires de luxe et événements institutionnels. Une expertise locale avec des standards internationaux."
+        : isHe
+            ? "השותף האסטרטגי שלכם לאירועים בינלאומיים. הפקת משלחות עסקיות, סמינרים יוקרתיים ואירועים מוסדיים. מומחיות מקומית בסטנדרטים בינלאומיים."
+            : "Your trusted partner in Israel. Organization of corporate delegations, luxury seminars, and institutional events. Local expertise with international standards.";
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: `https://www.seder-music.com/${lang}/agence`,
+            languages: {
+                'fr': `https://www.seder-music.com/fr/agence`,
+                'en': `https://www.seder-music.com/en/agence`,
+                'he': `https://www.seder-music.com/he/agence`,
+            },
+        },
+        openGraph: {
+            title,
+            description,
+            url: `https://www.seder-music.com/${lang}/agence`,
+            siteName: 'Seder Music Group',
+            images: [
+                {
+                    url: 'https://www.seder-music.com/images/og/agency.jpg',
+                    width: 1200,
+                    height: 630,
+                    alt: 'Seder Music Agency - Jerusalem',
+                },
+            ],
+            locale: lang,
+            type: 'website',
+        },
+    };
+}
 
 export default async function AgencyPage({ params }: { params: Promise<{ lang: Locale }> }) {
     const { lang } = await params;
@@ -13,6 +58,7 @@ export default async function AgencyPage({ params }: { params: Promise<{ lang: L
 
     return (
         <main className="min-h-screen bg-[#050505] text-white selection:bg-[#FFD700] selection:text-black font-sans">
+            <SchemaOrg type="Organization" data={SederOrganizationSchema} />
             {/* HERO */}
             <section className="pt-48 pb-32 px-6 container mx-auto text-center border-b border-white/5 relative overflow-hidden">
 

@@ -1,17 +1,17 @@
 import { MetadataRoute } from 'next';
 import { i18n } from '@/i18n-config';
 
-const BASE_URL = 'https://www.sedermusicgroup.com'; // Replace with actual domain
+const BASE_URL = 'https://www.seder-music.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const routes = [
         '',
-        '/label',
-        '/production',
-        '/booking',
         '/agence',
         '/contact',
-        '/legal',
+        '/services/production',
+        '/services/booking',
+        '/services/influence',
+        '/services/talents',
     ];
 
     const sitemapEntries: MetadataRoute.Sitemap = [];
