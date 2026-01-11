@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { Locale } from '@/i18n-config';
 import { ArrowUpRight, Music, Mic2, Users, Star } from 'lucide-react';
+import SmartCinematicVideo from '../ui/SmartCinematicVideo';
 
 const GOLD = '#FFD700';
 
@@ -17,6 +18,7 @@ const SERVICES_CONFIG = [
         href: '/services/production',
         icon: <Music className="w-8 h-8" />,
         videoSrc: '/videos/production.webm',
+        posterSrc: '/images/production-poster.webp',
         // Emerald & Gold - Brightened
         gradient: 'radial-gradient(circle at center, #10B981 0%, #064E3B 100%)',
         glowColor: '#10B981',
@@ -27,6 +29,7 @@ const SERVICES_CONFIG = [
         href: '/services/influence',
         icon: <Users className="w-8 h-8" />,
         videoSrc: '/videos/influence.webm',
+        posterSrc: '/images/influence-poster.webp',
         // Sapphire & Gold - Brightened
         gradient: 'radial-gradient(circle at center, #3B82F6 0%, #1E3A8A 100%)',
         glowColor: '#3B82F6',
@@ -37,6 +40,7 @@ const SERVICES_CONFIG = [
         href: '/services/booking',
         icon: <Mic2 className="w-8 h-8" />,
         videoSrc: '/videos/bookings.webm',
+        posterSrc: '/images/bookings-poster.webp',
         // Amethyst & Gold - Brightened
         gradient: 'radial-gradient(circle at center, #A855F7 0%, #581C87 100%)',
         glowColor: '#A855F7',
@@ -47,6 +51,7 @@ const SERVICES_CONFIG = [
         href: '/services/talents',
         icon: <Star className="w-8 h-8" />,
         videoSrc: '/videos/talents.webm',
+        posterSrc: '/images/talents-poster.webp',
         // Ruby & Gold - Brightened
         gradient: 'radial-gradient(circle at center, #EF4444 0%, #991B1B 100%)',
         glowColor: '#EF4444',
@@ -229,16 +234,11 @@ function TiltCard({
                         className="absolute inset-[-20px] z-0 pointer-events-none overflow-hidden rounded-[2rem] bg-black"
                         style={{ x: videoX, y: videoY }} // Parallax movement
                     >
-                        {isInView && (
-                            <video
-                                className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700 brightness-110 saturate-125"
-                                src={service.videoSrc}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                            />
-                        )}
+                        <SmartCinematicVideo
+                            posterSrc={service.posterSrc}
+                            videoSrc={service.videoSrc}
+                            className="absolute inset-0 w-full h-full brightness-110 saturate-125"
+                        />
 
                         {/* COLOR OVERLAY (Jewel Tone) */}
                         <div
