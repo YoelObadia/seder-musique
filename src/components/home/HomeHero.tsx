@@ -48,7 +48,7 @@ export default function HomeHero({ dict, lang }: HomeHeroProps) {
     }, { scope: containerRef, dependencies: [mounted] });
 
     return (
-        <section ref={containerRef} className="relative h-screen w-full flex flex-col items-center justify-start md:justify-center overflow-hidden bg-[#050505]" suppressHydrationWarning>
+        <section ref={containerRef} className="relative h-screen w-full flex flex-col items-center justify-start md:justify-end overflow-hidden bg-[#050505]" suppressHydrationWarning>
 
             {/* LE TITRE ANIMÉ EN PAILLETTES 2D (Z-0) */}
             <div className="hero-particles absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
@@ -56,7 +56,7 @@ export default function HomeHero({ dict, lang }: HomeHeroProps) {
             </div>
 
             {/* CONTENU INFÉRIEUR (Z-10) */}
-            <div className="hero-content opacity-0 relative z-10 container mx-auto px-6 flex flex-col items-center text-center select-none pt-[45vh] md:pt-0 mb-12 md:mb-0">
+            <div className="hero-content opacity-0 relative z-10 container mx-auto px-6 flex flex-col items-center text-center select-none pt-[45vh] md:pt-0 mb-12 md:mb-0 md:pb-32">
 
                 {/* Sous-titre */}
                 <p className="hero-element text-lg md:text-xl text-white/60 max-w-2xl font-light mb-8 md:mb-10 tracking-wide">

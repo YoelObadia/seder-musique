@@ -30,8 +30,8 @@
                     "booking_seder": "Seder Music — בוקינג בינלאומי (כוכבים ו-DJ)",
                     "booking_talent": "R&D Records — בוקינג טאלנטים",
                     "artist_management": "R&D Records — בקשת ניהול",
-                    "booking_rd": "R&D Records — בוקינג אמנים מבוססים",
-                    "talents_rd": "R&D Records — הצטרפות ללייבל",
+                    "booking_rd": "R&D Records — בוקינג אמנים מבוססים (נגנים, מלחינים)",
+                    "talents_rd": "R&D Records — הצטרפות ללייבל (טאלנטים ים תיכוניים ומזרחיים)",
                     "production": "הפקת אירועים (קונצרט, גאלה)",
                     "marketing": "שיווק משפיענים"
                 }
@@ -61,7 +61,6 @@
                 "מלחין",
                 "נגן",
                 "DJ",
-                "Beatmaker",
                 "Beatmaker",
                 "אחר"
             ],

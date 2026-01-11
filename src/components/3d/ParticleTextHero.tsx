@@ -38,7 +38,7 @@ export default function ParticleTextHero() {
 
         // 1. DYNAMIC FONT SIZING (Responsive & Safe)
         // We start with a target optimal size, then scale down if needed
-        let fontSize1 = width < 768 ? 100 : 240;
+        let fontSize1 = width < 768 ? 100 : 180; // Reduced from 240 to 180 for better desktop fit
 
         // Prepare context for measurement to ensure it fits
         offCtx.textAlign = 'center';
@@ -62,8 +62,8 @@ export default function ParticleTextHero() {
 
         // 2. POSITIONNEMENT (Responsive Vertical)
         // Mobile: 35% from top to avoid bottom content overlap
-        // Desktop: 42% from top for optical center
-        const verticalCenter = width < 768 ? height * 0.35 : height * 0.42;
+        // Desktop: 35% from top (unified) to clear space for center content
+        const verticalCenter = height * 0.35;
 
         // Apply styles
         offCtx.fillStyle = 'white';

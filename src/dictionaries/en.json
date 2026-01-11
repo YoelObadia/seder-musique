@@ -30,8 +30,8 @@
                     "booking_seder": "Seder Music — International Booking (Stars & DJ)",
                     "booking_talent": "R&D Records — Talent Booking",
                     "artist_management": "R&D Records — Management Request",
-                    "booking_rd": "R&D Records — Established Artists Booking",
-                    "talents_rd": "R&D Records — Join the Label",
+                    "booking_rd": "R&D Records — Established Artists Booking (Musicians, Composers)",
+                    "talents_rd": "R&D Records — Join the Label (Mediterranean & Oriental Talents)",
                     "production": "Event Production (Concert, Gala)",
                     "marketing": "Influencer Marketing"
                 }
@@ -51,7 +51,7 @@
             },
             "clientNeeds": [
                 "Established Artist",
-                "Rising Talent",
+                "Rising Talent (Graine)",
                 "Full Orchestra",
                 "DJ Set",
                 "Custom Performance"
