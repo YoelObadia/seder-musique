@@ -38,16 +38,16 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
     };
 
     const services = [
-        { href: `/${lang}/agence`, label: content.links.agency },
-        { href: `/${lang}/services/booking`, label: content.links.booking },
         { href: `/${lang}/services/production`, label: content.links.production },
         { href: `/${lang}/services/influence`, label: content.links.marketing },
+        { href: `/${lang}/services/booking`, label: content.links.booking },
         { href: `/${lang}/services/talents`, label: content.links.talents },
     ];
 
     const legal = [
-        { href: `/${lang}/legal`, label: content.links.legal_notice },
+        { href: `/${lang}/agence`, label: content.links.agency },
         { href: `/${lang}/contact`, label: content.links.contact },
+        { href: `/${lang}/legal`, label: content.links.legal_notice },
     ];
 
     return (

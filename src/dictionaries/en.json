@@ -63,7 +63,22 @@
                 "DJ",
                 "Beatmaker",
                 "Other"
-            ]
+            ],
+            "placeholders": {
+                "select_request": "Select a request type...",
+                "specific_talent": "Specify the talent...",
+                "artist_profile": "Your profile...",
+                "message_artist": "Introduce yourself in a few words...",
+                "message_client": "Describe your event..."
+            },
+            "labels": {
+                "talent_type": "What type of artist are you looking for?",
+                "artist_profile": "What is your artistic profile?",
+                "demo_link": "Demo Link (SoundCloud, YouTube, Instagram)"
+            },
+            "notes": {
+                "talent_selection": "We select the bespoke artist adapted to the atmosphere and scale of your event."
+            }
         },
         "info": {
             "location": "Jerusalem, Israel",
@@ -283,7 +298,7 @@
                 "project_sub": "The Convergence",
                 "event_sub": "Strategic Logistics"
             },
-            "concierge_btn": "Concierge Access",
+            "concierge_btn": "Produce my event",
             "signature": "Seder Group: One signature, total mastery."
         },
         "booking": {

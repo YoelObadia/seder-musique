@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     description: 'R&D Records, Production Studio & Booking Agency.',
 };
 
+import { getDictionary } from '@/get-dictionary';
+import { Locale } from '@/i18n-config';
+
 export default async function RootLayout({
     children,
     params,
@@ -21,6 +24,7 @@ export default async function RootLayout({
 }) {
     const { lang } = await params;
     const dir = lang === 'he' ? 'rtl' : 'ltr';
+    const dict = await getDictionary(lang as Locale);
 
     return (
         <html lang={lang} dir={dir} suppressHydrationWarning>
@@ -29,7 +33,7 @@ export default async function RootLayout({
             <body className="antialiased" suppressHydrationWarning>
                 <ReactLenis root>
                     <ScrollReset />
-                    <Header />
+                    <Header nav={dict.nav} />
                     {children}
                     <Footer lang={lang as any} />
                     <PersistentPlayer />

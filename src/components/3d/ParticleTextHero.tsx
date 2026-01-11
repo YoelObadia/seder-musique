@@ -54,7 +54,10 @@ export default function ParticleTextHero() {
             fontSize1 = fontSize1 * (maxWidth / textMetrics.width);
         }
 
-        const fontSize2 = fontSize1 * 0.5;
+        // DYNAMIC FONT HIERARCHY
+        // Mobile: "GROUP" is 75% of main title for better legibility
+        // Desktop: "GROUP" is 50% for stylistic contrast
+        const fontSize2 = width < 768 ? fontSize1 * 0.75 : fontSize1 * 0.5;
         const gap = fontSize1 * 0.15;
 
         // 2. POSITIONNEMENT (Responsive Vertical)
@@ -75,8 +78,12 @@ export default function ParticleTextHero() {
 
         const imageData = offCtx.getImageData(0, 0, width, height).data;
         const coordinates: { x: number, y: number }[] = [];
-        for (let y = 0; y < height; y += CONFIG.particleDensity) {
-            for (let x = 0; x < width; x += CONFIG.particleDensity) {
+
+        // DYNAMIC DENSITY: More particles on mobile for better legibility
+        const density = width < 768 ? 2 : CONFIG.particleDensity;
+
+        for (let y = 0; y < height; y += density) {
+            for (let x = 0; x < width; x += density) {
                 const index = (y * width + x) * 4;
                 if (imageData[index + 3] > 128) {
                     coordinates.push({ x, y });

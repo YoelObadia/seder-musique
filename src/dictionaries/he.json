@@ -14,18 +14,18 @@
     },
     "contact": {
         "title": {
-            "line1": "Let's build",
-            "line2": "the exceptional."
+            "line1": "בונים את",
+            "line2": "היוצא דופן."
         },
-        "subtitle": "Fill out this form to start your project.",
+        "subtitle": "מלאו את הטופס כדי להתחיל בפרויקט.",
         "form": {
-            "name": "Full Name",
-            "email": "Email",
-            "phone": "Phone",
-            "message": "Message",
-            "submit": "SEND REQUEST",
+            "name": "שם מלא",
+            "email": "אימייל",
+            "phone": "טלפון",
+            "message": "הודעה",
+            "submit": "שלח בקשה",
             "projectType": {
-                "label": "Nature of your request",
+                "label": "מהות הבקשה",
                 "options": {
                     "booking_seder": "Seder Music — בוקינג בינלאומי (כוכבים ו-DJ)",
                     "booking_talent": "R&D Records — בוקינג טאלנטים",
@@ -62,8 +62,24 @@
                 "נגן",
                 "DJ",
                 "Beatmaker",
+                "Beatmaker",
                 "אחר"
-            ]
+            ],
+            "placeholders": {
+                "select_request": "בחר סוג בקשה...",
+                "specific_talent": "ציין את הכישרון...",
+                "artist_profile": "הפרופיל שלך...",
+                "message_artist": "הציגו את עצמכם בכמה מילים...",
+                "message_client": "תאר את האירוע שלך..."
+            },
+            "labels": {
+                "talent_type": "איזה סוג של אמן אתם מחפשים?",
+                "artist_profile": "מה הפרופיל האומנותי שלך?",
+                "demo_link": "קישור לדמו (SoundCloud, YouTube, Instagram)"
+            },
+            "notes": {
+                "talent_selection": "אנו בוחרים את האמן המותאם אישית לאווירה ולהיקף האירוע שלכם."
+            }
         },
         "info": {
             "location": "ירושלים, ישראל",
@@ -283,7 +299,7 @@
                 "project_sub": "ההתכנסות",
                 "event_sub": "לוגיסטיקה אסטרטגית"
             },
-            "concierge_btn": "גישה לקונסיירז'",
+            "concierge_btn": "הפקת האירוע שלי'",
             "signature": "קבוצת סדר: חתימה אחת, שליטה מלאה."
         },
         "booking": {

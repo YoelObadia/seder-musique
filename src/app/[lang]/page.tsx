@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: Promise<{ lang: Locale 
     return (
         <main className="min-h-screen bg-black text-white selection:bg-gold selection:text-black">
             {/* HERO */}
-            <HomeHero dict={dict.home} />
+            <HomeHero dict={dict.home} lang={lang} />
 
             {/* SERVICES */}
             <ServicesSection dict={dict} lang={lang} />

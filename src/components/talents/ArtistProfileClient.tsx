@@ -108,22 +108,18 @@ export default function ArtistProfileClient({ artist, lang, labels }: ArtistProf
                 </div>
 
                 {/* 2. TEXT SIDE (Left 5 cols) */}
-                <div className="relative z-10 lg:col-span-5 lg:col-start-1 lg:row-start-1 flex flex-col justify-center px-6 md:px-12 lg:ps-24 lg:pe-12 py-12 lg:py-0 order-2 lg:order-1 lg:h-auto -mt-24 lg:mt-0">
+                <div className="relative z-10 lg:col-span-5 lg:col-start-1 lg:row-start-1 flex flex-col justify-center px-6 md:px-12 lg:ps-24 lg:pe-12 py-12 lg:py-0 order-2 lg:order-1 lg:h-auto -mt-12 md:-mt-24 lg:mt-0">
                     <div className="space-y-6 md:space-y-8 text-start max-w-xl">
                         <span className={`animate-text inline-block font-mono text-xs md:text-sm tracking-[0.2em] uppercase ${accentClass} bg-black/50 backdrop-blur-md px-3 py-1 rounded lg:bg-transparent lg:px-0`}>
                             {artist.role} — {artist.type === 'graine' ? 'R&D Talent' : 'R&D Artist'}
                         </span>
 
-                        <h1 className="animate-text text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold uppercase leading-[0.9] tracking-tighter text-white drop-shadow-xl lg:drop-shadow-none">
+                        <h1 className="animate-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold uppercase leading-[0.9] tracking-tighter text-white drop-shadow-xl lg:drop-shadow-none">
                             {artist.name}
                         </h1>
 
                         {/* CTA */}
                         <div className="animate-text pt-4 md:pt-8 flex flex-col items-start gap-6">
-                            {/* Show full first paragraph as intro, no truncation */}
-                            <p className="text-white/80 font-serif italic text-lg max-w-md hidden lg:block leading-relaxed">
-                                {artist.bio[0]}
-                            </p>
                             <SonicButton
                                 href={`/${lang}/contact`}
                                 variant={artist.type === 'graine' ? 'talents' : 'production'}
@@ -138,7 +134,7 @@ export default function ArtistProfileClient({ artist, lang, labels }: ArtistProf
 
             {/* BIO & CONTENT SECTION */}
             <section className="relative z-10 bg-[#050505] px-6 md:px-12 lg:px-24 pb-24">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 lg:gap-24">
 
                     {/* Left: Stats / Info - Stacks on mobile */}
                     <div className="lg:col-span-4 space-y-12 animate-section order-2 lg:order-1">
@@ -147,7 +143,7 @@ export default function ArtistProfileClient({ artist, lang, labels }: ArtistProf
                                 {artist.stats.map((stat, i) => (
                                     <div key={i}>
                                         <h4 className="text-white/40 font-mono text-xs uppercase tracking-wider mb-2">{stat.label}</h4>
-                                        <p className="text-3xl font-display uppercase">{stat.value}</p>
+                                        <p className="text-xl sm:text-2xl md:text-3xl font-display uppercase break-words">{stat.value}</p>
                                     </div>
                                 ))}
                             </div>

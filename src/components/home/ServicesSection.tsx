@@ -70,7 +70,7 @@ export default function ServicesSection({
     lang: Locale;
 }) {
     return (
-        <section className="relative py-40 overflow-hidden bg-[#050505]">
+        <section id="services" className="relative py-40 overflow-hidden bg-[#050505]">
             {/* Background elements */}
 
 

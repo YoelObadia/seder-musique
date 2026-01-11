@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,6 +10,8 @@ import { ArrowDownLeft, CheckCircle2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 interface InfluenceClientProps {
     content: any;
     lang: Locale;
@@ -18,15 +20,20 @@ interface InfluenceClientProps {
 export default function InfluenceClient({ content, lang }: InfluenceClientProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const timelineRef = useRef<HTMLDivElement>(null);
+    const isRTL = lang === 'he';
 
-    useEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // HERO: Cinematic Swipe
             const tl = gsap.timeline();
 
+            // --- ANIMATION BANDE ROSE ---
             tl.fromTo('.hero-title-mask',
                 { width: '0%' },
-                { width: '100%', duration: 1.5, ease: 'power4.inOut' }
+                {
+                    width: '100%',
+                    duration: 1.5,
+                    ease: 'power4.inOut'
+                }
             );
 
             tl.fromTo('.hero-content',
@@ -35,9 +42,9 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
                 '-=0.5'
             );
 
-            // WHAT WE DO: Asymmetric Reveal
+            // ANIMATIONS STANDARDS
             gsap.fromTo('.what-we-do-item',
-                { opacity: 0, x: -30 },
+                { opacity: 0, x: isRTL ? 30 : -30 },
                 {
                     opacity: 1,
                     x: 0,
@@ -50,11 +57,10 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
                 }
             );
 
-            // TIMELINE: Vertical Progress
             const steps = gsap.utils.toArray('.timeline-step');
             steps.forEach((step: any, i) => {
                 gsap.fromTo(step,
-                    { opacity: 0.2, x: -20 },
+                    { opacity: 0.2, x: isRTL ? 20 : -20 },
                     {
                         opacity: 1,
                         x: 0,
@@ -69,7 +75,6 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
                 );
             });
 
-            // FORMATS: Grid Stagger
             gsap.fromTo('.format-card',
                 { y: 50, opacity: 0 },
                 {
@@ -87,9 +92,9 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
 
         }, containerRef);
         return () => ctx.revert();
-    }, [content]);
+    }, [content, isRTL]);
 
-    if (!content.sections) return null; // Safety for outdated dictionaries
+    if (!content.sections) return null;
 
     const { whatWeDo, ourApproach, whatYouGet, formats, forWho, cta } = content.sections;
 
@@ -97,27 +102,70 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
         <main ref={containerRef} className="min-h-screen bg-[#050505] text-white font-sans overflow-x-hidden selection:bg-[#FF2E93] selection:text-black">
 
             {/* HERO */}
-            <section className="relative min-h-[90vh] flex flex-col justify-center px-6 md:px-20 pt-20">
-                <div className="max-w-7xl">
-                    <div className="relative mb-8 inline-block max-w-full">
-                        {/* Fluid Typography Title allowing wrap to prevent overflow */}
-                        <h1 className="text-[12vw] md:text-[8vw] font-display font-medium uppercase tracking-tighter leading-[0.8] text-transparent relative z-10 w-full break-words whitespace-normal" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)' }}>
+            <section className="relative h-screen flex flex-col justify-center px-6 md:px-20 overflow-hidden">
+
+                {/* 1. AMBIANCE : Glow d'arrière-plan */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-[#FF2E93] opacity-10 blur-[100px] rounded-full pointer-events-none" />
+
+                <div className="max-w-7xl relative z-10 mt-[-10vh]">
+
+                    <div className="relative mb-10 inline-block max-w-full px-4">
+
+                        {/* TITRE BASE (Contour) */}
+                        <h1
+                            className={`font-display font-medium uppercase tracking-tighter leading-[0.85] text-transparent relative z-10 w-full ${isRTL
+                                    ? 'whitespace-nowrap text-[12vw] md:text-[8vw]'
+                                    : 'whitespace-normal md:whitespace-nowrap text-[13vw] md:text-[7vw]'
+                                }`}
+                            style={{
+                                WebkitTextStroke: isRTL ? '4px rgba(255,255,255,0.2)' : '2px rgba(255,255,255,0.2)'
+                            }}
+                        >
                             {content.title}
                         </h1>
-                        <div className="hero-title-mask absolute top-0 start-0 h-full bg-[#FF2E93] overflow-hidden z-20 w-0">
-                            <h1 className="text-[12vw] md:text-[8vw] font-display font-medium uppercase tracking-tighter leading-[0.8] text-black px-1 w-full break-words whitespace-normal">
-                                {content.title}
-                            </h1>
+
+                        {/* TITRE MASQUE (Rose) */}
+                        <div
+                            className={`hero-title-mask absolute start-0 bg-[#FF2E93] z-20 w-0 overflow-hidden flex items-center ${isRTL
+                                    ? 'h-[120%] top-[-10%]'
+                                    : 'h-full top-0'
+                                }`}
+                        >
+                            <div className="px-4 w-full">
+                                <h1 className={`font-display font-medium uppercase tracking-tighter leading-[0.85] text-black w-full ${isRTL
+                                        ? 'whitespace-nowrap text-[12vw] md:text-[8vw]'
+                                        : 'whitespace-normal md:whitespace-nowrap text-[13vw] md:text-[7vw]'
+                                    }`}>
+                                    {content.title}
+                                </h1>
+                            </div>
                         </div>
                     </div>
 
-                    <p className="hero-content text-xl md:text-3xl font-serif italic text-white/80 max-w-4xl leading-relaxed border-s-4 border-[#FF2E93] ps-8">
-                        {content.subtitle}
-                    </p>
+                    {/* SOUS-TITRE */}
+                    <div className="hero-content ps-6 md:ps-8 border-s-2 md:border-s-4 border-[#FF2E93]">
+                        <p className="text-lg md:text-3xl font-serif italic text-white/70 max-w-4xl leading-relaxed">
+                            {content.subtitle}
+                        </p>
+                    </div>
+                </div>
+
+                {/* SCROLL INDICATOR (Cliquable) */}
+                <div
+                    onClick={() => {
+                        const nextSection = document.querySelector('.what-we-do-section');
+                        if (nextSection) {
+                            nextSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-50 animate-bounce cursor-pointer z-30 hover:opacity-100 transition-opacity"
+                >
+                    <span className="text-[10px] uppercase tracking-widest mb-2 text-white/60">Scroll</span>
+                    <div className="w-[1px] h-8 bg-gradient-to-b from-[#FF2E93] to-transparent"></div>
                 </div>
             </section>
 
-            {/* WHAT WE DO - Asymmetric Grid */}
+            {/* WHAT WE DO */}
             <section className="what-we-do-section py-32 px-6 md:px-20 container mx-auto">
                 <div className="grid lg:grid-cols-12 gap-16">
                     <div className="lg:col-span-4">
@@ -138,7 +186,7 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
                 </div>
             </section>
 
-            {/* OUR APPROACH - Interactive Timeline */}
+            {/* OUR APPROACH */}
             <section className="py-32 bg-[#080808]">
                 <div className="container mx-auto px-6 md:px-20">
                     <div className="mb-20 text-center max-w-3xl mx-auto">
@@ -148,7 +196,6 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
                     </div>
 
                     <div className="relative max-w-4xl mx-auto" ref={timelineRef}>
-                        {/* Vertical Line */}
                         <div className="absolute start-8 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#FF2E93] to-transparent hidden md:block" />
 
                         <div className="space-y-16">
@@ -168,9 +215,9 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
                 </div>
             </section>
 
-            {/* FORMATS - Grid */}
+            {/* FORMATS */}
             <section className="formats-section py-32 px-6 md:px-20 container mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div className="flex flex-col md:flex-row justify-between mb-20 gap-8">
                     <div>
                         <span className="text-[#FF2E93] font-mono text-sm uppercase tracking-widest mb-4 block">03 / {content.step_labels?.activation}</span>
                         <h2 className="text-4xl md:text-5xl font-display uppercase">{formats.title}</h2>
@@ -191,7 +238,7 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
                 </div>
             </section>
 
-            {/* FOR WHO & WHAT YOU GET - Split */}
+            {/* FOR WHO & WHAT YOU GET */}
             <section className="py-20 px-6 container mx-auto border-t border-white/5">
                 <div className="grid lg:grid-cols-2 gap-20">
                     <div>
@@ -200,8 +247,12 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
                             {forWho.text}
                         </p>
                     </div>
+
+                    {/* FLÈCHE INVERSÉE EN RTL */}
                     <div className="bg-[#111] p-12 relative overflow-hidden">
-                        <ArrowDownLeft className="absolute top-8 end-8 text-[#FF2E93] w-12 h-12" />
+                        <ArrowDownLeft
+                            className={`absolute top-8 end-8 text-[#FF2E93] w-12 h-12 ${isRTL ? "-rotate-90" : ""}`}
+                        />
                         <h3 className="text-3xl font-display uppercase mb-8">{whatYouGet.title}</h3>
                         <ul className="space-y-4">
                             {whatYouGet.bullets.map((bullet: string, i: number) => (

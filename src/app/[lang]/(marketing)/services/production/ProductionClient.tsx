@@ -116,13 +116,22 @@ export default function ProductionClient({ content, lang }: ProductionClientProp
                     </p>
                 </div>
 
-                <div className="absolute bottom-12 animate-bounce text-white/30">
+                <button
+                    onClick={() => {
+                        const synergySection = document.getElementById('synergy');
+                        if (synergySection) {
+                            synergySection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }}
+                    className="absolute bottom-12 animate-bounce text-white/30 hover:text-[#FFD700] transition-colors cursor-pointer z-20"
+                    aria-label="Scroll to content"
+                >
                     <ArrowDown className="w-6 h-6" />
-                </div>
+                </button>
             </section>
 
             {/* SYNERGY SECTION - THE POWER OF THE GROUP */}
-            <section className="synergy-section py-32 px-6 md:px-20 container mx-auto relative overflow-hidden">
+            <section id="synergy" className="synergy-section py-32 px-6 md:px-20 container mx-auto relative overflow-hidden">
                 <div className="text-center mb-20 relative z-10">
                     <h2 className="text-4xl md:text-6xl font-display uppercase mb-6">{content.synergy_title}</h2>
                     <p className="text-xl text-white/60 max-w-2xl mx-auto font-light leading-relaxed">

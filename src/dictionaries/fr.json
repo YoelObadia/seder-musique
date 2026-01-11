@@ -63,7 +63,22 @@
                 "DJ",
                 "Beatmaker",
                 "Autre"
-            ]
+            ],
+            "placeholders": {
+                "select_request": "Sélectionnez une demande...",
+                "specific_talent": "Précisez le talent...",
+                "artist_profile": "Votre profil...",
+                "message_artist": "Présentez-vous en quelques mots...",
+                "message_client": "Décrivez votre événement..."
+            },
+            "labels": {
+                "talent_type": "Quel type de talent recherchez-vous ?",
+                "artist_profile": "Quel est votre profil artistique ?",
+                "demo_link": "Lien Démo (SoundCloud, YouTube, Instagram)"
+            },
+            "notes": {
+                "talent_selection": "Nous sélectionnons l'artiste sur-mesure adapté à l'ambiance et l'envergure de votre événement."
+            }
         },
         "info": {
             "location": "Jérusalem, Israël",
@@ -267,9 +282,9 @@
     "service_pages": {
         "production": {
             "hero_title": "L’Ingénierie de l’Émotion.",
-            "hero_subtitle": "Quand Seder Music s'accorde avec Seder Event dans l'harmonie la plus parfaite.",
+            "hero_subtitle": "Quand Seder Music s'accorde avec Seder Events dans l'harmonie la plus parfaite.",
             "synergy_title": "La Force du Groupe",
-            "synergy_text": "Pour chaque production d'envergure, Seder Music mobilise l’expertise de Seder Event. Nos clients accèdent ainsi à un univers de services de prestige, logistique complexe, coordination internationale.",
+            "synergy_text": "Pour chaque production d'envergure, Seder Music mobilise l’expertise de Seder Events. Nos clients accèdent ainsi à un univers de services de prestige, logistique complexe, coordination internationale.",
             "pillars": {
                 "music": "Music",
                 "business": "Business",
@@ -283,7 +298,7 @@
                 "project_sub": "La Convergence",
                 "event_sub": "Logistique Stratégique"
             },
-            "concierge_btn": "Accès Conciergerie",
+            "concierge_btn": "Produire mon événement",
             "signature": "Seder Group : Une seule signature, une maîtrise totale."
         },
         "booking": {

@@ -12,7 +12,12 @@ import Image from 'next/image';
 
 const GOLD = '#FFD700';
 
-export default function Header() {
+
+interface HeaderProps {
+    nav?: any;
+}
+
+export default function Header({ nav }: HeaderProps) {
     const params = useParams();
     const pathname = usePathname();
     const lang = params?.lang ?? 'en';
@@ -27,40 +32,52 @@ export default function Header() {
     const headerBlur = useTransform(scrollY, [0, 50], ["blur(0px)", "blur(16px)"]);
     const headerBorder = useTransform(scrollY, [0, 50], ["rgba(255,255,255,0)", "rgba(255,255,255,0.05)"]);
 
-    // ... (Services Config - kept same)
+    // Use dictionary values or fallback if nav is undefined (safety)
+    const t = nav || {
+        agency: 'AGENCE',
+        services: 'SERVICES',
+        submenu: {
+            production: 'Production Événementielle',
+            influence: "Marketing d'Influence",
+            booking: 'Booking',
+            talents: 'Talents'
+        },
+        contact: 'CONTACT'
+    };
+
     const services = [
         {
             href: `/${lang}/services/production`,
-            label: 'Production Événementielle',
+            label: t.submenu?.production || 'Production',
             key: 'production',
             icon: <Music className="w-5 h-5 group-hover:text-black transition-colors" />
         },
         {
             href: `/${lang}/services/influence`,
-            label: 'Marketing d\'Influence',
+            label: t.submenu?.influence || 'Influence',
             key: 'influence',
             icon: <Users className="w-5 h-5 group-hover:text-black transition-colors" />
         },
         {
             href: `/${lang}/services/booking`,
-            label: 'Booking',
+            label: t.submenu?.booking || 'Booking',
             key: 'booking',
             icon: <Calendar className="w-5 h-5 group-hover:text-black transition-colors" />
         },
         {
             href: `/${lang}/services/talents`,
-            label: 'Talents',
+            label: t.submenu?.talents || 'Talents',
             key: 'talents',
             icon: <Star className="w-5 h-5 group-hover:text-black transition-colors" />
         },
     ];
 
     const simpleLinks = [
-        { href: `/${lang}/agence`, label: 'AGENCE' },
-        { href: 'services', label: 'SERVICES', isDropdown: true },
+        { href: `/${lang}/agence`, label: t.agency },
+        { href: 'services', label: t.services, isDropdown: true },
         // { href: `/${lang}/billetterie`, label: 'BILLETTERIE' },
         // { href: `/${lang}/blog`, label: 'BLOG' },
-        { href: `/${lang}/contact`, label: 'CONTACT' },
+        { href: `/${lang}/contact`, label: t.contact },
     ];
 
     const isActive = (href: string) => pathname === href || pathname.startsWith(href);

@@ -27,6 +27,7 @@ type FormValues = {
 };
 
 export default function ContactClient({ dict, lang }: ContactClientProps) {
+    const isRTL = lang === 'he';
     const containerRef = useRef<HTMLDivElement>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
@@ -99,14 +100,14 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
         {
             icon: <Mail className="w-6 h-6" />,
             label: dict.contact.info.email_label || 'Email',
-            value: "contact@sedermusic.com",
-            action: "mailto:contact@sedermusic.com"
+            value: "rds.event.production@gmail.com",
+            action: "mailto:rds.event.production@gmail.com"
         },
         {
             icon: <MapPin className="w-6 h-6" />,
             label: dict.contact.info.location_label || 'Studio',
-            value: dict.contact.info.location || 'Paris, France',
-            action: "https://maps.google.com/?q=Paris,France"
+            value: dict.contact.info.location || 'Jerusalem, Israel',
+            //action: "https://maps.google.com/?q=Paris,France"
         }
     ];
 
@@ -194,36 +195,36 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                 <div className="absolute top-0 end-0 w-[500px] h-[500px] bg-[#FFD700]/5 blur-[120px] rounded-full" />
             </div>
 
-            <div className="container mx-auto px-6 h-full min-h-screen flex flex-col md:flex-row relative z-10 pt-32 pb-20">
+            <div className="container mx-auto px-6 h-full min-h-screen flex flex-col md:flex-row gap-10 md:gap-0 relative z-10 pt-24 md:pt-32 pb-20">
 
                 {/* LEFT: INFO & CONTEXT (Dynamic) */}
-                <div className="w-full md:w-5/12 pe-0 md:pe-12 lg:pe-24 flex flex-col justify-start gap-16 mb-16 md:mb-0">
-                    <div className="space-y-8">
-                        <h1 className="text-5xl md:text-7xl font-display font-bold uppercase tracking-tighter leading-none">
+                <div className="contents md:flex md:flex-col w-full md:w-5/12 pe-0 md:pe-12 lg:pe-24 justify-start gap-16 md:mb-0">
+                    <div className="space-y-6 md:space-y-8 order-1 flex flex-col items-center md:items-start text-center md:text-start w-full max-w-2xl mx-auto md:mx-0">
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold uppercase tracking-tighter leading-none break-words">
                             {dict.contact.title.line1}<br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-[#E5C100]">
                                 {dict.contact.title.line2}
                             </span>
                         </h1>
-                        <p className="text-white/60 text-lg font-light tracking-wide max-w-sm">
+                        <p className="text-white/60 text-base md:text-lg font-light tracking-wide max-w-sm">
                             {dict.contact.description}
                         </p>
                     </div>
 
                     {/* Info Grid */}
-                    <div className="grid gap-8">
+                    <div className="grid gap-8 order-3 w-full max-w-2xl mx-auto md:mx-0">
                         {contactInfo.map((item, i) => (
                             <a
                                 key={i}
                                 href={item.action}
-                                className="group flex items-center gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 transition-all duration-500"
+                                className="group flex flex-col md:flex-row items-center gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 transition-all duration-500 text-center md:text-start"
                             >
                                 <div className="p-3 rounded-full bg-white/5 text-[#FFD700] group-hover:scale-110 transition-transform">
                                     {item.icon}
                                 </div>
                                 <div>
                                     <p className="text-xs font-mono uppercase tracking-widest text-white/40 mb-1">{item.label}</p>
-                                    <p className="text-lg font-display uppercase tracking-wide group-hover:text-white transition-colors">{item.value}</p>
+                                    <p className="text-lg font-display uppercase tracking-wide group-hover:text-white transition-colors break-all md:break-normal">{item.value}</p>
                                 </div>
                             </a>
                         ))}
@@ -231,7 +232,7 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                 </div>
 
                 {/* RIGHT: FORM */}
-                <div className="w-full md:w-7/12 relative min-h-[600px]">
+                <div className="w-full md:w-7/12 relative min-h-[600px] order-2">
                     <div className="hidden md:block absolute start-[-2px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
                     {isSuccess ? (
@@ -254,7 +255,7 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                             </SonicButton>
                         </div>
                     ) : (
-                        <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="ps-0 md:ps-12 lg:ps-16 flex flex-col gap-6 max-w-2xl py-10">
+                        <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="ps-0 md:ps-12 lg:ps-16 flex flex-col gap-6 max-w-2xl py-10 mx-auto md:mx-0">
 
                             {/* Name */}
                             <div className="anim-entry group">
@@ -294,7 +295,7 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                         {...register('projectType')}
                                         className={`w-full bg-white/5 border ${errors.projectType ? 'border-red-500/50' : 'border-white/10'} p-4 text-white appearance-none focus:outline-none focus:border-[#FFD700] focus:bg-white/10 transition-all duration-300 rounded-none cursor-pointer`}
                                     >
-                                        <option value="" className="bg-[#111] text-gray-500">Sélectionnez une demande...</option>
+                                        <option value="" className="bg-[#111] text-gray-500">{dict.contact.form.placeholders.select_request}</option>
                                         <option value="booking_talent" className="bg-[#111]">{dict.contact.form.projectType.options.booking_talent}</option>
                                         <option value="artist_management" className="bg-[#111]">{dict.contact.form.projectType.options.artist_management}</option>
 
@@ -304,7 +305,7 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                         <option value="production" className="bg-[#111]">{dict.contact.form.projectType.options.production}</option>
                                         <option value="marketing" className="bg-[#111]">{dict.contact.form.projectType.options.marketing}</option>
                                     </select>
-                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">▼</div>
+                                    <div className={`absolute ${isRTL ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 pointer-events-none text-white/40`}>▼</div>
                                 </div>
                                 {errors.projectType && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.projectType.message}</span>}
                             </div>
@@ -313,22 +314,22 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                             {projectType === 'booking_talent' && (
                                 <div className="artist-type-field overflow-hidden">
                                     <label className="block text-xs font-mono uppercase tracking-widest text-[#FFD700] mb-2">
-                                        Quel type de talent recherchez-vous ?
+                                        {dict.contact.form.labels.talent_type}
                                     </label>
                                     <div className="relative">
                                         <select
                                             {...register('artistType')}
                                             className="w-full bg-[#FFD700]/5 border border-[#FFD700]/30 p-4 text-white appearance-none focus:outline-none focus:border-[#FFD700] transition-all duration-300 rounded-none cursor-pointer"
                                         >
-                                            <option value="" className="bg-[#111] text-gray-500">Précisez le talent...</option>
+                                            <option value="" className="bg-[#111] text-gray-500">{dict.contact.form.placeholders.specific_talent}</option>
                                             {dict.contact.form.clientNeeds?.map((opt: string, i: number) => (
                                                 <option key={i} value={opt} className="bg-[#111]">{opt}</option>
                                             ))}
                                         </select>
-                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">▼</div>
+                                        <div className={`absolute ${isRTL ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 pointer-events-none text-white/40`}>▼</div>
                                     </div>
                                     <p className="text-[10px] text-white/40 mt-2 italic">
-                                        Nous sélectionnons l'artiste sur-mesure adapté à l'ambiance et l'envergure de votre événement.
+                                        {dict.contact.form.notes.talent_selection}
                                     </p>
                                     {errors.artistType && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.artistType.message}</span>}
                                 </div>
@@ -340,19 +341,19 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                 <>
                                     <div className="artist-type-field overflow-hidden">
                                         <label className="block text-xs font-mono uppercase tracking-widest text-[#3B82F6] mb-2">
-                                            Quel est votre profil artistique ?
+                                            {dict.contact.form.labels.artist_profile}
                                         </label>
                                         <div className="relative">
                                             <select
                                                 {...register('artistType')}
                                                 className="w-full bg-[#3B82F6]/5 border border-[#3B82F6]/30 p-4 text-white appearance-none focus:outline-none focus:border-[#3B82F6] transition-all duration-300 rounded-none cursor-pointer"
                                             >
-                                                <option value="" className="bg-[#111] text-gray-500">Votre profil...</option>
+                                                <option value="" className="bg-[#111] text-gray-500">{dict.contact.form.placeholders.artist_profile}</option>
                                                 {dict.contact.form.artistProfiles?.map((opt: string, i: number) => (
                                                     <option key={i} value={opt} className="bg-[#111]">{opt}</option>
                                                 ))}
                                             </select>
-                                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">▼</div>
+                                            <div className={`absolute ${isRTL ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 pointer-events-none text-white/40`}>▼</div>
                                         </div>
                                         {errors.artistType && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.artistType.message}</span>}
                                     </div>
@@ -360,13 +361,13 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                     {/* DEMO LINK (Required for Artists) */}
                                     <div className="demo-field overflow-hidden">
                                         <label className="block text-xs font-mono uppercase tracking-widest text-[#3B82F6] mb-2">
-                                            Lien Démo (SoundCloud, YouTube, Instagram) <span className="text-red-400">*</span>
+                                            {dict.contact.form.labels.demo_link} <span className="text-red-400">*</span>
                                         </label>
                                         <input
                                             {...register('demo')}
                                             type="text"
                                             className={`w-full bg-[#3B82F6]/5 border ${errors.demo ? 'border-red-500/50' : 'border-[#3B82F6]/30'} p-4 text-white placeholder-white/20 focus:outline-none focus:border-[#3B82F6] transition-all duration-300 rounded-none`}
-                                            placeholder="https://..."
+                                            placeholder={dict.contact.form.placeholders.demo_link}
                                         />
                                         {errors.demo && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.demo.message}</span>}
                                     </div>
@@ -399,17 +400,17 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                     {...register('message')}
                                     rows={4}
                                     className={`w-full bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} p-4 text-white placeholder-white/20 focus:outline-none focus:border-[#FFD700] focus:bg-white/10 transition-all duration-300 rounded-none resize-none`}
-                                    placeholder={isManagement ? "Présentez-vous en quelques mots..." : "Décrivez votre événement..."}
+                                    placeholder={isManagement ? dict.contact.form.placeholders.message_artist : dict.contact.form.placeholders.message_client}
                                 />
                                 {errors.message && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.message.message}</span>}
                             </div>
 
                             {/* Submit Button */}
-                            <div className="anim-entry pt-6 flex justify-end">
+                            <div className={`anim-entry pt-6 flex justify-center ${isRTL ? 'md:justify-start' : 'md:justify-end'}`}>
                                 <SonicButton
                                     type="submit"
                                     variant="booking"
-                                    className="w-full md:w-auto px-12 py-4 text-sm"
+                                    className="w-full md:w-auto px-12 py-4 text-sm flex items-center justify-center gap-2"
                                     disabled={isSubmitted}
                                 >
                                     {isSubmitted ? '...' : dict.contact.form.submit}
