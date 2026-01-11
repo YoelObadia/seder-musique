@@ -185,6 +185,7 @@ export default function Header({ nav }: HeaderProps) {
                 <button
                     className="lg:hidden text-white p-2"
                     onClick={() => setIsMobileOpen(!isMobileOpen)}
+                    aria-label="Toggle mobile menu"
                 >
                     {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
