@@ -11,7 +11,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
     return (
         <main className="min-h-screen bg-background text-white selection:bg-accent selection:text-black">
             {/* HERO SECTION (3D + Split Text) */}
-            <HomeHero dict={dict.home} />
+            <HomeHero dict={dict.home} lang={undefined} />
 
             {/* PARTNERS TICKER */}
             <PartnersTicker />
