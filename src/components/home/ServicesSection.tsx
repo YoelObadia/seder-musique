@@ -216,6 +216,7 @@ function TiltCard({
                 transformStyle: "preserve-3d",
                 rotateX,
                 rotateY,
+                willChange: "transform",
             }}
             className="relative h-[450px] rounded-[2rem] cursor-pointer group perspective-1000"
         >
@@ -231,13 +232,14 @@ function TiltCard({
                 >
                     {/* VIDEO BACKGROUND (HTML5) WITH PARALLAX */}
                     <motion.div
-                        className="absolute inset-[-20px] z-0 pointer-events-none overflow-hidden rounded-[2rem] bg-black"
-                        style={{ x: videoX, y: videoY }} // Parallax movement
+                        className="absolute inset-[-10px] z-0 pointer-events-none"
+                        style={{ x: videoX, y: videoY }}
                     >
                         <SmartCinematicVideo
                             posterSrc={service.posterSrc}
                             videoSrc={service.videoSrc}
-                            className="absolute inset-0 w-full h-full brightness-110 saturate-125"
+                            shouldPlay={isHovered} // <--- SEULEMENT SI HOVER
+                            className="absolute inset-0 w-full h-full brightness-[0.8] saturate-[1.1]"
                         />
 
                         {/* COLOR OVERLAY (Jewel Tone) */}
