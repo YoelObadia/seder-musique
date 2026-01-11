@@ -4,68 +4,55 @@ import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { Locale } from '@/i18n-config';
-import { ArrowUpRight, Music, Mic2, Users, Star } from 'lucide-react';
+import { Music, Mic2, Users, Star } from 'lucide-react';
 import SmartCinematicVideo from '../ui/SmartCinematicVideo';
-
-const GOLD = '#FFD700';
 
 // ----------------------------------------------------------------------
 // DATA & COLORS
 // ----------------------------------------------------------------------
+const ROTATION_RANGE = 15; // 15 est plus élégant que 20 pour ce design
+
 const SERVICES_CONFIG = [
     {
         id: 'production',
         href: '/services/production',
-        icon: <Music className="w-8 h-8" />,
+        icon: <Music className="w-6 h-6" />,
         videoSrc: '/videos/production.webm',
         posterSrc: '/images/production-poster.webp',
-        // Emerald & Gold - Brightened
         gradient: 'radial-gradient(circle at center, #10B981 0%, #064E3B 100%)',
         glowColor: '#10B981',
-        delay: 0.1
     },
     {
         id: 'influence',
         href: '/services/influence',
-        icon: <Users className="w-8 h-8" />,
+        icon: <Users className="w-6 h-6" />,
         videoSrc: '/videos/influence.webm',
         posterSrc: '/images/influence-poster.webp',
-        // Sapphire & Gold - Brightened
         gradient: 'radial-gradient(circle at center, #3B82F6 0%, #1E3A8A 100%)',
         glowColor: '#3B82F6',
-        delay: 0.2
     },
     {
         id: 'booking',
         href: '/services/booking',
-        icon: <Mic2 className="w-8 h-8" />,
+        icon: <Mic2 className="w-6 h-6" />,
         videoSrc: '/videos/bookings.webm',
         posterSrc: '/images/bookings-poster.webp',
-        // Amethyst & Gold - Brightened
         gradient: 'radial-gradient(circle at center, #A855F7 0%, #581C87 100%)',
         glowColor: '#A855F7',
-        delay: 0.3
     },
     {
         id: 'talents',
         href: '/services/talents',
-        icon: <Star className="w-8 h-8" />,
+        icon: <Star className="w-6 h-6" />,
         videoSrc: '/videos/talents.webm',
         posterSrc: '/images/talents-poster.webp',
-        // Ruby & Gold - Brightened
         gradient: 'radial-gradient(circle at center, #EF4444 0%, #991B1B 100%)',
         glowColor: '#EF4444',
-        delay: 0.4
     },
 ];
 
 // ----------------------------------------------------------------------
-// 3D TILT PROPS
-// ----------------------------------------------------------------------
-const ROTATION_RANGE = 20;
-
-// ----------------------------------------------------------------------
-// COMPONENT
+// COMPONENT MAIN
 // ----------------------------------------------------------------------
 export default function ServicesSection({
     dict,
@@ -77,12 +64,8 @@ export default function ServicesSection({
     return (
         <section id="services" className="relative py-40 overflow-hidden bg-[#050505]">
             {/* Background elements */}
-
-
-            {/* Ambient liquid blobs - Boosted Opacity */}
-            <div className="absolute top-1/4 start-1/4 w-[600px] h-[600px] bg-emerald-500/20 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
-            <div className="absolute bottom-1/4 end-1/4 w-[600px] h-[600px] bg-purple-500/20 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
-            <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/4 start-1/4 w-[600px] h-[600px] bg-emerald-500/10 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
+            <div className="absolute bottom-1/4 end-1/4 w-[600px] h-[600px] bg-purple-500/10 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
 
             <div className="container mx-auto px-6 relative z-10">
                 {/* Header */}
@@ -113,6 +96,10 @@ export default function ServicesSection({
                         const desc = dict.services_section.cards[service.id].desc;
                         const label = dict.nav.submenu[service.id];
 
+                        // Calcul du délai de chargement vidéo (Cascade)
+                        // 2s initial + 1.5s entre chaque carte
+                        const staggerDelay = 2000 + (index * 1500);
+
                         return (
                             <TiltCard
                                 key={service.id}
@@ -122,6 +109,7 @@ export default function ServicesSection({
                                 label={label}
                                 lang={lang}
                                 index={index}
+                                loadDelay={staggerDelay}
                             />
                         );
                     })}
@@ -132,7 +120,7 @@ export default function ServicesSection({
 }
 
 // ----------------------------------------------------------------------
-// TILT CARD COMPONENT WITH SPOTLIGHT
+// TILT CARD COMPONENT
 // ----------------------------------------------------------------------
 function TiltCard({
     service,
@@ -140,7 +128,8 @@ function TiltCard({
     desc,
     lang,
     index,
-    label
+    label,
+    loadDelay
 }: {
     service: typeof SERVICES_CONFIG[0];
     title: string;
@@ -148,67 +137,53 @@ function TiltCard({
     lang: Locale;
     index: number;
     label: string;
+    loadDelay: number;
 }) {
     const ref = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
-    // Lazy Load Video
-    const isInView = useInView(ref, { once: true, margin: "0px 0px 200px 0px" });
 
-    // Mouse position relative to center of card
+    // Mouse position logic
     const x = useMotionValue(0);
     const y = useMotionValue(0);
-
-    // Mouse position relative to top-left of card (for spotlight)
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Smooth physics
     const xSpring = useSpring(x, { stiffness: 300, damping: 30 });
     const ySpring = useSpring(y, { stiffness: 300, damping: 30 });
 
-    // Transform logic for tilt
     const rotateX = useTransform(ySpring, [-0.5, 0.5], [ROTATION_RANGE, -ROTATION_RANGE]);
     const rotateY = useTransform(xSpring, [-0.5, 0.5], [-ROTATION_RANGE, ROTATION_RANGE]);
 
-    // Parallax logic for video (moves opposite to tilt for depth)
-    const videoX = useTransform(xSpring, [-0.5, 0.5], [-15, 15]); // 15px movement
-    const videoY = useTransform(ySpring, [-0.5, 0.5], [-15, 15]);
+    // Parallax léger pour la vidéo
+    const videoX = useTransform(xSpring, [-0.5, 0.5], [-10, 10]);
+    const videoY = useTransform(ySpring, [-0.5, 0.5], [-10, 10]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!ref.current) return;
-
         const rect = ref.current.getBoundingClientRect();
         const width = rect.width;
         const height = rect.height;
-
         const clientX = e.clientX - rect.left;
         const clientY = e.clientY - rect.top;
 
-        // For tilt
-        const xPct = clientX / width - 0.5;
-        const yPct = clientY / height - 0.5;
-
-        x.set(xPct);
-        y.set(yPct);
-
-        // For spotlight
+        x.set(clientX / width - 0.5);
+        y.set(clientY / height - 0.5);
         mouseX.set(clientX);
         mouseY.set(clientY);
     };
 
     const handleMouseLeave = () => {
         setIsHovered(false);
-        x.set(0);
-        y.set(0);
+        x.set(0); y.set(0);
     };
 
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: service.delay, duration: 0.6 }}
+            transition={{ delay: 0.1 * index, duration: 0.6 }}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={handleMouseLeave}
@@ -216,21 +191,19 @@ function TiltCard({
                 transformStyle: "preserve-3d",
                 rotateX,
                 rotateY,
-                willChange: "transform",
+                willChange: "transform", // Optimisation GPU
             }}
-            className="relative h-[450px] rounded-[2rem] cursor-pointer group perspective-1000"
+            className="relative h-[500px] w-full rounded-[2rem] cursor-pointer group perspective-1000"
         >
             <Link href={`/${lang}${service.href}`} className="block h-full w-full">
-                {/* Card Container */}
                 <div
-                    className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-xl rounded-[2rem] border border-white/10
-                                transition-all duration-500 overflow-hidden shadow-xl"
+                    className="absolute inset-0 bg-[#0A0A0A] rounded-[2rem] overflow-hidden shadow-2xl transition-all duration-500 border border-white/5"
                     style={{
                         transform: "translateZ(0px)",
                         borderColor: isHovered ? service.glowColor : 'rgba(255,255,255,0.1)'
                     }}
                 >
-                    {/* VIDEO BACKGROUND (HTML5) WITH PARALLAX */}
+                    {/* --- VIDEO LAYER --- */}
                     <motion.div
                         className="absolute inset-[-10px] z-0 pointer-events-none"
                         style={{ x: videoX, y: videoY }}
@@ -238,63 +211,74 @@ function TiltCard({
                         <SmartCinematicVideo
                             posterSrc={service.posterSrc}
                             videoSrc={service.videoSrc}
-                            shouldPlay={isHovered} // <--- SEULEMENT SI HOVER
+                            shouldPlay={isHovered} // Lecture seulement au survol
+                            loadDelay={loadDelay}  // Chargement différé
                             className="absolute inset-0 w-full h-full brightness-[0.8] saturate-[1.1]"
                         />
 
-                        {/* COLOR OVERLAY (Jewel Tone) */}
+                        {/* Gradient Overlay pour lisibilité texte */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/90 z-[1]" />
+
+                        {/* Color Tint Overlay */}
                         <div
-                            className="absolute inset-0 mix-blend-multiply z-[1] transition-opacity duration-700"
-                            style={{
-                                backgroundColor: service.glowColor,
-                                opacity: 0.1
-                            }}
+                            className="absolute inset-0 mix-blend-overlay opacity-30 z-[1] transition-opacity duration-500"
+                            style={{ backgroundColor: service.glowColor }}
                         />
-                        {/* GRADIENT OVERLAY (Bottom fade) */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-[2]" />
                     </motion.div>
 
-                    {/* Spotlight Effect - Brightened, Top Layer */}
+                    {/* --- SPOTLIGHT EFFECT --- */}
                     <motion.div
-                        className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 group-hover:opacity-100 transition duration-300 z-20"
+                        className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 group-hover:opacity-100 transition duration-500 z-10"
                         style={{
-                            background: `radial-gradient(600px circle at ${mouseX}px ${mouseY}px, ${service.glowColor}50, transparent 40%)`,
+                            background: `radial-gradient(600px circle at ${mouseX}px ${mouseY}px, ${service.glowColor}40, transparent 40%)`,
                         }}
                     />
 
-                    {/* Content Layer */}
+                    {/* --- CONTENT LAYER --- */}
                     <div
-                        className="relative h-full flex flex-col justify-between p-10 z-30"
-                        style={{ transform: "translateZ(40px)" }}
+                        className="relative h-full flex flex-col justify-between p-8 z-20"
+                        style={{ transform: "translateZ(30px)" }}
                     >
-                        {/* Top: Icon & Number */}
-                        <div className="flex justify-between items-start">
+                        {/* TOP SECTION: Icon Box & Number */}
+                        <div className="flex justify-between items-start w-full">
+                            {/* Icon Box Vitré */}
                             <div
-                                className="p-4 rounded-2xl bg-black/40 backdrop-blur-md ring-1 ring-white/10 transition-all duration-300 shadow-lg"
+                                className="w-14 h-14 rounded-2xl flex items-center justify-center backdrop-blur-md transition-all duration-300 group-hover:scale-110 shadow-lg"
                                 style={{
-                                    color: isHovered ? '#000' : service.glowColor,
-                                    backgroundColor: isHovered ? service.glowColor : 'rgba(0,0,0,0.4)',
-                                    boxShadow: isHovered ? `0 0 30px ${service.glowColor}60` : 'none'
+                                    backgroundColor: 'rgba(255,255,255,0.05)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    color: isHovered ? '#FFF' : service.glowColor,
+                                    boxShadow: isHovered ? `0 0 20px ${service.glowColor}40` : 'none'
                                 }}
                             >
                                 {service.icon}
                             </div>
-                            <span className="font-mono text-xs text-white/60">0{index + 1}</span>
+
+                            {/* Number */}
+                            <span className="font-serif text-sm font-medium text-white/40 tracking-widest">
+                                0{index + 1}
+                            </span>
                         </div>
 
-                        {/* Bottom: Text */}
-                        <div>
-                            <div className="flex items-center gap-3 mb-4 opacity-100 transition-opacity duration-300">
-                                <span className="h-[1px] w-8 transition-all duration-300" style={{ backgroundColor: service.glowColor }} />
-                                <span className="text-xs font-mono tracking-widest uppercase shadow-black drop-shadow-md" style={{ color: service.glowColor }}>
-                                    {isHovered ? 'Discover' : label || 'Explore'}
+                        {/* BOTTOM SECTION: Centered Text */}
+                        <div className="flex flex-col items-center text-center space-y-3 pb-2">
+                            {/* Separator Line & Label */}
+                            <div className="flex items-center gap-4 mb-2 opacity-80">
+                                <span className="h-[1px] w-6 bg-white/20" />
+                                <span
+                                    className="text-[10px] font-bold tracking-[0.2em] uppercase"
+                                    style={{ color: service.glowColor }}
+                                >
+                                    {label || 'Service'}
                                 </span>
+                                <span className="h-[1px] w-6 bg-white/20" />
                             </div>
 
-                            <h3 className="h-10 text-3xl font-display font-bold uppercase mb-4 text-white transition-colors drop-shadow-2xl">
+                            <h3 className="text-3xl font-display font-bold uppercase text-white drop-shadow-lg tracking-tight">
                                 {title}
                             </h3>
-                            <p className="text-white/80 text-base font-serif italic leading-relaxed group-hover:text-white transition-colors drop-shadow-md">
+
+                            <p className="text-sm font-serif text-white/70 line-clamp-2 max-w-[90%] leading-relaxed group-hover:text-white transition-colors">
                                 {desc}
                             </p>
                         </div>
