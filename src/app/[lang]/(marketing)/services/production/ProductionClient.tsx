@@ -94,14 +94,14 @@ export default function ProductionClient({ content, lang }: ProductionClientProp
                 {/* Background Video/Image */}
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/images/production/hero.webp"
+                        src="/images/production.webp"
                         alt="Engineering of Emotion"
                         fill
                         className="object-cover opacity-50 brightness-[0.6]"
                         priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/50" />
-                    <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-15 mix-blend-overlay" />
+
                 </div>
 
                 <div className="relative z-10 max-w-6xl">
@@ -133,7 +133,7 @@ export default function ProductionClient({ content, lang }: ProductionClientProp
                 {/* VISUAL ECOSYSTEM */}
                 <div className="relative max-w-5xl mx-auto">
                     {/* Connecting Line */}
-                    <div className="connector-line absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FFD700]/50 to-transparent -translate-y-1/2 hidden md:block" />
+                    <div className="connector-line absolute top-1/2 start-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FFD700]/50 to-transparent -translate-y-1/2 hidden md:block" />
 
                     <div className="grid md:grid-cols-3 gap-8 relative z-10">
                         {/* Music Pillar */}
@@ -147,15 +147,7 @@ export default function ProductionClient({ content, lang }: ProductionClientProp
 
                         {/* Central Hub (Project) */}
                         <div className="pillar-card group relative p-12 text-center transform scale-105 border border-[#FFD700] shadow-[0_0_50px_rgba(255,215,0,0.2)] overflow-hidden">
-                            <video
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
-                            >
-                                <source src="/videos/projet.webm" type="video/webm" />
-                            </video>
+                            <VideoWithLazyLoad src="/videos/projet.webm" />
 
                             {/* Overlay subtil pour garder la lisibilité sans tuer la vidéo */}
                             <div className="absolute inset-0 bg-black/20 z-0" />
@@ -186,7 +178,7 @@ export default function ProductionClient({ content, lang }: ProductionClientProp
                 <div className="absolute inset-0 z-0">
                     {/* Abstract architectural image background */}
                     <Image
-                        src="/images/production/uhnwi.webp"
+                        src="/images/uhnwi.webp"
                         alt="Background"
                         fill
                         className="uhnwi-img object-cover opacity-20 scale-110"
@@ -222,3 +214,41 @@ export default function ProductionClient({ content, lang }: ProductionClientProp
         </main>
     );
 }
+
+const VideoWithLazyLoad = ({ src }: { src: string }) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && videoRef.current) {
+                        videoRef.current.src = src;
+                        observer.disconnect();
+                    }
+                });
+            },
+            { rootMargin: '200px' }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [src]);
+
+    return (
+        <div ref={containerRef} className="absolute inset-0 w-full h-full z-0">
+            <video
+                ref={videoRef}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover opacity-80"
+            />
+        </div>
+    );
+};

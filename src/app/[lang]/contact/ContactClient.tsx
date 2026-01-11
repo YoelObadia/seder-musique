@@ -9,6 +9,7 @@ import { Locale } from '@/i18n-config';
 import { useSearchParams } from 'next/navigation';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowRight, Loader2, Mail, MapPin, Check } from 'lucide-react';
 
 interface ContactClientProps {
     dict: any;
@@ -34,19 +35,47 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
 
     // 1. Map URL params to FINAL Logic
     let defaultType = '';
-    if (urlType === 'booking') defaultType = 'booking_seder'; // Default to Seder (Stars)
-    else if (urlType === 'talents') defaultType = 'talents_rd';
-    else if (urlType === 'influence') defaultType = 'marketing'; // Map old URL param to new key
+    if (urlType === 'booking') defaultType = 'booking_talent'; // Client seeking Artist
+    else if (urlType === 'management') defaultType = 'artist_management'; // Artist seeking Manager
+    else if (urlType === 'talents') defaultType = 'talents_rd'; // Old mapping, keep if needed
+    else if (urlType === 'influence') defaultType = 'marketing';
     else if (urlType && ['production', 'booking_rd'].includes(urlType)) defaultType = urlType;
 
-    // Zod Schema with i18n
+
+    // Zod Schema with Conditional Logic
     const contactSchema = z.object({
         name: z.string().min(2, dict.contact.errors.name_required),
         email: z.string().email(dict.contact.errors.email_invalid),
         projectType: z.string().min(1, dict.contact.errors.required),
         artistType: z.string().optional(),
         demo: z.string().optional(),
-        message: z.string().min(10, dict.contact.errors.message_too_short),
+        message: z.string().min(4, dict.contact.errors.message_too_short),
+    }).superRefine((data, ctx) => {
+        // Management Branch: Demo is REQUIRED
+        if (data.projectType === 'artist_management') {
+            if (!data.demo || data.demo.length < 5) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: dict.contact.errors.demo_required,
+                    path: ['demo']
+                });
+            }
+            if (!data.artistType) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: dict.contact.errors.profile_required,
+                    path: ['artistType']
+                });
+            }
+        }
+        // Booking Branch: Artist Type is REQUIRED
+        if (data.projectType === 'booking_talent' && !data.artistType) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: dict.contact.errors.talent_type_required,
+                path: ['artistType']
+            });
+        }
     });
 
     const { register, watch, handleSubmit, setValue, reset, formState: { errors } } = useForm<FormValues>({
@@ -66,9 +95,37 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
+    const contactInfo = [
+        {
+            icon: <Mail className="w-6 h-6" />,
+            label: dict.contact.info.email_label || 'Email',
+            value: "contact@sedermusic.com",
+            action: "mailto:contact@sedermusic.com"
+        },
+        {
+            icon: <MapPin className="w-6 h-6" />,
+            label: dict.contact.info.location_label || 'Studio',
+            value: dict.contact.info.location || 'Paris, France',
+            action: "https://maps.google.com/?q=Paris,France"
+        }
+    ];
+
+    // Dynamic Left Side Content
+    const isManagement = projectType === 'artist_management';
+    const leftTitle = isManagement
+        ? (dict.contact?.management?.title || "Représentation Artistique")
+        : (dict.contact?.booking?.title || dict.contact.title);
+
+    const leftSubtitle = isManagement
+        ? (dict.contact?.management?.subtitle || "Rejoignez R&D Records. Proposez votre démo et discutons de votre carrière.")
+        : (dict.contact?.booking?.subtitle || "Nous trouvons l'artiste adapté à votre vision pour vos événements.");
+
+    const leftInfo = isManagement ? "MANAGEMENT" : (dict.contact.info.management || "BOOKING");
+
+
     // Initial Animation
     useGSAP(() => {
-        if (!isSuccess) { // Only animate form entry if not in success state (or handle transition)
+        if (!isSuccess) {
             const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
             // Staggered Form Entry
@@ -77,48 +134,26 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                 { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1, stagger: 0.1, delay: 0.2 }
             );
 
-            // Waveform Animation (Continuous)
+            // Waveform Animation
             gsap.to('.waveform-line', {
                 scaleY: 1.5,
                 duration: 2,
-                stagger: {
-                    each: 0.1,
-                    yoyo: true,
-                    repeat: -1
-                },
+                stagger: { each: 0.1, yoyo: true, repeat: -1 },
                 ease: 'sine.inOut'
             });
-
-            // Highlight Pre-selection
-            if (defaultType) {
-                gsap.fromTo('.select-wrapper',
-                    { boxShadow: '0 0 0 rgba(255, 215, 0, 0)', borderColor: 'rgba(255, 255, 255, 0.1)' },
-                    {
-                        boxShadow: '0 0 20px rgba(255, 215, 0, 0.2)',
-                        borderColor: '#FFD700',
-                        duration: 1.5,
-                        ease: 'power2.out',
-                        delay: 1.2,
-                        yoyo: true,
-                        repeat: 1
-                    }
-                );
-            }
         }
-    }, { scope: containerRef, dependencies: [isSuccess] }); // Re-run if success state changes (to potentially animate success entry)
+    }, { scope: containerRef, dependencies: [isSuccess] });
 
     // Dynamic Field Animations
     useGSAP(() => {
         if (!isSuccess) {
-            // We target all potential dynamic containers
             const animatedFields = ['.artist-type-field', '.production-note', '.demo-field'];
-
             animatedFields.forEach(selector => {
                 const el = formRef.current?.querySelector(selector);
                 if (el) {
                     gsap.fromTo(el,
                         { height: 0, opacity: 0, marginTop: 0 },
-                        { height: 'auto', opacity: 1, marginTop: (selector === '.production-note') ? 16 : 24, duration: 0.5, ease: 'power2.out' }
+                        { height: 'auto', opacity: 1, marginTop: 24, duration: 0.5, ease: 'power2.out' }
                     );
                 }
             });
@@ -135,13 +170,11 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
             });
 
             if (res.ok) {
-                // Animate out? 
                 setIsSuccess(true);
                 reset();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 console.error('Error sending email');
-                // Optionally handle error UI
             }
         } catch (error) {
             console.error('Submission error:', error);
@@ -155,60 +188,73 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
 
             {/* Background Ambient Noise & Gradient */}
             <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-20 mix-blend-overlay" />
+
                 <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-900/10 blur-[120px] rounded-full" />
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFD700]/5 blur-[120px] rounded-full" />
+                <div className="absolute bottom-0 start-0 w-[500px] h-[500px] bg-purple-900/10 blur-[120px] rounded-full" />
+                <div className="absolute top-0 end-0 w-[500px] h-[500px] bg-[#FFD700]/5 blur-[120px] rounded-full" />
             </div>
 
             <div className="container mx-auto px-6 h-full min-h-screen flex flex-col md:flex-row relative z-10 pt-32 pb-20">
 
-                {/* LEFT: INFO & CONTEXT (Asymmetric) */}
-                <div className="w-full md:w-5/12 pr-0 md:pr-12 lg:pr-24 flex flex-col justify-between mb-16 md:mb-0">
-                    <div>
-                        <span className="anim-entry block text-[#FFD700] font-mono text-xs uppercase tracking-[0.3em] mb-6">
-                            {dict.contact.info.management}
-                        </span>
-                        <h1 className="anim-entry text-4xl md:text-6xl font-display font-medium uppercase leading-tight mb-8">
-                            {dict.contact.title}
+                {/* LEFT: INFO & CONTEXT (Dynamic) */}
+                <div className="w-full md:w-5/12 pe-0 md:pe-12 lg:pe-24 flex flex-col justify-start gap-16 mb-16 md:mb-0">
+                    <div className="space-y-8">
+                        <h1 className="text-5xl md:text-7xl font-display font-bold uppercase tracking-tighter leading-none">
+                            {dict.contact.title.line1}<br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-[#E5C100]">
+                                {dict.contact.title.line2}
+                            </span>
                         </h1>
-                        <p className="anim-entry text-lg text-white/60 font-light leading-relaxed max-w-md">
-                            {dict.contact.subtitle}
+                        <p className="text-white/60 text-lg font-light tracking-wide max-w-sm">
+                            {dict.contact.description}
                         </p>
                     </div>
 
-                    <div className="anim-entry mt-12 md:mt-0">
-                        <div className="flex items-center gap-4 text-[#FFD700]/80 mb-2">
-                            <span className="w-2 h-2 bg-[#FFD700] rounded-full animate-pulse" />
-                            <span className="font-mono text-sm tracking-widest uppercase">{dict.contact.info.location}</span>
-                        </div>
-                        <p className="text-white/40 text-sm">contact@sedermusic.com</p>
+                    {/* Info Grid */}
+                    <div className="grid gap-8">
+                        {contactInfo.map((item, i) => (
+                            <a
+                                key={i}
+                                href={item.action}
+                                className="group flex items-center gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 transition-all duration-500"
+                            >
+                                <div className="p-3 rounded-full bg-white/5 text-[#FFD700] group-hover:scale-110 transition-transform">
+                                    {item.icon}
+                                </div>
+                                <div>
+                                    <p className="text-xs font-mono uppercase tracking-widest text-white/40 mb-1">{item.label}</p>
+                                    <p className="text-lg font-display uppercase tracking-wide group-hover:text-white transition-colors">{item.value}</p>
+                                </div>
+                            </a>
+                        ))}
                     </div>
                 </div>
 
-                {/* RIGHT: FORM (The Interaction) */}
+                {/* RIGHT: FORM */}
                 <div className="w-full md:w-7/12 relative min-h-[600px]">
-                    {/* Vertical Divider Line (Desktop only) */}
-                    <div className="hidden md:block absolute left-[-2px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+                    <div className="hidden md:block absolute start-[-2px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
                     {isSuccess ? (
-                        <div className="pl-0 md:pl-12 lg:pl-16 flex flex-col justify-center h-full anim-entry">
-                            <div className="mb-8">
-                                <span className="block text-white/30 font-mono text-xs uppercase tracking-[0.3em] mb-4">Status</span>
-                                <h2 className="text-4xl md:text-5xl font-display uppercase text-[#FFD700] mb-6 leading-tight">
-                                    {dict.contact.success.title}
-                                </h2>
+                        <div className="ps-0 md:ps-12 lg:ps-16 flex flex-col justify-center h-full anim-entry">
+                            <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-8 border border-green-500/50">
+                                <Check className="w-10 h-10 text-green-500" />
                             </div>
-                            <p className="text-lg md:text-xl text-white/80 font-serif italic mb-12 leading-relaxed border-l-2 border-[#FFD700] pl-6 max-w-lg">
+                            <h3 className="text-4xl font-display uppercase mb-4 text-white">
+                                {dict.contact.success.title}
+                            </h3>
+                            <p className="text-lg md:text-xl text-white/80 font-serif italic mb-12 leading-relaxed border-s-2 border-[#FFD700] ps-6 max-w-lg">
                                 {dict.contact.success.message}
                             </p>
-                            <div>
-                                <SonicButton onClick={() => setIsSuccess(false)} variant="booking" className="px-10 py-4 uppercase tracking-widest text-xs">
-                                    {dict.contact.success.reset_btn}
-                                </SonicButton>
-                            </div>
+                            <SonicButton
+                                onClick={() => setIsSuccess(false)}
+                                variant="booking"
+                                className="border border-white/20 hover:bg-white hover:text-black hover:border-white px-8 py-4 uppercase tracking-widest text-sm transition-all duration-300 w-fit"
+                            >
+                                {dict.contact.success.button}
+                            </SonicButton>
                         </div>
                     ) : (
-                        <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="pl-0 md:pl-12 lg:pl-16 flex flex-col gap-6 max-w-2xl py-10">
+                        <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="ps-0 md:ps-12 lg:ps-16 flex flex-col gap-6 max-w-2xl py-10">
 
                             {/* Name */}
                             <div className="anim-entry group">
@@ -219,7 +265,7 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                     {...register('name')}
                                     type="text"
                                     className={`w-full bg-white/5 border ${errors.name ? 'border-red-500/50' : 'border-white/10'} p-4 text-white placeholder-white/20 focus:outline-none focus:border-[#FFD700] focus:bg-white/10 transition-all duration-300 rounded-none`}
-                                    placeholder="John Doe"
+                                    placeholder="Nom complet"
                                 />
                                 {errors.name && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.name.message}</span>}
                             </div>
@@ -233,12 +279,12 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                     {...register('email')}
                                     type="email"
                                     className={`w-full bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} p-4 text-white placeholder-white/20 focus:outline-none focus:border-[#FFD700] focus:bg-white/10 transition-all duration-300 rounded-none`}
-                                    placeholder="john@example.com"
+                                    placeholder="email@exemple.com"
                                 />
                                 {errors.email && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.email.message}</span>}
                             </div>
 
-                            {/* Project Type */}
+                            {/* Project Type (Main Selector) */}
                             <div className="anim-entry group">
                                 <label className="block text-xs font-mono uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-[#FFD700] transition-colors">
                                     {dict.contact.form.projectType.label}
@@ -248,10 +294,13 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                         {...register('projectType')}
                                         className={`w-full bg-white/5 border ${errors.projectType ? 'border-red-500/50' : 'border-white/10'} p-4 text-white appearance-none focus:outline-none focus:border-[#FFD700] focus:bg-white/10 transition-all duration-300 rounded-none cursor-pointer`}
                                     >
-                                        <option value="" className="bg-[#111] text-gray-500">...</option>
+                                        <option value="" className="bg-[#111] text-gray-500">Sélectionnez une demande...</option>
+                                        <option value="booking_talent" className="bg-[#111]">{dict.contact.form.projectType.options.booking_talent}</option>
+                                        <option value="artist_management" className="bg-[#111]">{dict.contact.form.projectType.options.artist_management}</option>
+
+                                        <option disabled className="bg-[#111] text-gray-600">──────────</option>
+
                                         <option value="booking_seder" className="bg-[#111]">{dict.contact.form.projectType.options.booking_seder}</option>
-                                        <option value="booking_rd" className="bg-[#111]">{dict.contact.form.projectType.options.booking_rd}</option>
-                                        <option value="talents_rd" className="bg-[#111]">{dict.contact.form.projectType.options.talents_rd}</option>
                                         <option value="production" className="bg-[#111]">{dict.contact.form.projectType.options.production}</option>
                                         <option value="marketing" className="bg-[#111]">{dict.contact.form.projectType.options.marketing}</option>
                                     </select>
@@ -260,51 +309,86 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                 {errors.projectType && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.projectType.message}</span>}
                             </div>
 
-                            {/* CONDITIONAL Fields */}
-                            {(projectType === 'booking_seder' || projectType === 'booking_rd') && dict.contact.form.dynamicFields?.artistType && (
+                            {/* CONDITIONAL: BRANCH CLIENT (Booking Talent) */}
+                            {projectType === 'booking_talent' && (
                                 <div className="artist-type-field overflow-hidden">
-                                    <label className="block text-xs font-mono uppercase tracking-widest text-[#A855F7] mb-2">
-                                        {dict.contact.form.dynamicFields.artistType.label}
+                                    <label className="block text-xs font-mono uppercase tracking-widest text-[#FFD700] mb-2">
+                                        Quel type de talent recherchez-vous ?
                                     </label>
                                     <div className="relative">
                                         <select
                                             {...register('artistType')}
-                                            className="w-full bg-[#A855F7]/10 border border-[#A855F7]/30 p-4 text-white appearance-none focus:outline-none focus:border-[#A855F7] transition-all duration-300 rounded-none cursor-pointer"
+                                            className="w-full bg-[#FFD700]/5 border border-[#FFD700]/30 p-4 text-white appearance-none focus:outline-none focus:border-[#FFD700] transition-all duration-300 rounded-none cursor-pointer"
                                         >
-                                            <option value="" className="bg-[#111] text-gray-500">...</option>
-                                            {dict.contact.form.dynamicFields.artistType.options.map((opt: string, i: number) => (
+                                            <option value="" className="bg-[#111] text-gray-500">Précisez le talent...</option>
+                                            {dict.contact.form.clientNeeds?.map((opt: string, i: number) => (
                                                 <option key={i} value={opt} className="bg-[#111]">{opt}</option>
                                             ))}
                                         </select>
                                         <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">▼</div>
                                     </div>
+                                    <p className="text-[10px] text-white/40 mt-2 italic">
+                                        Nous sélectionnons l'artiste sur-mesure adapté à l'ambiance et l'envergure de votre événement.
+                                    </p>
+                                    {errors.artistType && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.artistType.message}</span>}
                                 </div>
                             )}
 
-                            {projectType === 'talents_rd' && dict.contact.form.dynamicFields?.demo && (
+
+                            {/* CONDITIONAL: BRANCH ARTIST (Management) */}
+                            {projectType === 'artist_management' && (
+                                <>
+                                    <div className="artist-type-field overflow-hidden">
+                                        <label className="block text-xs font-mono uppercase tracking-widest text-[#3B82F6] mb-2">
+                                            Quel est votre profil artistique ?
+                                        </label>
+                                        <div className="relative">
+                                            <select
+                                                {...register('artistType')}
+                                                className="w-full bg-[#3B82F6]/5 border border-[#3B82F6]/30 p-4 text-white appearance-none focus:outline-none focus:border-[#3B82F6] transition-all duration-300 rounded-none cursor-pointer"
+                                            >
+                                                <option value="" className="bg-[#111] text-gray-500">Votre profil...</option>
+                                                {dict.contact.form.artistProfiles?.map((opt: string, i: number) => (
+                                                    <option key={i} value={opt} className="bg-[#111]">{opt}</option>
+                                                ))}
+                                            </select>
+                                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">▼</div>
+                                        </div>
+                                        {errors.artistType && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.artistType.message}</span>}
+                                    </div>
+
+                                    {/* DEMO LINK (Required for Artists) */}
+                                    <div className="demo-field overflow-hidden">
+                                        <label className="block text-xs font-mono uppercase tracking-widest text-[#3B82F6] mb-2">
+                                            Lien Démo (SoundCloud, YouTube, Instagram) <span className="text-red-400">*</span>
+                                        </label>
+                                        <input
+                                            {...register('demo')}
+                                            type="text"
+                                            className={`w-full bg-[#3B82F6]/5 border ${errors.demo ? 'border-red-500/50' : 'border-[#3B82F6]/30'} p-4 text-white placeholder-white/20 focus:outline-none focus:border-[#3B82F6] transition-all duration-300 rounded-none`}
+                                            placeholder="https://..."
+                                        />
+                                        {errors.demo && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.demo.message}</span>}
+                                    </div>
+                                </>
+                            )}
+
+                            {/* Legacy / Other Conditional Logic */}
+                            {projectType === 'talents_rd' && !isManagement && ( // Keeps old logic fallback if needed
                                 <div className="demo-field overflow-hidden">
                                     <label className="block text-xs font-mono uppercase tracking-widest text-[#3B82F6] mb-2">
-                                        {dict.contact.form.dynamicFields.demo}
+                                        {dict.contact.form.dynamicFields?.demo || "Demo"}
                                     </label>
                                     <input
                                         {...register('demo')}
                                         type="text"
                                         className="w-full bg-[#3B82F6]/10 border border-[#3B82F6]/30 p-4 text-white placeholder-white/20 focus:outline-none focus:border-[#3B82F6] transition-all duration-300 rounded-none"
-                                        placeholder="SoundCloud, YouTube, Instagram..."
+                                        placeholder="SoundCloud, YouTube..."
                                     />
                                 </div>
                             )}
 
-                            {projectType === 'production' && (
-                                <div className="production-note overflow-hidden">
-                                    <div className="flex items-start gap-3 p-4 bg-[#FFD700]/5 border border-[#FFD700]/20 text-[#FFD700]">
-                                        <span className="text-xl">✨</span>
-                                        <p className="text-sm font-light leading-tight">
-                                            {dict.contact.form.dynamicFields.productionNote}
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
+
 
                             {/* Message */}
                             <div className="anim-entry group">
@@ -315,7 +399,7 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                                     {...register('message')}
                                     rows={4}
                                     className={`w-full bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} p-4 text-white placeholder-white/20 focus:outline-none focus:border-[#FFD700] focus:bg-white/10 transition-all duration-300 rounded-none resize-none`}
-                                    placeholder="..."
+                                    placeholder={isManagement ? "Présentez-vous en quelques mots..." : "Décrivez votre événement..."}
                                 />
                                 {errors.message && <span className="text-red-400 text-[10px] tracking-wide uppercase mt-1 block">{errors.message.message}</span>}
                             </div>

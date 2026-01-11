@@ -46,10 +46,10 @@ export default function FinalManifesto({ dict }: FinalManifestoProps) {
                     }}
                     className="text-center"
                 >
-                    <p className="text-[clamp(1.5rem,3vw,2.5rem)] font-serif italic font-light text-white leading-relaxed md:leading-relaxed">
-                        <span className="text-[#FFD700] mr-2 opactiy-50">“</span>
+                    <p className="text-3xl md:text-4xl lg:text-5xl font-serif italic leading-relaxed text-white/90">
+                        <span className="text-[#FFD700] me-2 opactiy-50">“</span>
                         {dict.manifesto.content}
-                        <span className="text-[#FFD700] ml-2 opacity-50">”</span>
+                        <span className="text-[#FFD700] ms-2 opacity-50">”</span>
                     </p>
                 </motion.div>
 

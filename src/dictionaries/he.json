@@ -13,7 +13,10 @@
         "contact": "צור קשר"
     },
     "contact": {
-        "title": "Let's build the exceptional.",
+        "title": {
+            "line1": "Let's build",
+            "line2": "the exceptional."
+        },
         "subtitle": "Fill out this form to start your project.",
         "form": {
             "name": "Full Name",
@@ -24,36 +27,56 @@
             "projectType": {
                 "label": "Nature of your request",
                 "options": {
-                    "booking_seder": "Seder Music — International Booking (Stars & DJs)",
-                    "booking_rd": "R&D Records — Confirmed Artists Booking (Musicians, Composers)",
-                    "talents_rd": "R&D Records — Join Label (Mediterranean & Oriental Talents)",
-                    "production": "Event Production (Concert, Gala)",
-                    "marketing": "Influencer Marketing"
+                    "booking_seder": "Seder Music — בוקינג בינלאומי (כוכבים ו-DJ)",
+                    "booking_talent": "R&D Records — בוקינג טאלנטים",
+                    "artist_management": "R&D Records — בקשת ניהול",
+                    "booking_rd": "R&D Records — בוקינג אמנים מבוססים",
+                    "talents_rd": "R&D Records — הצטרפות ללייבל",
+                    "production": "הפקת אירועים (קונצרט, גאלה)",
+                    "marketing": "שיווק משפיענים"
                 }
             },
             "dynamicFields": {
                 "artistType": {
-                    "label": "What artist profile are you looking for?",
+                    "label": "איזה סוג של אמן אתם מחפשים?",
                     "options": [
-                        "Singer / Voice",
-                        "Musician / Instrumentalist",
-                        "Orchestra",
-                        "Composer / Arranger"
+                        "זמר / קול",
+                        "נגן / אינסטרומנטלי",
+                        "תזמורת",
+                        "מלחין / מעבד"
                     ]
                 },
-                "demo": "Link to your demo or socials (YouTube, SoundCloud, etc.)",
-                "productionNote": "Production logistics are handled by Seder Events."
-            }
+                "demo": "קישור לרשתות או לדמו (יוטיוב, סאונדקלאוד וכו')",
+                "productionNote": "הלוגיסטיקה של ההפקות שלנו מטופלת על ידי Seder Events."
+            },
+            "clientNeeds": [
+                "אמן מבוסס",
+                "כישרון צעיר (Graine)",
+                "תזמורת מלאה",
+                "סט DJ",
+                "הופעה בהתאמה אישית"
+            ],
+            "artistProfiles": [
+                "זמר",
+                "מלחין",
+                "נגן",
+                "DJ",
+                "Beatmaker",
+                "אחר"
+            ]
         },
         "info": {
-            "location": "Jerusalem, Israel",
-            "management": "Seder Music is a department of Seder Group. Our production logistics are handled by Seder Events."
+            "location": "ירושלים, ישראל",
+            "management": "Seder Music היא מחלקה של קבוצת Seder. הלוגיסטיקה של ההפקות שלנו מטופלת על ידי Seder Events."
         },
         "errors": {
-            "name_required": "שם חובה.",
+            "name_required": "שם נדרש.",
             "email_invalid": "כתובת אימייל לא חוקית.",
             "required": "שדה זה חובה.",
-            "message_too_short": "ההודעה חייבת להכיל לפחות 10 תווים."
+            "message_too_short": "ההודעה חייבת להכיל לפחות 4 תווים.",
+            "demo_required": "קישור דמו נדרש לאמנים (SoundCloud, YouTube...)",
+            "profile_required": "אנא בחר את הפרופיל שלך.",
+            "talent_type_required": "אנא ציין את סוג הטאלנט."
         },
         "success": {
             "title": "הודעה נשלחה",
@@ -146,8 +169,66 @@
         }
     },
     "talents": {
-        "hero_title": "ניהול טאלנטים",
-        "hero_subtitle": "אנחנו מגלים ומעצבים את האייקונים של המחר."
+        "slug": "rd-records",
+        "title": "לייבל R&D Records",
+        "tag": "Records & Development — by Seder Music",
+        "subtitle": "המעבדה האומנותית שבה מצוינות מוזיקלית פוגשת את הבמה.",
+        "intro": {
+            "p1": "R&D Records הוא הלייבל מבית Seder Music — בית שנועד לגלות אומנים, לבנות זהויות חזקות ולהפיק יצירות שנשארות לאורך זמן.",
+            "p2": "במפגש שבין האומנותי לאסטרטגי, אנו מלווים כל פרויקט מא' ועד ת': ניהול אומנותי, הפקה, הקלטה, מיקס ומאסטרינג, הפצה ושיווק. החתימה שלנו: סטנדרט סאונד פרימיום, חזון ברור ועבודת צוות בשירות הרגש.",
+            "p3": "R&D זה גם חתימה וגם שיטה: מחקר ופיתוח (Research & Development) בשירות היצירתיות, כדי להפוך רעיון ליצירה, ואז יצירה לקהל.",
+            "welcome": "ברוכים הבאים ל-R&D Records — המקום שבו הכישרון הופך לפרויקט... והפרויקט להצלחה."
+        },
+        "cards": {
+            "graines": {
+                "title": "זרעים של כישרון",
+                "desc": "אתם כישרון צעיר ורוצים להיות חלק ממשפחת R&D Records?",
+                "full_text": "אנחנו מאתרים ומקדמים את הדור הבא של המוזיקה הים תיכונית והמזרחית. R&D Records מבטיחה ליווי גלובלי ומותאם אישית.",
+                "bullets": [
+                    "חבילת הפקה וניהול אומנותי",
+                    "ניהול וייצוג תדמית",
+                    "ארגון הופעות ומכירת כרטיסים",
+                    "בוסט תקשורתי ורשתות חברתיות"
+                ],
+                "cta": "לנסות את מזלי",
+                "link": "/contact?type=talents_rd",
+                "list": [
+                    {
+                        "name": "שמואל סקורי",
+                        "role": "זמר",
+                        "slug": "samuel-skouri",
+                        "image": "/images/samuel.webp"
+                    },
+                    {
+                        "name": "שרה חלפון",
+                        "role": "מלחינה",
+                        "slug": "sarah-halfon",
+                        "image": "/images/sarah.webp"
+                    }
+                ]
+            },
+            "artistes": {
+                "title": "אמנים ומנהלים",
+                "desc": "האם אתה כבר אמן שמחפש ייצוג וניהול לבוקינג שלך?",
+                "full_text": "אנו דואגים להפקה החזותית שלך, לארגון ההופעות והאירועים שלך.",
+                "bullets": [
+                    "ייצוג וניהול בלעדי",
+                    "ניהול בוקינג מלא",
+                    "הפקה חזותית וצילומים",
+                    "ארגון הופעות ואירועים ייעודיים"
+                ],
+                "cta": "צור קשר",
+                "link": "/contact",
+                "list": [
+                    {
+                        "name": "רפאל דוד סקורי",
+                        "role": "זמר",
+                        "slug": "raphael-david-skouri",
+                        "image": "/images/raphael.webp"
+                    }
+                ]
+            }
+        }
     },
     "billetterie": {
         "hero_title": "כרטוס",
@@ -231,26 +312,32 @@
             "tag": "Records & Development",
             "subtitle": "From creative spark to global stage. We develop talents and produce musical excellence.",
             "audition_btn": "אודישנים וסקאוטינג",
-            "booking_btn": "הפקה ובוקינג",
-            "sections": {
-                "incubation": {
-                    "title": "Talent Development",
-                    "text": "We scout and propel the new generation of Mediterranean and Oriental music. R&D Records provides global and bespoke support: from studio production to image coaching, music videos, and social media management. Our team puts its expertise at the service of your takeoff.",
+            "booking_btn": "צור קשר",
+            "cards": {
+                "graines": {
+                    "title": "פיתוח כישרונות",
+                    "desc": "אנו מגלים ומקדמים את הדור הבא של המוזיקה הים-תיכונית והמזרחית.",
+                    "full_text": "R&D Records מספקת ליווי גלובלי ומותאם אישית: מהפקה באולפן ועד אימון תדמית, הפקת קליפים וניהול רשתות חברתיות. הצוות שלנו מעמיד את המומחיות שלו לשירות הפריצה שלך.",
+                    "link": "/contact",
+                    "cta": "הגש מועמדות",
                     "bullets": [
-                        "Music Production & Artistic Direction",
-                        "Visual Identity & Professional Video Clips",
-                        "Image Strategy & Social Media",
-                        "Booking on our events and concerts"
+                        "הפקה מוזיקלית וניהול אמנותי",
+                        "זהות חזותית וקליפים מקצועיים",
+                        "אסטרטגיית תדמית ורשתות חברתיות",
+                        "בוקינג באירועים וההופעות שלנו"
                     ]
                 },
-                "production": {
-                    "title": "Production & Pro Booking",
-                    "text": "The label also supports established artists and musicians. We put our production power and booking network at your disposal for your stage projects or recordings, whether you are a singer, composer, or instrumentalist.",
+                "artistes": {
+                    "title": "אמנים",
+                    "desc": "האם אתה כבר אמן שמחפש ייצוג וניהול לבוקינג שלך?",
+                    "full_text": "אנו דואגים להפקה החזותית שלך, לארגון ההופעות והאירועים שלך. ניהול 360 לקריירה שלך.",
+                    "link": "/contact",
+                    "cta": "צור קשר",
                     "bullets": [
-                        "Booking & Image Representation",
-                        "High-end Studio Session Production",
-                        "Technical Coordination for your concerts",
-                        "Access to the Seder Music network"
+                        "ייצוג וניהול בלעדי",
+                        "ניהול בוקינג מלא",
+                        "הפקה חזותית וצילומים",
+                        "ארגון הופעות ואירועים ייעודיים"
                     ]
                 },
                 "who": {
@@ -355,7 +442,7 @@
     },
     "manifesto": {
         "content": "סדר הוא בית יצירה. אנחנו לא עוקבים אחרי טרנדים, אנחנו יוצרים אותם. הגישה שלנו רדיקלית, האסתטיקה שלנו על-זמנית. אנחנו האדריכלים של החזון שלכם.",
-        "signature": "Seder Music Group"
+        "signature": "Seder Music"
     },
     "cta_final": {
         "text": "ליצור קשר עם סוכנות",

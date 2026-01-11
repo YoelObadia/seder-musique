@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 export default async function TalentsPage({ params }: { params: Promise<{ lang: Locale }> }) {
     const { lang } = await params;
     const dict = await getDictionary(lang);
-    const content = dict.service_pages?.talents;
+    const content = dict.talents;
 
     if (!content) return notFound();
 

@@ -1,7 +1,7 @@
 import { getDictionary } from '@/get-dictionary';
 import { Locale } from '@/i18n-config';
 import HomeHero from '@/components/home/HomeHero';
-import PillarsNav from '@/components/home/PillarsNav';
+
 import PartnersTicker from '@/components/home/PartnersTicker';
 
 export default async function HomePage({ params }: { params: Promise<{ lang: Locale }> }) {
@@ -17,7 +17,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
             <PartnersTicker />
 
             {/* PILLARS NAVIGATION (Cards) */}
-            <PillarsNav dict={dict.home} />
+
 
             {/* Additional sections (Booking Wizard, etc) will go here */}
         </main>

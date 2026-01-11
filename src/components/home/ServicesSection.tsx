@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { Locale } from '@/i18n-config';
 import { ArrowUpRight, Music, Mic2, Users, Star } from 'lucide-react';
 
@@ -72,12 +72,12 @@ export default function ServicesSection({
     return (
         <section className="relative py-40 overflow-hidden bg-[#050505]">
             {/* Background elements */}
-            <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/noise.png')] opacity-[0.03] pointer-events-none" />
+
 
             {/* Ambient liquid blobs - Boosted Opacity */}
-            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-emerald-500/20 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
-            <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-500/20 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/4 start-1/4 w-[600px] h-[600px] bg-emerald-500/20 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
+            <div className="absolute bottom-1/4 end-1/4 w-[600px] h-[600px] bg-purple-500/20 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
+            <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
                 {/* Header */}
@@ -86,7 +86,7 @@ export default function ServicesSection({
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-5xl md:text-6xl lg:text-7xl font-display font-bold uppercase tracking-tighter mb-8"
+                        className="text-[clamp(3rem,5vw,5rem)] font-display font-bold uppercase tracking-tighter mb-8"
                     >
                         {dict.services_section.title}
                     </motion.h2>
@@ -146,6 +146,8 @@ function TiltCard({
 }) {
     const ref = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
+    // Lazy Load Video
+    const isInView = useInView(ref, { once: true, margin: "0px 0px 200px 0px" });
 
     // Mouse position relative to center of card
     const x = useMotionValue(0);
@@ -216,7 +218,7 @@ function TiltCard({
                 {/* Card Container */}
                 <div
                     className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-xl rounded-[2rem] border border-white/10
-                               transition-all duration-500 overflow-hidden shadow-xl"
+                                transition-all duration-500 overflow-hidden shadow-xl"
                     style={{
                         transform: "translateZ(0px)",
                         borderColor: isHovered ? service.glowColor : 'rgba(255,255,255,0.1)'
@@ -227,15 +229,16 @@ function TiltCard({
                         className="absolute inset-[-20px] z-0 pointer-events-none overflow-hidden rounded-[2rem] bg-black"
                         style={{ x: videoX, y: videoY }} // Parallax movement
                     >
-                        <video
-                            className="absolute top-0 left-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700 brightness-110 saturate-125"
-                            src={service.videoSrc}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            preload="auto"
-                        />
+                        {isInView && (
+                            <video
+                                className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700 brightness-110 saturate-125"
+                                src={service.videoSrc}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                            />
+                        )}
 
                         {/* COLOR OVERLAY (Jewel Tone) */}
                         <div

@@ -5,6 +5,7 @@ import { ReactLenis } from '@/lib/lenis'; // We'll create a wrapper for Client C
 import PersistentPlayer from '@/components/player/PersistentPlayer';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import ScrollReset from '@/components/utils/ScrollReset';
 
 export const metadata: Metadata = {
     title: 'Seder Music Group',
@@ -27,6 +28,7 @@ export default async function RootLayout({
             {/* On l'ajoute ICI sur le body pour ignorer bis_register */}
             <body className="antialiased" suppressHydrationWarning>
                 <ReactLenis root>
+                    <ScrollReset />
                     <Header />
                     {children}
                     <Footer lang={lang as any} />

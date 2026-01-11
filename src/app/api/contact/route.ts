@@ -12,6 +12,25 @@ const contactSchema = z.object({
     demo: z.string().optional(),
     message: z.string().min(4),
     lang: z.string().optional(), // Receive language context
+}).superRefine((data, ctx) => {
+    // Management Branch: Demo is REQUIRED
+    if (data.projectType === 'artist_management') {
+        if (!data.demo || data.demo.length < 5) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Demo link is required for artist management",
+                path: ['demo']
+            });
+        }
+    }
+    // Booking Branch: Artist Type is REQUIRED
+    if (data.projectType === 'booking_talent' && !data.artistType) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Artist type is required for booking",
+            path: ['artistType']
+        });
+    }
 });
 
 const notifyEmails = [

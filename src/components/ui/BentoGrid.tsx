@@ -78,6 +78,7 @@ export const BentoCard = ({
                         loop
                         muted
                         playsInline
+                        preload="none"
                         className={cn(
                             "w-full h-full object-cover transition-opacity duration-500 ease-in-out",
                             isHovered ? "opacity-100" : "opacity-0"

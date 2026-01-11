@@ -66,7 +66,7 @@ export default function BookingClient({ content, lang }: BookingClientProps) {
             <section className="relative h-screen flex items-center justify-center px-6 clip-path-slant bg-[#080508]">
                 <div className="hero-wrap absolute inset-0 z-0">
                     <Image
-                        src="/images/booking/hero.webp"
+                        src="/images/booking.webp"
                         alt="Booking"
                         fill
                         className="object-cover opacity-50 contrast-125"
@@ -105,11 +105,11 @@ export default function BookingClient({ content, lang }: BookingClientProps) {
                     <div>
                         <h2 className="text-4xl font-display uppercase mb-12 relative inline-block">
                             {content.points_title}
-                            <span className="absolute -right-12 top-0 text-[#A855F7] text-6xl">*</span>
+                            <span className="absolute -end-12 top-0 text-[#A855F7] text-6xl">*</span>
                         </h2>
                         <ul className="space-y-8">
                             {content.points.map((point: string, i: number) => (
-                                <li key={i} className="artist-card text-2xl md:text-4xl font-light border-l-2 border-white/10 pl-6 hover:border-[#A855F7] hover:pl-10 transition-all duration-500 cursor-default">
+                                <li key={i} className="artist-card text-2xl md:text-4xl font-light border-s-2 border-white/10 ps-6 hover:border-[#A855F7] hover:ps-10 transition-all duration-500 cursor-default">
                                     {point}
                                 </li>
                             ))}

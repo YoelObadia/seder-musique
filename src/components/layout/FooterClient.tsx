@@ -6,6 +6,7 @@ import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
 import Image from 'next/image';
 import { Locale } from '@/i18n-config';
 
+
 const GOLD = '#FFD700';
 
 interface FooterClientProps {
@@ -51,17 +52,17 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
 
     return (
         <motion.footer
-            className="border-t border-white/5 py-20 px-6"
+            className="border-t border-white/5 py-20 px-6 pb-[calc(5rem+var(--safe-bottom))]"
             style={{ background: '#050505' }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={containerVariants}
         >
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto px-6 relative z-10 text-start">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-0">
                     {/* Brand */}
-                    <motion.div variants={itemVariants} className="max-w-sm">
+                    <motion.div variants={itemVariants} className="max-w-sm text-start">
                         <Link href={`/${lang}`} className="flex items-center gap-4 mb-6 group">
                             <div className="relative w-12 h-12 transition-transform group-hover:scale-105">
                                 <Image
@@ -75,20 +76,20 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                                 <span style={{ color: GOLD }}>SEDER</span> MUSIC
                             </span>
                         </Link>
-                        <p className="text-gray-500 text-sm leading-relaxed whitespace-pre-line">
+                        <p className="text-gray-500 text-sm leading-relaxed whitespace-pre-line text-start">
                             {content.description}
                         </p>
                     </motion.div>
 
                     {/* Services */}
-                    <motion.div variants={itemVariants}>
+                    <motion.div variants={itemVariants} className="text-start">
                         <h4
-                            className="font-mono text-xs uppercase tracking-widest mb-6"
+                            className="font-mono text-xs uppercase tracking-widest mb-6 text-start"
                             style={{ color: GOLD }}
                         >
                             {content.headings.services}
                         </h4>
-                        <ul className="space-y-3 text-sm">
+                        <ul className="space-y-3 text-sm text-start">
                             {services.map((item) => (
                                 <li key={item.href}>
                                     <Link
@@ -108,14 +109,14 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                     </motion.div>
 
                     {/* Legal */}
-                    <motion.div variants={itemVariants}>
+                    <motion.div variants={itemVariants} className="text-start">
                         <h4
-                            className="font-mono text-xs uppercase tracking-widest mb-6"
+                            className="font-mono text-xs uppercase tracking-widest mb-6 text-start"
                             style={{ color: GOLD }}
                         >
                             {content.headings.legal}
                         </h4>
-                        <ul className="space-y-3 text-sm">
+                        <ul className="space-y-3 text-sm text-start">
                             {legal.map((item) => (
                                 <li key={item.href}>
                                     <Link
@@ -141,7 +142,7 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                     className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4"
                 >
                     <div className="flex flex-col md:flex-row items-center gap-6">
-                        <p className="text-gray-600 text-xs">
+                        <p className="text-gray-600 text-xs text-start">
                             {content.copyright}
                         </p>
                         <div className="hidden md:block w-px h-3 bg-white/10" />

@@ -15,7 +15,7 @@ export default async function AgencyPage({ params }: { params: Promise<{ lang: L
         <main className="min-h-screen bg-[#050505] text-white selection:bg-[#FFD700] selection:text-black font-sans">
             {/* HERO */}
             <section className="pt-48 pb-32 px-6 container mx-auto text-center border-b border-white/5 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/noise.png')] opacity-[0.05] pointer-events-none" />
+
 
                 <span className="text-[#FFD700] font-mono text-xs tracking-[0.5em] uppercase mb-12 block opacity-80">
                     Seder Music
@@ -34,7 +34,7 @@ export default async function AgencyPage({ params }: { params: Promise<{ lang: L
                     <div>
                         <h2 className="text-4xl font-display mb-12 uppercase tracking-tight relative inline-block">
                             {dict.agency.vision_title}
-                            <span className="absolute -bottom-4 left-0 w-12 h-[2px] bg-[#FFD700]" />
+                            <span className="absolute -bottom-4 start-0 w-12 h-[2px] bg-[#FFD700]" />
                         </h2>
                         <p className="text-2xl md:text-3xl text-white/90 leading-relaxed font-light font-display">
                             {dict.agency.vision_text.split('. ').map((sentence: string, i: number) => (
@@ -76,7 +76,7 @@ export default async function AgencyPage({ params }: { params: Promise<{ lang: L
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
 
-                                <div className="absolute bottom-8 left-8 z-20">
+                                <div className="absolute bottom-8 start-8 z-20">
                                     <div className="text-3xl font-display uppercase tracking-tighter mb-2">{dict.expert.name}</div>
                                     <div className="text-[#FFD700] text-sm font-mono tracking-widest">{dict.expert.role}</div>
                                 </div>
@@ -99,8 +99,8 @@ export default async function AgencyPage({ params }: { params: Promise<{ lang: L
                                     <div className="text-xs font-mono text-white/40 uppercase tracking-[0.2em]">{dict.expert.stats.experience}</div>
                                 </div>
                                 <div>
-                                    <div className="text-5xl font-display text-[#FFD700] mb-2">R&D</div>
-                                    <div className="text-xs font-mono text-white/40 uppercase tracking-[0.2em]">Records Owner</div>
+                                    <div className="text-5xl font-display text-[#FFD700] mb-2">Seder Music</div>
+                                    <div className="text-xs font-mono text-white/40 uppercase tracking-[0.2em]">Owner</div>
                                 </div>
                             </div>
                         </div>

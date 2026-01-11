@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import ParticleTextHero2D from '@/components/3d/ParticleTextHero';
+import ParticleTextHero from '@/components/3d/ParticleTextHero';
 import MagneticButton from '@/components/ui/MagneticButton';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 
@@ -49,7 +49,7 @@ export default function HomeHero({ dict }: HomeHeroProps) {
 
             {/* LE TITRE ANIMÉ EN PAILLETTES 2D (Z-0) */}
             <div className="hero-particles absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-                <ParticleTextHero2D />
+                <ParticleTextHero />
             </div>
 
             {/* CONTENU INFÉRIEUR (Z-10) */}

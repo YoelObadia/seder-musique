@@ -13,7 +13,10 @@
         "contact": "Contact"
     },
     "contact": {
-        "title": "Let's build the exceptional.",
+        "title": {
+            "line1": "Let's build",
+            "line2": "the exceptional."
+        },
         "subtitle": "Fill out this form to start your project.",
         "form": {
             "name": "Full Name",
@@ -24,16 +27,18 @@
             "projectType": {
                 "label": "Nature of your request",
                 "options": {
-                    "booking_seder": "Seder Music — International Booking (Stars & DJs)",
-                    "booking_rd": "R&D Records — Confirmed Artists Booking (Musicians, Composers)",
-                    "talents_rd": "R&D Records — Join Label (Mediterranean & Oriental Talents)",
+                    "booking_seder": "Seder Music — International Booking (Stars & DJ)",
+                    "booking_talent": "R&D Records — Talent Booking",
+                    "artist_management": "R&D Records — Management Request",
+                    "booking_rd": "R&D Records — Established Artists Booking",
+                    "talents_rd": "R&D Records — Join the Label",
                     "production": "Event Production (Concert, Gala)",
                     "marketing": "Influencer Marketing"
                 }
             },
             "dynamicFields": {
                 "artistType": {
-                    "label": "What artist profile are you looking for?",
+                    "label": "What type of artist are you looking for?",
                     "options": [
                         "Singer / Voice",
                         "Musician / Instrumentalist",
@@ -41,9 +46,24 @@
                         "Composer / Arranger"
                     ]
                 },
-                "demo": "Link to your demo or socials (YouTube, SoundCloud, etc.)",
-                "productionNote": "Production logistics are handled by Seder Events."
-            }
+                "demo": "Link to your networks or demo (YouTube, SoundCloud, etc.)",
+                "productionNote": "Our production logistics are handled by Seder Events."
+            },
+            "clientNeeds": [
+                "Established Artist",
+                "Rising Talent",
+                "Full Orchestra",
+                "DJ Set",
+                "Custom Performance"
+            ],
+            "artistProfiles": [
+                "Singer",
+                "Composer",
+                "Musician",
+                "DJ",
+                "Beatmaker",
+                "Other"
+            ]
         },
         "info": {
             "location": "Jerusalem, Israel",
@@ -53,7 +73,10 @@
             "name_required": "Name is required.",
             "email_invalid": "Invalid email address.",
             "required": "This field is required.",
-            "message_too_short": "Message must be at least 10 characters long."
+            "message_too_short": "Message must be at least 4 characters.",
+            "demo_required": "Demo link is required for artists (SoundCloud, YouTube...)",
+            "profile_required": "Please select your profile.",
+            "talent_type_required": "Please specify the type of talent."
         },
         "success": {
             "title": "Message Sent",
@@ -146,8 +169,66 @@
         }
     },
     "talents": {
-        "hero_title": "Talents & Curation",
-        "hero_subtitle": "We scout and shape the icons of tomorrow."
+        "slug": "rd-records",
+        "title": "R&D Records Label",
+        "tag": "Records & Development — by Seder Music",
+        "subtitle": "The artistic laboratory where Musical excellence meets the stage.",
+        "intro": {
+            "p1": "R&D Records is the label of Seder Music — a house designed to reveal artists, build strong identities, and produce tracks that last.",
+            "p2": "At the crossroads of the artistic and the strategic, we support every project from A to Z: artistic direction, production, recording, mix & mastering, distribution, and marketing deployment. Our signature: premium sound standards, a clear vision, and teamwork dedicated to emotion.",
+            "p3": "R&D is both a signature and a method: Research & Development at the service of creativity, to transform an idea into a work, and then a work into an audience.",
+            "welcome": "Welcome to R&D Records — where talent becomes a project… and the project, a success."
+        },
+        "cards": {
+            "graines": {
+                "title": "Seeds of Talent",
+                "desc": "Are you a young talent looking to join the R&D Records family?",
+                "full_text": "We scout and propel the new generation of Mediterranean and Oriental music. R&D Records ensures global and bespoke support.",
+                "bullets": [
+                    "Production Package & Artistic Direction",
+                    "Management & Image Representation",
+                    "Concert Organization & Ticketing",
+                    "Communication Boost & Social Media"
+                ],
+                "cta": "Discover Graines",
+                "link": "/talents/graines",
+                "list": [
+                    {
+                        "name": "Samuel Skouri",
+                        "role": "Singer",
+                        "slug": "samuel-skouri",
+                        "image": "/images/samuel.webp"
+                    },
+                    {
+                        "name": "Sarah Halfon",
+                        "role": "Composer",
+                        "slug": "sarah-halfon",
+                        "image": "/images/sarah.webp"
+                    }
+                ]
+            },
+            "artistes": {
+                "title": "Artists & Managers",
+                "desc": "Are you already an artist looking to benefit from management representation for your bookings?",
+                "full_text": "We take care of your visual production, the organization of your concerts, and your events.",
+                "bullets": [
+                    "Exclusive Representation and Management",
+                    "Complete Booking Management",
+                    "Visual Production and Shooting",
+                    "Organization of dedicated concerts and events"
+                ],
+                "cta": "Contact Us",
+                "link": "/contact",
+                "list": [
+                    {
+                        "name": "Raphaël David Skouri",
+                        "role": "Singer",
+                        "slug": "raphael-david-skouri",
+                        "image": "/images/raphael.webp"
+                    }
+                ]
+            }
+        }
     },
     "billetterie": {
         "hero_title": "Ticketing",
@@ -231,11 +312,14 @@
             "tag": "Records & Development",
             "subtitle": "From creative spark to global stage. We develop talents and produce musical excellence.",
             "audition_btn": "Auditions & Scouting",
-            "booking_btn": "Production & Booking",
-            "sections": {
-                "incubation": {
+            "booking_btn": "Contact Us",
+            "cards": {
+                "graines": {
                     "title": "Talent Development",
-                    "text": "We scout and propel the new generation of Mediterranean and Oriental music. R&D Records provides global and bespoke support: from studio production to image coaching, music videos, and social media management. Our team puts its expertise at the service of your takeoff.",
+                    "desc": "We scout and propel the new generation of Mediterranean and Oriental music.",
+                    "full_text": "R&D Records provides global and bespoke support: from studio production to image coaching, music videos, and social media management. Our team puts its expertise at the service of your takeoff.",
+                    "link": "/contact",
+                    "cta": "Apply",
                     "bullets": [
                         "Music Production & Artistic Direction",
                         "Visual Identity & Professional Video Clips",
@@ -243,14 +327,17 @@
                         "Booking on our events and concerts"
                     ]
                 },
-                "production": {
-                    "title": "Production & Pro Booking",
-                    "text": "The label also supports established artists and musicians. We put our production power and booking network at your disposal for your stage projects or recordings, whether you are a singer, composer, or instrumentalist.",
+                "artistes": {
+                    "title": "Artists",
+                    "desc": "Are you already an artist looking to benefit from management representation for your bookings?",
+                    "full_text": "We take care of your visual production, the organization of your concerts, and your events. 360° management for your career.",
+                    "link": "/contact",
+                    "cta": "Contact Us",
                     "bullets": [
-                        "Booking & Image Representation",
-                        "High-end Studio Session Production",
-                        "Technical Coordination for your concerts",
-                        "Access to the Seder Music network"
+                        "Exclusive Representation and Management",
+                        "Complete Booking Management",
+                        "Visual Production and Shooting",
+                        "Organization of dedicated concerts and events"
                     ]
                 },
                 "who": {

@@ -9,6 +9,7 @@ import MagneticNavItem from '@/components/ui/MagneticNavItem';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
 import Image from 'next/image';
 
+
 const GOLD = '#FFD700';
 
 export default function Header() {
@@ -17,6 +18,8 @@ export default function Header() {
     const lang = params?.lang ?? 'en';
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [isServicesHover, setIsServicesHover] = useState(false);
+
+    const isRTL = lang === 'he';
 
     // Smart Glass Logic
     const { scrollY } = useScroll();
@@ -68,10 +71,9 @@ export default function Header() {
                 backgroundColor: headerBg,
                 backdropFilter: headerBlur,
                 borderBottomColor: headerBorder,
-                borderBottomWidth: 1,
                 borderBottomStyle: 'solid'
             }}
-            className="fixed top-0 left-0 right-0 z-50 transition-colors duration-500"
+            className="fixed top-0 start-0 end-0 z-50 transition-colors duration-500 pt-[var(--safe-top)]"
             onMouseLeave={() => setIsServicesHover(false)}
         >
             <nav className="w-full px-6 md:px-12 py-4 flex items-center justify-between">
@@ -116,18 +118,18 @@ export default function Header() {
                                     <AnimatePresence>
                                         {isServicesHover && (
                                             <motion.div
-                                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                initial={{ opacity: 0, y: 10, scale: 0.95, x: isRTL ? '50%' : '-50%' }}
+                                                animate={{ opacity: 1, y: 0, scale: 1, x: isRTL ? '50%' : '-50%' }}
+                                                exit={{ opacity: 0, y: 10, scale: 0.95, x: isRTL ? '50%' : '-50%' }}
                                                 transition={{ duration: 0.15 }}
-                                                className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-64 z-50"
+                                                className="absolute top-full start-1/2 pt-2 w-64 z-50"
                                             >
                                                 <div className="bg-[#080808] border border-white/10 rounded-xl shadow-2xl overflow-hidden backdrop-blur-3xl py-2">
                                                     {services.map((service) => (
                                                         <Link
                                                             key={service.href}
                                                             href={service.href}
-                                                            className="block px-4 py-3 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                                                            className="block px-4 py-3 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-start"
                                                             onClick={() => setIsServicesHover(false)}
                                                         >
                                                             <div className="flex items-center gap-3">
@@ -158,7 +160,7 @@ export default function Header() {
                     ))}
                 </ul>
 
-                <div className="hidden lg:flex items-center gap-6 border-l border-white/10 pl-6 ml-6 h-6">
+                <div className="hidden lg:flex items-center gap-6 border-s border-white/10 ps-6 ms-6 h-6">
                     <LocaleSwitcher />
                 </div>
 
@@ -180,30 +182,30 @@ export default function Header() {
                         exit={{ opacity: 0, height: 0 }}
                         className="lg:hidden bg-[#050505] border-t border-white/5 overflow-hidden"
                     >
-                        <div className="px-6 py-8 space-y-6">
+                        <div className="px-6 py-8 space-y-6 pt-[calc(2rem+var(--safe-top))] pb-[calc(2rem+var(--safe-bottom))]">
                             {simpleLinks.map((item) => (
                                 <div key={item.label}>
                                     {!item.isDropdown ? (
                                         <Link
                                             href={item.href}
                                             onClick={() => setIsMobileOpen(false)}
-                                            className="block text-lg font-mono uppercase tracking-widest mb-4"
+                                            className="block text-lg font-mono uppercase tracking-widest mb-4 text-start"
                                             style={{ color: isActive(item.href) ? GOLD : 'rgba(255,255,255,0.7)' }}
                                         >
                                             {item.label}
                                         </Link>
                                     ) : (
                                         <div className="space-y-4">
-                                            <span className="block text-lg font-mono uppercase tracking-widest text-[#FFD700]">
+                                            <span className="block text-lg font-mono uppercase tracking-widest text-[#FFD700] text-start">
                                                 {item.label}
                                             </span>
-                                            <div className="pl-4 border-l border-white/10 space-y-3">
+                                            <div className="ps-4 border-s border-white/10 space-y-3">
                                                 {services.map(service => (
                                                     <Link
                                                         key={service.href}
                                                         href={service.href}
                                                         onClick={() => setIsMobileOpen(false)}
-                                                        className="block text-sm text-white/60 hover:text-white"
+                                                        className="block text-sm text-white/60 hover:text-white text-start"
                                                     >
                                                         {service.label}
                                                     </Link>
@@ -215,13 +217,15 @@ export default function Header() {
                             ))}
 
                             <div className="pt-6 border-t border-white/10">
-                                <span className="block text-xs font-mono uppercase tracking-widest text-white/40 mb-4">Language</span>
-                                <LocaleSwitcher />
+                                <span className="block text-xs font-mono uppercase tracking-widest text-white/40 mb-4 text-start">Language</span>
+                                <div className="flex justify-start">
+                                    <LocaleSwitcher />
+                                </div>
                             </div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.header>
+        </motion.header >
     );
 }

@@ -6,6 +6,7 @@
   /* Palette Officielle "Oriental Mediterranean Premium" */
 
   /* Fond & texte */
+  --header-height: 80px;
   --color-background: #0C1B2A;
   /* Bleu nuit profond */
   --color-foreground: #F5F1E8;
@@ -20,6 +21,12 @@
   /* or atténué (hover / border) */
 
   --glow-gold: 0 0 10px rgba(201, 162, 77, 0.35);
+
+  /* Safe Areas (Mobile/Notch Support) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
 
   /* Typographies Premium */
   --font-display: "Cinzel", "Playfair Display", serif;

@@ -21,7 +21,7 @@ interface Particle {
     size: number; color: string; phase: number;
 }
 
-export default function ParticleTextHero2D() {
+export default function ParticleTextHero() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const particles = useRef<Particle[]>([]);
@@ -119,15 +119,7 @@ export default function ParticleTextHero2D() {
             let currentX = p.originX + (p.targetX - p.originX) * progress;
             let currentY = p.originY + (p.targetY - p.originY) * progress;
 
-            if (progress > 0.4) {
-                // Mouvement "Breath" plus ample et organique
-                const breathParams = {
-                    xAmp: 2.5, yAmp: 2.5,
-                    xFreq: 0.5, yFreq: 0.3
-                };
-                currentX += Math.sin(timeScale * breathParams.xFreq + p.phase) * breathParams.xAmp * progress;
-                currentY += Math.cos(timeScale * breathParams.yFreq + p.phase) * breathParams.yAmp * progress;
-            }
+            // Breath animation removed for static stability until hover
 
             const dx = mouse.current.x - currentX;
             const dy = mouse.current.y - currentY;
@@ -182,7 +174,6 @@ export default function ParticleTextHero2D() {
         });
     }, { dependencies: [dimensions] }); // On relance si resize
 
-    // ... (Reste de l'animation loop inchangé sauf ajustement visuel via code existant)
 
     return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
 }
