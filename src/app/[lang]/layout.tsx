@@ -58,7 +58,6 @@ export default async function RootLayout({
             {/* On l'ajoute ICI sur le body pour ignorer bis_register */}
             <body className="antialiased" suppressHydrationWarning>
                 <ReactLenis root>
-                    <ScrollReset />
                     <Header nav={dict.nav} />
                     {children}
                     <Footer lang={lang as any} />

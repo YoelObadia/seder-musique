@@ -53,8 +53,15 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: Loc
     };
 }
 
-export default async function TalentsPage({ params }: { params: Promise<{ lang: Locale }> }) {
+export default async function TalentsPage({
+    params,
+    searchParams
+}: {
+    params: Promise<{ lang: Locale }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
     const { lang } = await params;
+    const { view } = await searchParams;
     const dict = await getDictionary(lang);
     const content = dict.talents;
 
@@ -73,7 +80,7 @@ export default async function TalentsPage({ params }: { params: Promise<{ lang: 
                     description: "Artist management and music production label specializing in Jewish and Mediterranean music."
                 }}
             />
-            <TalentsClient content={content} lang={lang} />
+            <TalentsClient content={content} lang={lang} initialViewMode={typeof view === 'string' ? view : undefined} />
         </>
     );
 }

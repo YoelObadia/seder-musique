@@ -64,7 +64,7 @@ export default function FinalCTA({ dict }: FinalCTAProps) {
 
                     {/* Button Body */}
                     <div className="relative px-12 py-6 bg-[#CBA135] text-black rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105">
-                        <span className="relative z-10 font-display font-bold uppercase tracking-[0.2em] text-sm md:text-base mix-blend-multiply">
+                        <span className="relative z-10 font-display font-bold uppercase tracking-[0.2em] text-sm md:text-base text-black">
                             {text}
                         </span>
 

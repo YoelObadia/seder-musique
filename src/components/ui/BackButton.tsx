@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface BackButtonProps {
     href: string;
@@ -11,9 +12,17 @@ interface BackButtonProps {
 }
 
 export default function BackButton({ href, lang, isRTL = false }: BackButtonProps) {
+    const router = useRouter();
+
+    const handleBack = (e: React.MouseEvent) => {
+        e.preventDefault();
+        router.back();
+    };
+
     return (
         <Link
             href={href}
+            onClick={handleBack}
             className="absolute z-40 flex items-center gap-2 text-white/80 hover:text-white transition-colors group start-6 md:start-12"
             // STRICT positioning: Header Height + 1.5rem spacing.
             style={{ top: 'calc(var(--header-height) + 1.5rem)' }}

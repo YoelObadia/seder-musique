@@ -7,18 +7,29 @@ import SonicButton from '@/components/ui/SonicButton';
 import { Locale } from '@/i18n-config';
 import Turntable from '@/components/3d/Turntable';
 import ArtistCard from '@/components/talents/ArtistCard';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
 
 interface TalentsClientProps {
     content: any;
     lang: Locale;
+    initialViewMode?: string;
 }
 
 type CardType = 'graines' | 'artistes' | null;
 
-export default function TalentsClient({ content, lang }: TalentsClientProps) {
+export default function TalentsClient({ content, lang, initialViewMode }: TalentsClientProps) {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [selectedCard, setSelectedCard] = useState<CardType>(null);
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
+    // Initialize state from Prop (server) or URL param (client fallback)
+    const initialView = (initialViewMode || searchParams.get('view')) as CardType;
+    // Validate it's a valid type, otherwise null
+    const validView = (initialView === 'graines' || initialView === 'artistes') ? initialView : null;
+
+    const [selectedCard, setSelectedCard] = useState<CardType>(validView);
     const cardsSectionRef = useRef<HTMLDivElement>(null);
 
     const isRTL = lang === 'he';
@@ -67,6 +78,15 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
     const handleCardSelect = (type: CardType) => {
         if (selectedCard === type) return;
 
+        // Update URL to reflect state (shallow update)
+        const newParams = new URLSearchParams(searchParams.toString());
+        if (type) {
+            newParams.set('view', type);
+        } else {
+            newParams.delete('view');
+        }
+        router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
+
         const ctx = gsap.context(() => {
             if (type === null) {
                 // Reset View
@@ -74,6 +94,11 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                     onComplete: () => {
                         // Critical: Reset state AFTER animation to avoid flicker
                         setSelectedCard(null);
+                        // Clear props after React render cycle to ensure clean state
+                        setTimeout(() => {
+                            gsap.set('.interactive-card', { clearProps: 'all' });
+                            gsap.set('.card-container', { clearProps: 'all' });
+                        }, 50);
                     }
                 });
 
@@ -86,6 +111,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                         ease: 'power2.in'
                     })
                     // Restore Cards
+                    .set('.interactive-card', { display: 'flex' }) // Ensure they are visible for calculation
                     .to(`.card-container`, {
                         width: '100%',
                         flex: '1 1 0%', // Reset flex grow
@@ -98,7 +124,6 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                         width: 'auto', // Allow flex to control width again
                         flex: '1 1 0%',
                         opacity: 1,
-                        padding: '', // Clear padding overrides if any
                         duration: 0.6
                     }, '<') // Run concurrently with container reset
                     .to('.card-content-initial', {
@@ -112,7 +137,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                 // Expand Selected
                 const otherType = type === 'graines' ? 'artistes' : 'graines';
                 const tl = gsap.timeline({
-                    onStart: () => setSelectedCard(type)
+                    onComplete: () => setSelectedCard(type)
                 });
 
                 // 1. Hide Other Card
@@ -181,7 +206,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                             {content.tag}
                         </span>
 
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold uppercase leading-[0.9] mb-8 text-white tracking-tighter">
+                        <h1 className="text-4xl md:text-7xl lg:text-8xl font-display font-bold uppercase leading-[0.9] mb-8 text-white tracking-tighter">
                             {content.title}
                         </h1>
 
@@ -203,7 +228,8 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                 {/* Back Button - Sticky/Fixed on Mobile */}
                 <button
                     onClick={() => handleCardSelect(null)}
-                    className="back-button fixed lg:absolute top-24 lg:top-12 end-4 lg:end-auto lg:start-24 z-50 flex items-center justify-center lg:justify-start gap-2 text-white hover:text-[#3B82F6] transition-colors invisible opacity-0 bg-black/50 backdrop-blur-md p-3 rounded-full lg:bg-transparent lg:p-0 border border-white/10 lg:border-none"
+                    className={`back-button fixed lg:absolute top-20 lg:top-12 end-4 lg:end-auto lg:start-24 z-50 flex items-center justify-center lg:justify-start gap-2 text-white hover:text-[#3B82F6] transition-colors bg-black/50 backdrop-blur-md p-3 rounded-full lg:bg-transparent lg:p-0 border border-white/10 lg:border-none
+                    ${selectedCard ? 'visible opacity-100' : 'invisible opacity-0'}`}
                     aria-label="Retour"
                 >
                     {isRTL ? <ArrowLeft className="w-6 h-6 rotate-180" /> : <ArrowLeft className="w-6 h-6" />}
@@ -216,7 +242,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                     <div
                         onClick={() => !selectedCard && handleCardSelect('graines')}
                         className={`interactive-card card-graines relative bg-[#0a0a0a] border border-white/10 hover:border-[#3B82F6]/50 transition-colors cursor-pointer overflow-hidden flex flex-col
-                        ${selectedCard === 'graines' ? 'w-full cursor-default border-[#3B82F6]' : selectedCard === 'artistes' ? 'hidden' : 'flex-1 h-[350px] lg:h-auto'}
+                        ${selectedCard === 'graines' ? 'w-full cursor-default border-[#3B82F6]' : selectedCard === 'artistes' ? 'w-0 flex-none overflow-hidden opacity-0' : 'flex-1 h-[350px] lg:h-auto'}
                         `}
                     >
                         {/* Background Visual */}
@@ -224,7 +250,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
 
                         <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-between">
                             {/* Initial Content */}
-                            <div className="card-content-initial">
+                            <div className={`card-content-initial ${selectedCard === 'graines' ? 'opacity-0 h-0 overflow-hidden' : ''}`}>
                                 <span className="text-[#3B82F6] font-mono text-sm tracking-widest mb-4 block">01</span>
                                 <h3 className="text-3xl md:text-5xl font-display uppercase mb-4 md:mb-6">{content.cards.graines.title}</h3>
                                 <p className="text-white/60 text-base md:text-xl serif italic max-w-md">
@@ -242,9 +268,9 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                             </div>
 
                             {/* Detailed Content (Hidden initially) */}
-                            <div className="card-details opacity-0 h-0 overflow-hidden">
-                                <div className="max-w-6xl mx-auto pt-8 md:pt-12">
-                                    <h2 className="text-4xl md:text-7xl font-display uppercase text-white mb-6 md:mb-8 leading-none">
+                            <div className={`card-details ${selectedCard === 'graines' ? 'opacity-100 h-auto' : 'opacity-0 h-0 overflow-hidden'}`}>
+                                <div className="max-w-6xl mx-auto pt-24 md:pt-12">
+                                    <h2 className="text-3xl md:text-7xl font-display uppercase text-white mb-6 md:mb-8 leading-none">
                                         {content.cards.graines.title}
                                     </h2>
 
@@ -279,7 +305,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                                             <h3 className="text-[#3B82F6] font-mono uppercase tracking-widest text-sm mb-8">Nos Graines de Talents</h3>
                                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                                                 {content.cards.graines.list.map((artist: any, i: number) => (
-                                                    <div key={i} className="artist-card-entry opacity-0 translate-y-8">
+                                                    <div key={i} className={`artist-card-entry ${selectedCard === 'graines' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                                                         <ArtistCard
                                                             name={artist.name}
                                                             role={artist.role}
@@ -302,7 +328,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                     <div
                         onClick={() => !selectedCard && handleCardSelect('artistes')}
                         className={`interactive-card card-artistes relative bg-[#0a0a0a] border border-white/10 hover:border-[#FFD700]/50 transition-colors cursor-pointer overflow-hidden flex flex-col
-                        ${selectedCard === 'artistes' ? 'w-full cursor-default border-[#FFD700]' : selectedCard === 'graines' ? 'hidden' : 'flex-1 h-[350px] lg:h-auto'}
+                        ${selectedCard === 'artistes' ? 'w-full cursor-default border-[#FFD700]' : selectedCard === 'graines' ? 'w-0 flex-none overflow-hidden opacity-0' : 'flex-1 h-[350px] lg:h-auto'}
                         `}
                     >
                         {/* Background Visual */}
@@ -310,7 +336,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
 
                         <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-between">
                             {/* Initial Content */}
-                            <div className="card-content-initial text-start lg:text-end">
+                            <div className={`card-content-initial text-start lg:text-end ${selectedCard === 'artistes' ? 'opacity-0 h-0 overflow-hidden' : ''}`}>
                                 <span className="text-[#FFD700] font-mono text-sm tracking-widest mb-4 block">02</span>
                                 <h3 className="text-4xl md:text-5xl font-display uppercase mb-6">{content.cards.artistes.title}</h3>
                                 <p className="text-white/60 text-lg md:text-xl serif italic max-w-md lg:ms-auto">
@@ -328,9 +354,9 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                             </div>
 
                             {/* Detailed Content */}
-                            <div className="card-details opacity-0 h-0 overflow-hidden">
-                                <div className="max-w-6xl mx-auto pt-12">
-                                    <h2 className="text-4xl md:text-7xl font-display uppercase text-white mb-8 leading-none">
+                            <div className={`card-details ${selectedCard === 'artistes' ? 'opacity-100 h-auto' : 'opacity-0 h-0 overflow-hidden'}`}>
+                                <div className="max-w-6xl mx-auto pt-24 md:pt-12">
+                                    <h2 className="text-3xl md:text-7xl font-display uppercase text-white mb-8 leading-none">
                                         {content.cards.artistes.title}
                                     </h2>
 
@@ -365,7 +391,7 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                                             <h3 className="text-[#FFD700] font-mono uppercase tracking-widest text-sm mb-8">Nos Artistes</h3>
                                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                                                 {content.cards.artistes.list.map((artist: any, i: number) => (
-                                                    <div key={i} className="artist-card-entry opacity-0 translate-y-8">
+                                                    <div key={i} className={`artist-card-entry ${selectedCard === 'artistes' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                                                         <ArtistCard
                                                             name={artist.name}
                                                             role={artist.role}

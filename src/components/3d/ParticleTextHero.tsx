@@ -57,7 +57,7 @@ export default function ParticleTextHero() {
 
         // 2. POSITIONNEMENT (Centered)
         // Single line centered vertically
-        const verticalCenter = height * 0.5;
+        const verticalCenter = width < 768 ? height * 0.35 : height * 0.5;
 
         // Apply styles
         offCtx.fillStyle = 'white';
