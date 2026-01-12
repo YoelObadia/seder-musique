@@ -1,0 +1,56 @@
+{
+    "samuel-skouri": {
+        "bio": [
+            "Né en France, Samuel a grandi entre l’Europe et Los Angeles (USA), avant de faire son Alyah en Israël, où il réside aujourd’hui. Il se déplace dans le monde entier pour animer Shabbat Hatan, mariages, houppot, et tous types d’événements communautaires.",
+            "Mais Samuel est bien plus qu’un simple chanteur. Il possède une voix rare et remarquable, avec des tonalités de contre-ténor lui permettant d’évoluer sur plusieurs octaves, avec une combinaison unique de douceur, puissance et maîtrise. Son talent s’exprime aussi dans sa capacité à chanter avec naturel et justesse dans plusieurs styles et langues — du français à l’anglais, de l’arabe pour les répertoires orientaux, jusqu’aux chants chassidiques.",
+            "Son parcours international, allié à ses capacités vocales exceptionnelles, lui a permis de construire un répertoire extrêmement large, offrant à chaque prestation une variété et une énergie uniques."
+        ],
+        "stats": [
+            {
+                "label": "Voix",
+                "value": "Contre-Ténor"
+            },
+            {
+                "label": "Répertoire",
+                "value": "International"
+            }
+        ],
+        "gallery": [
+            "/images/samuel.webp",
+            "/images/placeholders/studio-mic.jpg"
+        ]
+    },
+    "sarah-halfon": {
+        "bio": [
+            "Biographie à venir..."
+        ],
+        "stats": [
+            {
+                "label": "Instrument",
+                "value": "Piano"
+            }
+        ],
+        "gallery": []
+    },
+    "raphael-david-skouri": {
+        "bio": [
+            "Raphaël David Skouri est un artiste vocal rare, hazan et chanteur-performeur, façonné par une vie de scène et de voyages entre la France, les États-Unis et Israël. Depuis l’enfance, il développe une maîtrise vocale hors norme et une sensibilité musicale qui transforment chaque prestation en moment marquant.",
+            "Sa signature : une voix exceptionnelle, capable de monter très haut avec une précision et une élégance saisissantes — une couleur soprano unique qui mêle puissance, pureté et émotion. Cette singularité lui permet d’évoluer avec naturel dans des univers très variés, tout en gardant une identité forte : celle d’un interprète habité, expressif, et profondément musical.",
+            "Spécialisé dans la musique orientale, Raphaël porte également l’art du hazanout avec intensité, il est spécialisé dans les houpot, alliant tradition, virtuosité et présence scénique. Son parcours l’a conduit à créer et participer à des comédies musicales, à se produire dans des concerts et des événements d’envergure, et à voyager à travers le monde pour des représentations exceptionnelles — en Allemagne, aux États-Unis, au Canada, en Australie, et bien au-delà."
+        ],
+        "stats": [
+            {
+                "label": "Voix",
+                "value": "Sopraniste"
+            },
+            {
+                "label": "Style",
+                "value": "Oriental & Hazanout"
+            }
+        ],
+        "gallery": [
+            "/images/raphael.webp",
+            "/images/placeholders/concert-lights.jpg"
+        ]
+    }
+}

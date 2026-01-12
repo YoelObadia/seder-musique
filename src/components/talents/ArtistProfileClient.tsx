@@ -139,11 +139,11 @@ export default function ArtistProfileClient({ artist, lang, labels }: ArtistProf
                     {/* Left: Stats / Info - Stacks on mobile */}
                     <div className="lg:col-span-4 space-y-12 animate-section order-2 lg:order-1">
                         {artist.stats && (
-                            <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-8 border-t border-white/10 pt-8">
                                 {artist.stats.map((stat, i) => (
                                     <div key={i}>
                                         <h4 className="text-white/40 font-mono text-xs uppercase tracking-wider mb-2">{stat.label}</h4>
-                                        <p className="text-xl sm:text-2xl md:text-3xl font-display uppercase break-words">{stat.value}</p>
+                                        <p className="text-xl sm:text-2xl lg:text-3xl font-display uppercase break-words hyphens-auto leading-none">{stat.value}</p>
                                     </div>
                                 ))}
                             </div>

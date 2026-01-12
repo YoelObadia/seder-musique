@@ -1,0 +1,56 @@
+{
+    "samuel-skouri": {
+        "bio": [
+            "Born in France, Samuel grew up between Europe and Los Angeles (USA) before making Aliyah to Israel, where he resides today. He travels worldwide to perform at Shabbat Hatan, weddings, Chuppahs, and all types of community events.",
+            "But Samuel is much more than just a singer. He possesses a rare and remarkable voice, with countertenor tones allowing him to span multiple octaves, blending a unique combination of softness, power, and mastery. His talent also shines through his ability to sing naturally and accurately in multiple styles and languages — from French to English, Arabic for oriental repertoires, to Hasidic melodies.",
+            "His international background, combined with his exceptional vocal abilities, has enabled him to build an extremely wide repertoire, bringing unique variety and energy to every performance."
+        ],
+        "stats": [
+            {
+                "label": "Voice",
+                "value": "Countertenor"
+            },
+            {
+                "label": "Repertoire",
+                "value": "International"
+            }
+        ],
+        "gallery": [
+            "/images/samuel.webp",
+            "/images/placeholders/studio-mic.jpg"
+        ]
+    },
+    "sarah-halfon": {
+        "bio": [
+            "Biography coming soon..."
+        ],
+        "stats": [
+            {
+                "label": "Instrument",
+                "value": "Piano"
+            }
+        ],
+        "gallery": []
+    },
+    "raphael-david-skouri": {
+        "bio": [
+            "Raphaël David Skouri is a rare vocal artist, cantor, and singer-performer, shaped by a life of stage performance and travels between France, the United States, and Israel. Since childhood, he has developed extraordinary vocal mastery and musical sensitivity that transform every performance into a memorable moment.",
+            "His signature: an exceptional voice, capable of reaching high notes with striking precision and elegance — a unique soprano color blending power, purity, and emotion. This singularity allows him to move naturally across very varied universes while maintaining a strong identity: that of an inhabited, expressive, and deeply musical interpreter.",
+            "Specializing in Andalusian Oriental music, Raphaël also carries the art of Hazanut with intensity, specializing in Chuppahs, combining tradition, virtuosity, and stage presence. His journey has led him to create and participate in musicals, perform in major concerts and events, and travel the world for exceptional performances — in Germany, the United States, Canada, Australia, and far beyond."
+        ],
+        "stats": [
+            {
+                "label": "Voice",
+                "value": "Sopranist"
+            },
+            {
+                "label": "Style",
+                "value": "Andalusian & Hazanut"
+            }
+        ],
+        "gallery": [
+            "/images/raphael.webp",
+            "/images/placeholders/concert-lights.jpg"
+        ]
+    }
+}
