@@ -6,19 +6,20 @@ import { useGSAP } from '@gsap/react';
 
 const CONFIG = {
     textLine1: "SEDER MUSIC",
-    textLine2: "GROUP",
     particleDensity: 4,
-    colors: ['#FFD700', '#D4AF37', '#CFB53B', '#F5E6AB'],
     mouseRepulsionRadius: 100,
     mouseRepulsionStrength: 0.8,
-    animationDuration: { enter: 2.5, stay: 8, leave: 1.5 }
+    animationDuration: { enter: 2.5, stay: 8, leave: 1.5 },
+    colorSpeed: 0.005 // New config for color shifting speed
 };
 
 interface Particle {
     x: number; y: number;
     originX: number; originY: number;
     targetX: number; targetY: number;
-    size: number; color: string; phase: number;
+    size: number;
+    baseHue: number; // Store a base hue instead of a fixed color string
+    phase: number;
 }
 
 export default function ParticleTextHero() {
@@ -36,9 +37,9 @@ export default function ParticleTextHero() {
         const offCtx = offscreenCanvas.getContext('2d');
         if (!offCtx) return [];
 
-        // 1. DYNAMIC FONT SIZING (Responsive & Safe)
-        // We start with a target optimal size, then scale down if needed
-        let fontSize1 = width < 768 ? 100 : 180; // Reduced from 240 to 180 for better desktop fit
+        // 1. DYNAMIC FONT SIZING (Responsive & Bigger)
+        // Significantly increased base sizes for single line
+        let fontSize1 = width < 768 ? 140 : 250;
 
         // Prepare context for measurement to ensure it fits
         offCtx.textAlign = 'center';
@@ -47,34 +48,23 @@ export default function ParticleTextHero() {
 
         // Measure "SEDER MUSIC"
         const textMetrics = offCtx.measureText(CONFIG.textLine1);
-        const maxWidth = width * 0.85; // Keep 15% margin
+        const maxWidth = width * 0.90; // Uses 90% of screen width
 
         // Scale down if text is too wide
         if (textMetrics.width > maxWidth) {
             fontSize1 = fontSize1 * (maxWidth / textMetrics.width);
         }
 
-        // DYNAMIC FONT HIERARCHY
-        // Mobile: "GROUP" is 75% of main title for better legibility
-        // Desktop: "GROUP" is 50% for stylistic contrast
-        const fontSize2 = width < 768 ? fontSize1 * 0.75 : fontSize1 * 0.5;
-        const gap = fontSize1 * 0.15;
-
-        // 2. POSITIONNEMENT (Responsive Vertical)
-        // Mobile: 35% from top to avoid bottom content overlap
-        // Desktop: 35% from top (unified) to clear space for center content
-        const verticalCenter = height * 0.35;
+        // 2. POSITIONNEMENT (Centered)
+        // Single line centered vertically
+        const verticalCenter = height * 0.5;
 
         // Apply styles
         offCtx.fillStyle = 'white';
 
-        // Ligne 1 : SEDER MUSIC
+        // Draw Text
         offCtx.font = `900 ${fontSize1}px 'Monument Extended', sans-serif`;
-        offCtx.fillText(CONFIG.textLine1, width / 2, verticalCenter - (fontSize2 / 2) - gap);
-
-        // Ligne 2 : GROUP
-        offCtx.font = `900 ${fontSize2}px 'Monument Extended', sans-serif`;
-        offCtx.fillText(CONFIG.textLine2, width / 2, verticalCenter + (fontSize1 / 2) + gap);
+        offCtx.fillText(CONFIG.textLine1, width / 2, verticalCenter);
 
         const imageData = offCtx.getImageData(0, 0, width, height).data;
         const coordinates: { x: number, y: number }[] = [];
@@ -105,7 +95,7 @@ export default function ParticleTextHero() {
                 originY: coord.y + Math.sin(angle) * dist,
                 x: 0, y: 0,
                 size: Math.random() * 2 + 0.5,
-                color: CONFIG.colors[Math.floor(Math.random() * CONFIG.colors.length)],
+                baseHue: Math.random() * 60 + 30, // Start around Gold/Yellow (30-90)
                 phase: Math.random() * Math.PI * 2
             };
         });
@@ -122,11 +112,12 @@ export default function ParticleTextHero() {
         const progress = animationProgress.current.value;
         const timeScale = time * 0.001;
 
+        // Continuous color shift over time
+        const globalHueShift = time * 0.02; // Controls speed of color change
+
         particles.current.forEach(p => {
             let currentX = p.originX + (p.targetX - p.originX) * progress;
             let currentY = p.originY + (p.targetY - p.originY) * progress;
-
-            // Breath animation removed for static stability until hover
 
             const dx = mouse.current.x - currentX;
             const dy = mouse.current.y - currentY;
@@ -141,7 +132,13 @@ export default function ParticleTextHero() {
 
             const shimmer = Math.sin(timeScale * 4 + p.phase) * 0.4 + 0.6;
             ctx.globalAlpha = progress * shimmer;
-            ctx.fillStyle = p.color;
+
+            // Dynamic Color Calculation
+            // Rotate hue continuously. 
+            // baseHue provides initial variation. globalHueShift animates it.
+            const currentHue = (p.baseHue + globalHueShift) % 360;
+            ctx.fillStyle = `hsl(${currentHue}, 80%, 60%)`;
+
             ctx.fillRect(currentX, currentY, p.size, p.size);
         });
 

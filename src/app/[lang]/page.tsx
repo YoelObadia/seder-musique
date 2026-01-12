@@ -61,7 +61,7 @@ export default async function Page({ params }: { params: Promise<{ lang: Locale 
     const dict = await getDictionary(lang);
 
     return (
-        <main className="min-h-screen bg-black text-white selection:bg-gold selection:text-black">
+        <main className="min-h-screen bg-black text-white selection:bg-[#FFD700] selection:text-black">
             <SchemaOrg type="Organization" data={SederOrganizationSchema} />
             {/* HERO */}
             <HomeHero dict={dict.home} lang={lang} />

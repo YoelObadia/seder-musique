@@ -7,7 +7,7 @@ import Link from 'next/link';
 // ═══════════════════════════════════════════════════════════════════════════════
 // CONFIGURATION
 // ═══════════════════════════════════════════════════════════════════════════════
-const GOLD = '#FFD700';
+const GOLD = '#CBA135';
 
 interface FinalCTAProps {
     dict: {
@@ -60,10 +60,10 @@ export default function FinalCTA({ dict }: FinalCTAProps) {
             >
                 <Link href="/contact" className="group relative inline-block cursor-pointer">
                     {/* Background Glow */}
-                    <div className="absolute inset-0 bg-[#FFD700] rounded-full blur-xl opacity-20 group-hover:opacity-60 transition-opacity duration-500 scale-75 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-[#CBA135] rounded-full blur-xl opacity-20 group-hover:opacity-60 transition-opacity duration-500 scale-75 group-hover:scale-110" />
 
                     {/* Button Body */}
-                    <div className="relative px-12 py-6 bg-[#FFD700] text-black rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <div className="relative px-12 py-6 bg-[#CBA135] text-black rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105">
                         <span className="relative z-10 font-display font-bold uppercase tracking-[0.2em] text-sm md:text-base mix-blend-multiply">
                             {text}
                         </span>

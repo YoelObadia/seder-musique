@@ -9,6 +9,7 @@ const contactSchema = z.object({
     phone: z.string().optional(),
     projectType: z.string().min(1),
     artistType: z.string().optional(),
+    artistName: z.string().optional(), // Specific artist request
     demo: z.string().optional(),
     message: z.string().min(4),
     lang: z.string().optional(), // Receive language context
@@ -23,7 +24,7 @@ const contactSchema = z.object({
             });
         }
     }
-    // Booking Branch: Artist Type is REQUIRED
+    // Booking Branch: Artist Type is REQUIRED (Only if NOT booking a specific Seder artist)
     if (data.projectType === 'booking_talent' && !data.artistType) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
@@ -79,6 +80,7 @@ export async function POST(req: Request) {
                 <hr style="border: 1px solid #eee; margin: 20px 0;">
                 <p><strong>Project Type:</strong> ${data.projectType}</p>
                 ${data.artistType ? `<p><strong>Artist Type:</strong> ${data.artistType}</p>` : ''}
+                ${data.artistName ? `<p><strong>Requested Artist:</strong> ${data.artistName}</p>` : ''}
                 ${data.demo ? `<p><strong>Demo Link:</strong> <a href="${data.demo}">${data.demo}</a></p>` : ''}
                 <hr style="border: 1px solid #eee; margin: 20px 0;">
                 <h3>Message:</h3>

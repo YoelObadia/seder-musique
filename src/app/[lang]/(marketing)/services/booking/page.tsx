@@ -73,7 +73,7 @@ export default async function BookingPage({ params }: { params: Promise<{ lang: 
                     description: "Premium booking agency for international stars, orchestras, and VIP entertainment."
                 }}
             />
-            <BookingClient content={content} lang={lang} />
+            <BookingClient content={content} dict={dict} lang={lang} />
         </>
     );
 }

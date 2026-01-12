@@ -62,7 +62,7 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                 viewport={{ once: true, amount: 0.2 }}
                 variants={containerVariants}
             >
-                <div className="container mx-auto px-6 relative z-10 text-start">
+                <div className="w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24 relative z-10 text-start">
                     <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-0">
                         {/* Brand */}
                         <motion.div variants={itemVariants} className="max-w-sm text-start">

@@ -186,9 +186,10 @@ export default function TalentsClient({ content, lang }: TalentsClientProps) {
                         </h1>
 
                         <div className="space-y-6 text-white/70 font-serif text-lg md:text-xl leading-relaxed">
-                            <p className="border-s-2 border-[#FFD700] ps-6 italic text-[#FFD700]">{content.subtitle}</p>
+                            {/* <p className="border-s-2 border-[#FFD700] ps-6 italic text-[#FFD700]">{content.subtitle}</p> */}
                             <p>{content.intro.p1}</p>
-                            <p className="hidden md:block">{content.intro.p2}</p>
+                            <p>{content.intro.p2}</p>
+                            <p>{content.intro.p3}</p>
                             <p className="font-bold text-white">{content.intro.welcome}</p>
                         </div>
                     </div>

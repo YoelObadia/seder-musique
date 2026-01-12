@@ -27,10 +27,15 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
             const tl = gsap.timeline();
 
             // --- ANIMATION BANDE ROSE ---
+            // --- ANIMATION BANDE ROSE ---
+            // Use clip-path instead of width to prevent text reflow issues on multi-line
+            const startClip = isRTL ? 'inset(0 0% 0 100%)' : 'inset(0 100% 0 0%)';
+            const endClip = 'inset(0 0% 0 0%)';
+
             tl.fromTo('.hero-title-mask',
-                { width: '0%' },
+                { clipPath: startClip },
                 {
-                    width: '100%',
+                    clipPath: endClip,
                     duration: 1.5,
                     ease: 'power4.inOut'
                 }
@@ -39,7 +44,7 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
             tl.fromTo('.hero-content',
                 { opacity: 0, y: 50 },
                 { opacity: 1, y: 0, duration: 1, ease: 'power3.out' },
-                '-=0.5'
+                '-=0.2'
             );
 
             // ANIMATIONS STANDARDS
@@ -102,23 +107,36 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
         <main ref={containerRef} className="min-h-screen bg-[#050505] text-white font-sans overflow-x-hidden selection:bg-[#FF2E93] selection:text-black">
 
             {/* HERO */}
-            <section className="relative h-screen flex flex-col justify-center px-6 md:px-20 overflow-hidden">
+            <section className="relative h-screen flex flex-col justify-center px-6 md:px-20 overflow-hidden bg-[#050505]">
+
+                {/* 0. BACKGROUND IMAGE */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/hero-marketing.webp"
+                        alt="Influence Marketing"
+                        fill
+                        className="object-cover opacity-40"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/30 via-transparent to-[#050505]" />
+                    <div className="absolute inset-0 bg-black/40" />
+                </div>
 
                 {/* 1. AMBIANCE : Glow d'arrière-plan */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-[#FF2E93] opacity-10 blur-[100px] rounded-full pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-[#FF2E93] opacity-10 blur-[100px] rounded-full pointer-events-none z-0" />
 
-                <div className="max-w-7xl relative z-10 mt-[-10vh]">
+                <div className="relative z-10 mt-[-10vh] w-full text-center md:text-start">
 
-                    <div className="relative mb-10 inline-block max-w-full px-4">
+                    <div className="relative mb-10 inline-block px-4">
 
                         {/* TITRE BASE (Contour) */}
                         <h1
-                            className={`font-display font-medium uppercase tracking-tighter leading-[0.85] text-transparent relative z-10 w-full ${isRTL
-                                    ? 'whitespace-nowrap text-[12vw] md:text-[8vw]'
-                                    : 'whitespace-normal md:whitespace-nowrap text-[13vw] md:text-[7vw]'
+                            className={`font-display font-medium uppercase tracking-tighter leading-[0.85] text-transparent relative z-10 w-full whitespace-normal ${isRTL
+                                ? 'text-[12vw] md:text-[8vw]'
+                                : 'text-[13vw] md:text-[7vw]'
                                 }`}
                             style={{
-                                WebkitTextStroke: isRTL ? '4px rgba(255,255,255,0.2)' : '2px rgba(255,255,255,0.2)'
+                                WebkitTextStroke: '2px rgba(255,255,255,0.2)'
                             }}
                         >
                             {content.title}
@@ -126,15 +144,15 @@ export default function InfluenceClient({ content, lang }: InfluenceClientProps)
 
                         {/* TITRE MASQUE (Rose) */}
                         <div
-                            className={`hero-title-mask absolute start-0 bg-[#FF2E93] z-20 w-0 overflow-hidden flex items-center ${isRTL
-                                    ? 'h-[120%] top-[-10%]'
-                                    : 'h-full top-0'
+                            className={`hero-title-mask absolute start-0 bg-[#FF2E93] z-20 w-full overflow-hidden flex items-center ${isRTL
+                                ? 'h-[135%] top-[-17.5%]'
+                                : 'h-full top-0'
                                 }`}
                         >
                             <div className="px-4 w-full">
-                                <h1 className={`font-display font-medium uppercase tracking-tighter leading-[0.85] text-black w-full ${isRTL
-                                        ? 'whitespace-nowrap text-[12vw] md:text-[8vw]'
-                                        : 'whitespace-normal md:whitespace-nowrap text-[13vw] md:text-[7vw]'
+                                <h1 className={`font-display font-medium uppercase tracking-tighter leading-[0.85] text-black w-full whitespace-normal ${isRTL
+                                    ? 'text-[12vw] md:text-[8vw]'
+                                    : 'text-[13vw] md:text-[7vw]'
                                     }`}>
                                     {content.title}
                                 </h1>

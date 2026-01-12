@@ -7,14 +7,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SonicButton from '@/components/ui/SonicButton';
 import { Locale } from '@/i18n-config';
 
+import BookingForm from '@/components/booking/BookingForm';
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface BookingClientProps {
     content: any;
+    dict: any;
     lang: Locale;
 }
 
-export default function BookingClient({ content, lang }: BookingClientProps) {
+export default function BookingClient({ content, dict, lang }: BookingClientProps) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -152,19 +155,22 @@ export default function BookingClient({ content, lang }: BookingClientProps) {
                 </div>
             </section>
 
-            {/* WOW - SIGNATURE */}
-            <section className="py-24 md:py-40 relative flex items-center justify-center bg-gradient-to-b from-[#050505] to-purple-950/20">
-                <div className="text-center max-w-4xl px-6 relative z-10">
-                    <h2 className="text-3xl md:text-5xl lg:text-7xl font-display uppercase leading-tight tracking-tight">
-                        {content.wow_fact}
-                    </h2>
-                    <div className="mt-16">
-                        <SonicButton href={`/${lang}/contact?type=booking`} variant="booking" className="border border-[#A855F7] text-[#A855F7] hover:bg-[#A855F7] hover:text-white px-10 py-5 uppercase tracking-widest font-bold text-sm transition-colors">
-                            {content.book_btn}
-                        </SonicButton>
+            {/* BOOKING FORM SECTION */}
+            <section id="booking-form" className="py-24 md:py-40 relative flex items-center justify-center bg-gradient-to-b from-[#050505] to-purple-950/20">
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="max-w-4xl mx-auto mb-16 text-center">
+                        <h2 className="text-3xl md:text-5xl lg:text-7xl font-display uppercase leading-tight tracking-tight mb-8">
+                            {content.wow_fact}
+                        </h2>
+                    </div>
+
+                    {/* Integrated Form */}
+                    <div className="bg-black/40 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-3xl relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#A855F7] to-transparent" />
+                        <BookingForm dict={dict} lang={lang} />
                     </div>
                 </div>
-                <div className="absolute inset-0 bg-[url('/images/logo.webp')] opacity-10 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-[url('/images/logo.webp')] opacity-5 mix-blend-overlay bg-center bg-no-repeat bg-contain" />
             </section>
 
         </main>

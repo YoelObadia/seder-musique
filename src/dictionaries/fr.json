@@ -6,7 +6,7 @@
             "production": "Production Événementielle",
             "influence": "Marketing d'Influence",
             "booking": "Booking",
-            "talents": "Talents"
+            "talents": "Label"
         },
         "billetterie": "Billetterie",
         "blog": "Blog",
@@ -53,6 +53,7 @@
                 "Artiste Confirmé",
                 "Jeune Talent (Graine)",
                 "Orchestre complet",
+                "Musiciens",
                 "DJ Set",
                 "Performance sur-mesure"
             ],
@@ -122,8 +123,8 @@
                 "desc": "La meilleure sélection artistique pour vos événements."
             },
             "talents": {
-                "title": "Talents",
-                "desc": "Gestion et déploiement de profils créatifs d'exception."
+                "title": "Label",
+                "desc": "Sélection des talents d'aujourd'hui et révélation des stars de demain."
             }
         }
     },
@@ -145,6 +146,18 @@
             "all": "Tous",
             "dj": "DJs",
             "live": "Live Acts"
+        },
+        "form": {
+            "title": "Réserver un Artiste",
+            "subtitle": "Complétez ce formulaire pour faire une demande de booking.",
+            "name": "Nom complet",
+            "email": "Email",
+            "phone": "Téléphone",
+            "artist": "Nom de l'artiste souhaité",
+            "message": "Détails de l'événement",
+            "submit": "ENVOYER LA DEMANDE",
+            "success": "Demande envoyée avec succès",
+            "required": "Ce champ est requis"
         },
         "wizard_steps": {
             "role_selection": "Quel est votre rôle ?",
@@ -189,10 +202,10 @@
         "tag": "Records & Development — by Seder Music",
         "subtitle": "Le laboratoire artistique où l’excellence musicale rencontre la scène.",
         "intro": {
-            "p1": "R&D Records est le label de Seder Music — une maison pensée pour révéler des artistes, construire des identités fortes et produire des titres qui durent.",
-            "p2": "À la croisée de l’artistique et du stratégique, nous accompagnons chaque projet de A à Z : direction artistique, production, enregistrement, mix & mastering, distribution et déploiement marketing. Notre signature : une exigence sonore premium, une vision claire, et un travail d’équipe au service de l’émotion.",
-            "p3": "R&D, c’est à la fois une signature et une méthode : Recherche & Développement au service de la créativité, pour transformer une idée en œuvre, puis une œuvre en audience.",
-            "welcome": "Bienvenue chez R&D Records — là où le talent devient un projet… et le projet, une réussite."
+            "p1": "R&D Records est né d’une idée simple : donner à Seder Music un vrai moteur de découverte et de développement artistique.",
+            "p2": "Dans le cadre de l’expansion du groupe, nous avons créé un label dédié pour ouvrir une section entièrement tournée vers les nouveaux talents et les artistes en pleine ascension. Notre rôle : repérer, sélectionner, accompagner, puis signer les profils qui ont un potentiel réel — artistique, vocal, scénique et humain — et leur offrir une structure solide pour passer un cap.",
+            "p3": "R&D Records s’adresse aussi aux artistes déjà actifs dans l’industrie, qui ont une identité forte et un public en croissance, mais qui ne correspondent pas forcément au positionnement “superstars” de la partie Booking de Seder Music. Pour eux, nous apportons une prise en charge complète et concrète : stratégie de promotion, mise en avant, création d’opportunités, et surtout représentation auprès des bons partenaires (producteurs, organisateurs, marques, médias, scènes et événements).",
+            "welcome": "En résumé, Seder Music porte la vision globale, et R&D Records en devient le label “terrain” : celui qui découvre, développe, structure et propulse les artistes — qu’ils soient révélations de demain ou talents confirmés en pleine montée."
         },
         "cards": {
             "graines": {
@@ -264,12 +277,12 @@
         "streams": "Écoutes Mensuelles"
     },
     "agency": {
-        "hero_title": "Une base en Israël. Une scène mondiale.",
+        "hero_title": "Une agence artistique pour une portée internationale.",
         "hero_subtitle": "International Booking & Artistic Production",
         "vision_title": "L'origine",
-        "vision_text": "Née à Jérusalem, à la croisée des cultures et des exigences, Seder Music est une agence de booking et de production conçue comme une maison de création. Nous ne nous contentons pas d’organiser ; nous bâtissons des ponts artistiques entre Israël et le reste du monde.",
+        "vision_text": "Fondée à Jérusalem, Seder Music est une agence de booking et de production à portée internationale. Nous réunissons expertise de terrain, direction artistique et réseau global pour accompagner les artistes et les projets, de la création à la scène. Notre identité s’enracine dans une culture de communauté, de confiance et de transmission — au service d’expériences musicales fortes, partout dans le monde.",
         "leadership_title": "L'Exigence",
-        "leadership_bio": "De la direction musicale à l’exécution technique, nous accompagnons les institutions et les familles les plus exigeantes dans la création d’expériences immersives. Notre réseau international nous permet de briser les frontières : inviter l'exceptionnel en Israël, et porter l'excellence israélienne sur les scènes mondiales.",
+        "leadership_bio": "De la direction musicale à l’exécution technique, nous accompagnons les institutions les plus exigeantes dans la création d’expériences immersives. Notre réseau international nous permet de briser les frontières : inviter l'exceptionnel en Israël, et porter l'excellence israélienne sur les scènes mondiales.",
         "signature": "L'excellence opérationnelle au service d'une émotion profonde."
     },
     "expert": {
@@ -456,7 +469,7 @@
         }
     },
     "manifesto": {
-        "content": "Seder est une maison de création. Nous ne suivons pas les tendances, nous les créons. Notre approche est radicale, notre esthétique est intemporelle. Nous sommes l'architecte de votre vision.",
+        "content": "Un projet musical se construit tant par le son que par l'impact. C'est pourquoi, Seder Music combine relationnel, culture, studio, expertise événementielle et direction artistique pour donner vie à votre événement.",
         "signature": "Seder Music"
     },
     "cta_final": {

@@ -53,6 +53,7 @@
                 "Established Artist",
                 "Rising Talent (Graine)",
                 "Full Orchestra",
+                "Musicians",
                 "DJ Set",
                 "Custom Performance"
             ],
@@ -123,7 +124,7 @@
             },
             "talents": {
                 "title": "Talents",
-                "desc": "Management and deployment of exceptional creative profiles."
+                "desc": "Selecting today's talents and revealing tomorrow's stars."
             }
         }
     },
@@ -145,6 +146,18 @@
             "all": "All",
             "dj": "DJs",
             "live": "Live Acts"
+        },
+        "form": {
+            "title": "Book an Artist",
+            "subtitle": "Complete this form to request a booking.",
+            "name": "Full Name",
+            "email": "Email",
+            "phone": "Phone",
+            "artist": "Desired Artist Name",
+            "message": "Event Details",
+            "submit": "SEND REQUEST",
+            "success": "Request sent successfully",
+            "required": "This field is required"
         },
         "wizard_steps": {
             "role_selection": "What is your role?",
@@ -267,9 +280,9 @@
         "hero_title": "Based in Israel. A Global Stage.",
         "hero_subtitle": "International Booking & Artistic Production",
         "vision_title": "The Origin",
-        "vision_text": "Born in Jerusalem, at the crossroads of cultures and exacting standards, Seder Music is a booking and production agency conceived as a creative house. We don't just organize; we build artistic bridges between Israel and the rest of the world.",
+        "vision_text": "Founded in Jerusalem, Seder Music is an international booking and production agency. We bring together field expertise, artistic direction, and a global network to support artists and projects from creation to the stage. Our identity is rooted in a culture of community, trust, and transmission — at the service of powerful musical experiences, everywhere in the world.",
         "leadership_title": "The Standard",
-        "leadership_bio": "From musical direction to technical execution, we accompany the most demanding institutions and families in creating immersive experiences. Our international network allows us to break boundaries: inviting the exceptional to Israel, and bringing Israeli excellence to global stages.",
+        "leadership_bio": "From musical direction to technical execution, we accompany the most demanding institutions in creating immersive experiences. Our international network allows us to break boundaries: inviting the exceptional to Israel, and bringing Israeli excellence to global stages.",
         "signature": "Operational excellence in the service of radical emotion."
     },
     "expert": {
@@ -456,7 +469,7 @@
         }
     },
     "manifesto": {
-        "content": "Seder is a creative house. We don't follow trends, we create them. Our approach is radical, our aesthetic is timeless. We are the architect of your vision.",
+        "content": "A musical project is built as much on sound as on impact. That's why Seder Music combines relationships, culture, studio experience, event expertise, and artistic direction to bring your event to life.",
         "signature": "Seder Music Group"
     },
     "cta_final": {
