@@ -204,22 +204,22 @@
         "intro": {
             "p1": "R&D Records est né d’une idée simple : donner à Seder Music un vrai moteur de découverte et de développement artistique.",
             "p2": "Dans le cadre de l’expansion du groupe, nous avons créé un label dédié pour ouvrir une section entièrement tournée vers les nouveaux talents et les artistes en pleine ascension. Notre rôle : repérer, sélectionner, accompagner, puis signer les profils qui ont un potentiel réel — artistique, vocal, scénique et humain — et leur offrir une structure solide pour passer un cap.",
-            "p3": "R&D Records s’adresse aussi aux artistes déjà actifs dans l’industrie, qui ont une identité forte et un public en croissance, mais qui ne correspondent pas forcément au positionnement “superstars” de la partie Booking de Seder Music. Pour eux, nous apportons une prise en charge complète et concrète : stratégie de promotion, mise en avant, création d’opportunités, et surtout représentation auprès des bons partenaires (producteurs, organisateurs, marques, médias, scènes et événements).",
+            "p3": "R&D Records s’adresse aussi aux artistes déjà actifs dans l’industrie, qui ont une identité forte et un public en croissance. Pour eux, nous apportons une prise en charge complète et concrète : stratégie de promotion, mise en avant, création d’opportunités, et surtout représentation auprès des bons partenaires (producteurs, organisateurs, marques, médias, scènes et événements).",
             "welcome": "En résumé, Seder Music porte la vision globale, et R&D Records en devient le label “terrain” : celui qui découvre, développe, structure et propulse les artistes — qu’ils soient révélations de demain ou talents confirmés en pleine montée."
         },
         "cards": {
             "graines": {
                 "title": "Graines de Talent",
-                "desc": "Vous êtes un jeune talent et voulez faire partie de la famille du label R&D Records ?",
-                "full_text": "Nous repérons et propulsons la nouvelle génération de la musique méditerranéenne et orientale. R&D Records assure un accompagnement global et sur-mesure.",
+                "desc": "Vous êtes un jeune talent et voulez faire partie de la famille R&D Records ?",
+                "full_text": "Nous repérons et propulsons la nouvelle génération de la musique. R&D Records assure un accompagnement global et sur-mesure.",
                 "bullets": [
                     "Package Production & Direction artistique",
                     "Management & Représentation d'image",
                     "Organisation de concert & Billetterie",
                     "Boost communication & Réseaux sociaux"
                 ],
-                "cta": "Découvrir la Révélation",
-                "link": "/talents/graines",
+                "cta": "Booker l'artiste",
+                "link": "/contact",
                 "list": [
                     {
                         "name": "Samuel Skouri",
@@ -277,16 +277,16 @@
         "streams": "Écoutes Mensuelles"
     },
     "agency": {
-        "hero_title": "Une agence artistique pour une portée internationale.",
-        "hero_subtitle": "International Booking & Artistic Production",
+        "hero_title": "Une agence de production musicale",
+        "hero_subtitle": "Booking, Influence & Musical Event Production",
         "vision_title": "L'origine",
-        "vision_text": "Fondée à Jérusalem, Seder Music est une agence de booking et de production à portée internationale. Nous réunissons expertise de terrain, direction artistique et réseau global pour accompagner les artistes et les projets, de la création à la scène. Notre identité s’enracine dans une culture de communauté, de confiance et de transmission — au service d’expériences musicales fortes, partout dans le monde.",
+        "vision_text": "Seder Music est une agence événementielle et de booking dédiée à celles et ceux qui recherchent l’excellence artistique pour des événements de haut niveau : mariages, galas, soirées privées, institutions, marques, concerts et productions sur mesure. Nous représentons et programmons des artistes de renom, des têtes d’affiche et des performances premium — avec une approche complète : sélection de l’artiste, négociation, logistique, coordination, et accompagnement artistique jusqu’au jour J. Notre objectif est simple : créer un événement qui marque, avec une prestation irréprochable et une expérience fluide pour l’organisateur. Au-delà du booking, Seder Music accompagne également les marques et projets dans le marketing d’influence artistique : mise en relation stratégique, création de campagnes, et visibilité par des artistes adaptés à l’image et au public visé. Et parce qu’une grande agence ne se contente pas de programmer les stars, nous avons aussi développé un label interne : R&D Records. À travers lui, nous signons, manageons et développons des artistes émergents et des talents en devenir, que nous formons, structurons et propulsons — jusqu’à les intégrer, pour certains, aux grandes scènes et aux opportunités de Seder Music. En résumé : Seder Music orchestre le haut niveau (stars & événements), et R&D Records construit l’avenir (nouveaux talents & développement artistique) — le tout au sein d’un même écosystème, avec une seule exigence : la qualité.",
         "leadership_title": "L'Exigence",
         "leadership_bio": "De la direction musicale à l’exécution technique, nous accompagnons les institutions les plus exigeantes dans la création d’expériences immersives. Notre réseau international nous permet de briser les frontières : inviter l'exceptionnel en Israël, et porter l'excellence israélienne sur les scènes mondiales.",
         "signature": "L'excellence opérationnelle au service d'une émotion profonde."
     },
     "expert": {
-        "name": "Raphaël Skouri",
+        "name": "Raphaël D. Skouri",
         "role": "Directeur",
         "stats": {
             "experience": "Années d'expérience"
@@ -315,9 +315,9 @@
             "signature": "Seder Group : Une seule signature, une maîtrise totale."
         },
         "booking": {
-            "hero_title": "L'Accès à l'Excellence.",
+            "hero_title": "Booking",
             "hero_subtitle": "Chanteurs, Musiciens et DJ de renommée mondiale pour vos scènes.",
-            "core_text": "Nous donnons accès à des artistes majeurs en garantissant une gestion complète : de la négociation des contrats à la logistique technique (voyage, hébergement, riders). Nous comprenons les attentes d'un public global et connectons les plus grandes scènes aux talents les plus rares.",
+            "core_text": "Nous accompagnons des marques, des institutions et des clients privés qui souhaitent faire venir des artistes reconnus. De la sélection du talent au show final, nous orchestrons l’ensemble de l’événement. Nous cadrons votre demande, confirmons l’artiste, négocions les conditions, sécurisons les engagements contractuels, puis pilotons la production et toute la logistique liée à la prestation, du voyage à l’hébergement, jusqu’à la coordination technique et au rider. Vous avez un seul interlocuteur, pour une expérience maîtrisée et un rendu à la hauteur de l’affiche.",
             "points_title": "Services",
             "points": [
                 "Sélection d'artistes",
@@ -384,18 +384,18 @@
             },
             "sections": {
                 "whatWeDo": {
-                    "title": "Ce que nous faisons",
-                    "text": "Nous concevons et pilotons des campagnes d’influence sur-mesure autour de votre produit ou service, en transformant l’image et l’audience des talents en contenu et activations performants.",
+                    "title": "Notre plan d'action",
+                    "text": "Nous concevons et pilotons des campagnes d’influence sur-mesure autour de votre produit ou service. De la stratégie au reporting, nous transformons l’audience des talents en contenu performant, générateur de résultats mesurables.",
                     "bullets": [
-                        "Artistes & créateurs (music, lifestyle, entertainment, niches ciblées)",
-                        "Contenu premium (Reels, TikTok, YouTube, Stories, Shorts)",
-                        "Activations événementielles (showcases, lancements, pop-up, brand moments)",
-                        "Placements artistiques (clips, coulisses studio, performance live, univers musical)"
+                        "Artistes & créateurs alignés à votre univers (music, lifestyle, entertainment, niches)",
+                        "Production de formats qui performent : Reels, TikTok, YouTube, Stories, Shorts.",
+                        "Showcases, lancements, pop-up, \"brand moments\", collavoration IRL.",
+                        "Placements naturels dans l'univers de l'artiste : clips, coulisses studio, performance live."
                     ]
                 },
                 "ourApproach": {
                     "title": "Notre approche",
-                    "text": "Nous ne faisons pas “de l’influence pour faire du bruit”. Nous construisons des campagnes cohérentes avec votre image, avec une stratégie claire et une exécution maîtrisée.",
+                    "text": "Nous alignons stratégie, talents et création pour transformer votre image en impact — et l’impact en résultats.",
                     "steps": [
                         {
                             "title": "Positionnement & objectif",
@@ -485,9 +485,9 @@
         "links": {
             "agency": "Agence",
             "booking": "Booking",
-            "production": "Production",
-            "marketing": "Marketing",
-            "talents": "Talents",
+            "production": "Production événementielle",
+            "marketing": "Marketing d'Influence",
+            "talents": "Label",
             "legal_notice": "Mentions Légales",
             "contact": "Contact"
         },

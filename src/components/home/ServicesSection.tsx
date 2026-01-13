@@ -14,13 +14,13 @@ const ROTATION_RANGE = 15; // 15 est plus élégant que 20 pour ce design
 
 const SERVICES_CONFIG = [
     {
-        id: 'production',
-        href: '/services/production',
-        icon: <Music className="w-6 h-6" />,
-        videoSrc: '/videos/production.webm',
-        posterSrc: '/images/production-poster.webp',
-        gradient: 'radial-gradient(circle at center, #10B981 0%, #064E3B 100%)',
-        glowColor: '#10B981',
+        id: 'booking',
+        href: '/services/booking',
+        icon: <Mic2 className="w-6 h-6" />,
+        videoSrc: '/videos/bookings.webm',
+        posterSrc: '/images/bookings-poster.webp',
+        gradient: 'radial-gradient(circle at center, #A855F7 0%, #581C87 100%)',
+        glowColor: '#A855F7',
     },
     {
         id: 'influence',
@@ -32,13 +32,13 @@ const SERVICES_CONFIG = [
         glowColor: '#3B82F6',
     },
     {
-        id: 'booking',
-        href: '/services/booking',
-        icon: <Mic2 className="w-6 h-6" />,
-        videoSrc: '/videos/bookings.webm',
-        posterSrc: '/images/bookings-poster.webp',
-        gradient: 'radial-gradient(circle at center, #A855F7 0%, #581C87 100%)',
-        glowColor: '#A855F7',
+        id: 'production',
+        href: '/services/production',
+        icon: <Music className="w-6 h-6" />,
+        videoSrc: '/videos/production.webm',
+        posterSrc: '/images/production-poster.webp',
+        gradient: 'radial-gradient(circle at center, #10B981 0%, #064E3B 100%)',
+        glowColor: '#10B981',
     },
     {
         id: 'talents',

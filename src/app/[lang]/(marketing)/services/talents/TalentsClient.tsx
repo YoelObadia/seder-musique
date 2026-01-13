@@ -281,7 +281,7 @@ export default function TalentsClient({ content, lang, initialViewMode }: Talent
                                                 {content.cards.graines.full_text}
                                             </p>
                                             <SonicButton
-                                                href={`/${lang}${content.cards.graines.link}`}
+                                                href={`/${lang}${content.cards.graines.link}?type=talents`}
                                                 variant="talents"
                                                 className="inline-block border border-[#3B82F6] text-[#3B82F6] hover:bg-[#3B82F6] hover:text-black px-8 py-4 uppercase tracking-widest text-sm transition-colors mt-8 w-full md:w-auto text-center"
                                             >
@@ -367,7 +367,7 @@ export default function TalentsClient({ content, lang, initialViewMode }: Talent
                                                 {content.cards.artistes.full_text}
                                             </p>
                                             <SonicButton
-                                                href={`/${lang}${content.cards.artistes.link}`}
+                                                href={`/${lang}${content.cards.artistes.link}?type=management`}
                                                 variant="production"
                                                 className="inline-block border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black px-8 py-4 uppercase tracking-widest text-sm transition-colors mt-8 w-full md:w-auto text-center"
                                             >

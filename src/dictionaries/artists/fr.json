@@ -17,7 +17,7 @@
         ],
         "gallery": [
             "/images/samuel.webp",
-            "/images/placeholders/studio-mic.jpg"
+            "/sounds/samuel.webm"
         ]
     },
     "sarah-halfon": {
@@ -50,7 +50,13 @@
         ],
         "gallery": [
             "/images/raphael.webp",
-            "/images/placeholders/concert-lights.jpg"
+            "/sounds/raphael.webm"
+        ],
+        "socials": [
+            {
+                "platform": "youtube",
+                "url": "https://youtube.com/@-raphaelskourichannel6534?si=7d5eETgxZnJJBsvt"
+            }
         ]
     }
 }

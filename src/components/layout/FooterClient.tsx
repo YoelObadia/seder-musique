@@ -40,9 +40,9 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
     };
 
     const services = [
-        { href: `/${lang}/services/production`, label: content.links.production },
-        { href: `/${lang}/services/influence`, label: content.links.marketing },
         { href: `/${lang}/services/booking`, label: content.links.booking },
+        { href: `/${lang}/services/influence`, label: content.links.marketing },
+        { href: `/${lang}/services/production`, label: content.links.production },
         { href: `/${lang}/services/talents`, label: content.links.talents },
     ];
 

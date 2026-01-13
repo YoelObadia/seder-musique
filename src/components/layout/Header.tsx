@@ -38,8 +38,8 @@ export default function Header({ nav }: HeaderProps) {
         services: 'SERVICES',
         submenu: {
             production: 'Production Événementielle',
-            influence: "Marketing d'Influence",
             booking: 'Booking',
+            influence: "Marketing d'Influence",
             talents: 'Talents'
         },
         contact: 'CONTACT'
@@ -47,10 +47,10 @@ export default function Header({ nav }: HeaderProps) {
 
     const services = [
         {
-            href: `/${lang}/services/production`,
-            label: t.submenu?.production || 'Production',
-            key: 'production',
-            icon: <Music className="w-5 h-5 group-hover:text-black transition-colors" />
+            href: `/${lang}/services/booking`,
+            label: t.submenu?.booking || 'Booking',
+            key: 'booking',
+            icon: <Calendar className="w-5 h-5 group-hover:text-black transition-colors" />
         },
         {
             href: `/${lang}/services/influence`,
@@ -59,10 +59,10 @@ export default function Header({ nav }: HeaderProps) {
             icon: <Users className="w-5 h-5 group-hover:text-black transition-colors" />
         },
         {
-            href: `/${lang}/services/booking`,
-            label: t.submenu?.booking || 'Booking',
-            key: 'booking',
-            icon: <Calendar className="w-5 h-5 group-hover:text-black transition-colors" />
+            href: `/${lang}/services/production`,
+            label: t.submenu?.production || 'Production',
+            key: 'production',
+            icon: <Music className="w-5 h-5 group-hover:text-black transition-colors" />
         },
         {
             href: `/${lang}/services/talents`,

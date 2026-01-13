@@ -204,21 +204,21 @@
         "intro": {
             "p1": "R&D Records is the label of Seder Music — a house designed to reveal artists, build strong identities, and produce tracks that last.",
             "p2": "At the crossroads of the artistic and the strategic, we support every project from A to Z: artistic direction, production, recording, mix & mastering, distribution, and marketing deployment. Our signature: premium sound standards, a clear vision, and teamwork dedicated to emotion.",
-            "p3": "R&D is both a signature and a method: Research & Development at the service of creativity, to transform an idea into a work, and then a work into an audience.",
+            "p3": "R&D Records is also dedicated to established artists with a strong identity and a growing audience. We provide them with comprehensive, hands-on support: promotional strategy, exposure, opportunity creation, and—crucially—representation with the right partners (producers, organizers, brands, media, venues, and events).",
             "welcome": "Welcome to R&D Records — where talent becomes a project… and the project, a success."
         },
         "cards": {
             "graines": {
                 "title": "Seeds of Talent",
                 "desc": "Are you a young talent looking to join the R&D Records family?",
-                "full_text": "We scout and propel the new generation of Mediterranean and Oriental music. R&D Records ensures global and bespoke support.",
+                "full_text": "We scout and propel the next generation of music. R&D Records provides comprehensive, bespoke support.",
                 "bullets": [
                     "Production Package & Artistic Direction",
                     "Management & Image Representation",
                     "Concert Organization & Ticketing",
                     "Communication Boost & Social Media"
                 ],
-                "cta": "Discover the Revelation",
+                "cta": "Booker the artist",
                 "link": "/talents/graines",
                 "list": [
                     {
@@ -277,10 +277,10 @@
         "streams": "Monthly Listeners"
     },
     "agency": {
-        "hero_title": "Based in Israel. A Global Stage.",
+        "hero_title": "A music production agency",
         "hero_subtitle": "International Booking & Artistic Production",
         "vision_title": "The Origin",
-        "vision_text": "Founded in Jerusalem, Seder Music is an international booking and production agency. We bring together field expertise, artistic direction, and a global network to support artists and projects from creation to the stage. Our identity is rooted in a culture of community, trust, and transmission — at the service of powerful musical experiences, everywhere in the world.",
+        "vision_text": "Seder Music is an event and booking agency dedicated to those seeking artistic excellence for high-profile events: weddings, galas, private parties, corporate events, brand partnerships, concerts, and bespoke productions. We represent and book renowned artists, headliners, and premium performances—with a comprehensive approach: artist selection, negotiation, logistics, coordination, and artistic support right up to the big day. Our goal is simple: to create a memorable event with impeccable performance and a seamless experience for the organizer. Beyond booking, Seder Music also supports brands and projects in artistic influencer marketing: strategic networking, campaign creation, and visibility through artists perfectly suited to the brand image and target audience. And because a great agency doesn't just book stars, we've also developed an in-house label: R&D Records. Through it, we sign, manage, and develop emerging artists and up-and-coming talents, whom we train, structure, and propel—even integrating some of them into major venues and Seder Music's opportunities. In short: Seder Music orchestrates the high level (stars & events), and R&D Records builds the future (new talent & artistic development)—all within the same ecosystem, with a single requirement: quality.",
         "leadership_title": "The Standard",
         "leadership_bio": "From musical direction to technical execution, we accompany the most demanding institutions in creating immersive experiences. Our international network allows us to break boundaries: inviting the exceptional to Israel, and bringing Israeli excellence to global stages.",
         "signature": "Operational excellence in the service of radical emotion."
@@ -315,9 +315,9 @@
             "signature": "Seder Group: One signature, total mastery."
         },
         "booking": {
-            "hero_title": "Access to Excellence.",
+            "hero_title": "Booking",
             "hero_subtitle": "World-renowned Singers, Musicians, and DJs for your stages.",
-            "core_text": "We provide access to major artists by guaranteeing complete management: from contract negotiation to technical logistics (travel, accommodation, riders). We understand the expectations of a global audience and connect the biggest stages with the rarest talents.",
+            "core_text": "We support brands, institutions, and private clients who want to bring in renowned artists. From talent selection to the final show, we orchestrate the entire event. We define your requirements, confirm the artist, negotiate the terms, secure contractual commitments, and then manage the production and all the logistics related to the performance, from travel and accommodation to technical coordination and rider support. You have a single point of contact for a seamless experience and a result that lives up to the hype.",
             "points_title": "Services",
             "points": [
                 "Artist Selection",
@@ -384,18 +384,18 @@
             },
             "sections": {
                 "whatWeDo": {
-                    "title": "What We Do",
-                    "text": "We design and pilot bespoke influence campaigns around your product or service, transforming the image and audience of talents into high-performing content and activations.",
+                    "title": "Our action plan",
+                    "text": "We design and manage bespoke influencer campaigns tailored to your product or service. From strategy to reporting, we turn talent audiences into high-performing content that drives measurable results.",
                     "bullets": [
-                        "Artists & Creators (music, lifestyle, entertainment, targeted niches)",
-                        "Premium Content (Reels, TikTok, YouTube, Stories, Shorts)",
-                        "Event Activations (showcases, launches, pop-ups, brand moments)",
-                        "Artistic Placements (music videos, studio behind-the-scenes, live performance, musical universe)"
+                        "Artists & creators aligned with your universe (music, lifestyle, entertainment, niches)",
+                        "Production of high-performing formats: Reels, TikTok, YouTube, Stories, Shorts",
+                        "Showcases, launches, pop-ups, \"brand moments\", and IRL collaborations",
+                        "Organic placements within the artist's world: music videos, studio behind-the-scenes, live performances"
                     ]
                 },
                 "ourApproach": {
                     "title": "Our Approach",
-                    "text": "We don’t do “influence just for noise”. We build campaigns consistent with your image, with a clear strategy and mastered execution.",
+                    "text": "We align strategy, talent and creativity to transform your image into impact — and impact into results.",
                     "steps": [
                         {
                             "title": "Positioning & Objective",
@@ -485,9 +485,9 @@
         "links": {
             "agency": "Agency",
             "booking": "Booking",
-            "production": "Production",
-            "marketing": "Marketing",
-            "talents": "Talents",
+            "production": "Event Production",
+            "marketing": "Influencer Marketing",
+            "talents": "Label",
             "legal_notice": "Legal Notice",
             "contact": "Contact"
         },

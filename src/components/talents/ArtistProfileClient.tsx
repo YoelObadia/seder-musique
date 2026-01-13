@@ -3,7 +3,7 @@
 import { Locale } from '@/i18n-config';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Instagram, Globe, Mail } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Instagram, Globe, Mail, Youtube } from 'lucide-react';
 import SonicButton from '@/components/ui/SonicButton';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -127,6 +127,30 @@ export default function ArtistProfileClient({ artist, lang, labels }: ArtistProf
                             >
                                 {labels.book}
                             </SonicButton>
+
+                            {/* Socials */}
+                            {artist.socials && artist.socials.length > 0 && (
+                                <div className="flex gap-4">
+                                    {artist.socials.map((social, i) => {
+                                        let Icon = Globe;
+                                        if (social.platform === 'instagram') Icon = Instagram;
+                                        if (social.platform === 'youtube') Icon = Youtube; // Requires import
+
+                                        return (
+                                            <a
+                                                key={i}
+                                                href={social.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`p-3 border rounded-full transition-all duration-300 ${borderClass} ${accentClass} hover:bg-white hover:text-black hover:border-white`}
+                                                aria-label={social.platform}
+                                            >
+                                                <Icon className="w-5 h-5" />
+                                            </a>
+                                        );
+                                    })}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -152,16 +176,34 @@ export default function ArtistProfileClient({ artist, lang, labels }: ArtistProf
                         <div className="border-t border-white/10 pt-8">
                             <h4 className="text-white/40 font-mono text-xs uppercase tracking-wider mb-6">{labels.gallery}</h4>
                             <div className="grid grid-cols-2 gap-4">
-                                {artist.gallery.slice(0, 4).map((img, i) => (
-                                    <div key={i} className="relative aspect-[4/5] bg-white/5 overflow-hidden group">
-                                        <Image
-                                            src={img}
-                                            alt={`Gallery ${i}`}
-                                            fill
-                                            className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                                        />
-                                    </div>
-                                ))}
+                                {artist.gallery.slice(0, 4).map((img, i) => {
+                                    const isAudio = img.endsWith('.webm') || img.endsWith('.mp3');
+                                    return (
+                                        <div key={i} className="relative aspect-[4/5] bg-white/5 overflow-hidden group flex items-center justify-center">
+                                            {isAudio ? (
+                                                <div className="w-full px-4 text-center">
+                                                    <div className="w-12 h-12 bg-[#FFD700] rounded-full flex items-center justify-center mx-auto mb-4 text-black animate-pulse">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                                                            <path fillRule="evenodd" d="M19.952 1.651a.75.75 0 0 1 .291.599V2.25c0 5.061-3.28 9.183-7.5 9.183V21h-3v-9.65c-2.457.172-4.5 2.147-4.5 4.65v.375a.75.75 0 0 1-1.5 0v-.375c0-3.13 2.501-5.69 5.86-5.96a9.09 9.09 0 0 0-4.36-7.854.75.75 0 1 1 .802-1.28A10.59 10.59 0 0 1 12 10.298a10.593 10.593 0 0 1 6.649-10.285.75.75 0 0 1 .951.196l.352.441Z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <audio controls className="w-full max-w-[200px] mx-auto h-8 opacity-80 hover:opacity-100 transition-opacity">
+                                                        <source src={img} type="audio/webm" />
+                                                        Your browser does not support the audio element.
+                                                    </audio>
+                                                    <p className="text-xs font-mono text-white/50 mt-2 uppercase tracking-widest">Listen Demo</p>
+                                                </div>
+                                            ) : (
+                                                <Image
+                                                    src={img}
+                                                    alt={`Gallery ${i}`}
+                                                    fill
+                                                    className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                                                />
+                                            )}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
