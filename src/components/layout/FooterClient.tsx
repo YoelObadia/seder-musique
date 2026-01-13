@@ -15,8 +15,10 @@ interface FooterClientProps {
     lang: Locale;
 }
 
+type LegalContentType = 'mentions' | 'privacy' | null;
+
 export default function FooterClient({ content, lang }: FooterClientProps) {
-    const [isLegalOpen, setIsLegalOpen] = useState(false);
+    const [activeLegalContent, setActiveLegalContent] = useState<LegalContentType>(null);
 
     // Animation Config
     const containerVariants = {
@@ -51,6 +53,18 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
         { href: `/${lang}/agence`, label: content.links.agency },
         { href: `/${lang}/contact`, label: content.links.contact },
     ];
+
+    const getModalTitle = () => {
+        if (activeLegalContent === 'mentions') return content.links.legal_notice;
+        if (activeLegalContent === 'privacy') return content.links.privacy_policy;
+        return '';
+    };
+
+    const getModalContent = () => {
+        if (activeLegalContent === 'mentions') return content.legal.mentions;
+        if (activeLegalContent === 'privacy') return content.legal.privacy;
+        return '';
+    };
 
     return (
         <>
@@ -140,7 +154,7 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                                 {/* 2. Le bouton Mentions Légales (Modal) */}
                                 <li>
                                     <button
-                                        onClick={() => setIsLegalOpen(true)}
+                                        onClick={() => setActiveLegalContent('mentions')}
                                         className="text-gray-400 hover:text-white transition-colors text-start inline-block"
                                     >
                                         <motion.span
@@ -148,6 +162,21 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                                             transition={{ duration: 0.2 }}
                                         >
                                             {content.links.legal_notice}
+                                        </motion.span>
+                                    </button>
+                                </li>
+
+                                {/* 3. Le bouton Politique de Confidentialité (Modal) */}
+                                <li>
+                                    <button
+                                        onClick={() => setActiveLegalContent('privacy')}
+                                        className="text-gray-400 hover:text-white transition-colors text-start inline-block"
+                                    >
+                                        <motion.span
+                                            whileHover={{ color: '#FFFFFF', textShadow: "0 0 8px rgba(255,255,255,0.5)" }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            {content.links.privacy_policy}
                                         </motion.span>
                                     </button>
                                 </li>
@@ -179,9 +208,11 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
 
             {/* LE MODAL EST ICI */}
             <LegalModal
-                isOpen={isLegalOpen}
-                onClose={() => setIsLegalOpen(false)}
+                isOpen={!!activeLegalContent}
+                onClose={() => setActiveLegalContent(null)}
                 lang={lang}
+                title={getModalTitle()}
+                content={getModalContent()}
             />
         </>
     );

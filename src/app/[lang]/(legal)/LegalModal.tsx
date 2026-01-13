@@ -11,9 +11,11 @@ interface LegalModalProps {
     isOpen: boolean;
     onClose: () => void;
     lang: Locale;
+    title: string;
+    content: string;
 }
 
-export default function LegalModal({ isOpen, onClose, lang }: LegalModalProps) {
+export default function LegalModal({ isOpen, onClose, lang, title, content }: LegalModalProps) {
 
     const lenis = useLenis();
 
@@ -29,8 +31,64 @@ export default function LegalModal({ isOpen, onClose, lang }: LegalModalProps) {
         return () => {
             lenis?.start();
             document.body.style.overflow = 'unset';
+            // Important: ne pas oublier de relancer lenis si le composant démonte
         };
     }, [isOpen, lenis]);
+
+    // Fonction pour parser et formater le contenu
+    const renderContent = () => {
+        return content.split('\n').map((line, index) => {
+            const trimmed = line.trim();
+            if (!trimmed) return <div key={index} className="h-4" />;
+
+            // Titres de section: ex "1) Éditeur..." ou "1. Éditeur..."
+            // On vérifie si la ligne commence par un chiffre suivi d'une parenthèse ou d'un point
+            if (/^\d+[\)\.]/.test(trimmed)) {
+                return (
+                    <h3 key={index} className="text-[#FFD700] font-sans font-bold text-lg uppercase tracking-wider mt-10 mb-6 border-l-4 border-[#FFD700] pl-4">
+                        {trimmed}
+                    </h3>
+                );
+            }
+
+            // Sous-titres principaux (ex: "Mentions Légales...")
+            if (index === 0 || trimmed.includes("Politique de confidentialité —")) {
+                return (
+                    <p key={index} className="text-white font-sans text-xl font-semibold mb-8">
+                        {trimmed}
+                    </p>
+                );
+            }
+
+            // Highlight des champs clés (Email:, Tel:, etc.)
+            // On split la ligne si elle contient un ":" pour mettre en gras la clé
+            if (trimmed.includes(':') && trimmed.length < 100) {
+                const [key, ...rest] = trimmed.split(':');
+                const value = rest.join(':');
+                // Simple hack pour éviter de casser des phrases normales avec ":"
+                // On assume que les champs clés sont courts et ont une structure "Clé : Valeur"
+                const keywords = [
+                    'Email', 'Mail', 'Tel', 'Tél', 'Téléphone', 'Phone', 'Adresse', 'Address', 'Statut', 'Status', 'N°', 'Directeur', 'Director', 'Hébergement', 'Hosting', 'Contact',
+                    'אימייל', 'טלפון', 'כתובת', 'סטטוס', 'מנהל', 'מייל' // Hebrew keywords
+                ];
+
+                if (keywords.some(k => key.trim().includes(k))) {
+                    return (
+                        <p key={index} className="text-white/80 font-sans text-sm leading-relaxed mb-2">
+                            <strong className="text-white/90 font-semibold">{key} :</strong>{value}
+                        </p>
+                    );
+                }
+            }
+
+            // Paragraphes standards
+            return (
+                <p key={index} className="text-white/70 font-sans text-sm leading-8 tracking-wide mb-3">
+                    {trimmed}
+                </p>
+            );
+        });
+    };
 
     return (
         <AnimatePresence>
@@ -53,7 +111,7 @@ export default function LegalModal({ isOpen, onClose, lang }: LegalModalProps) {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="bg-[#0A0A0A] w-full max-w-3xl max-h-[85vh] rounded-3xl border border-white/10 shadow-2xl overflow-hidden pointer-events-auto flex flex-col"
+                            className="bg-[#0A0A0A] w-full max-w-4xl max-h-[85vh] rounded-3xl border border-white/10 shadow-2xl overflow-hidden pointer-events-auto flex flex-col"
                             // Gestion RTL si jamais tu ajoutes l'arabe plus tard
                             dir={lang === 'he' ? 'rtl' : 'ltr'}
                         >
@@ -61,7 +119,7 @@ export default function LegalModal({ isOpen, onClose, lang }: LegalModalProps) {
                             {/* --- HEADER STICKY (Le bouton X ne bougera pas) --- */}
                             <div className="sticky top-0 left-0 right-0 z-10 flex justify-between items-center p-6 bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-white/5">
                                 <h2 className="text-xl font-display font-bold uppercase text-white tracking-wider">
-                                    Mentions Légales
+                                    {title}
                                 </h2>
                                 <button
                                     onClick={onClose}
@@ -75,58 +133,13 @@ export default function LegalModal({ isOpen, onClose, lang }: LegalModalProps) {
                             {/* --- CONTENT SCROLLABLE --- */}
                             {/* C'est ici qu'on met la scrollbar custom */}
                             <div
-                                className="overflow-y-auto p-6 md:p-10 space-y-10 text-white/80 font-serif leading-relaxed custom-scrollbar"
+                                className="overflow-y-auto p-6 md:p-10 custom-scrollbar"
                                 data-lenis-prevent
                             >
+                                {renderContent()}
 
-                                {/* Section 1 */}
-                                <section>
-                                    <h3 className="text-sm font-sans font-bold text-[#FFD700] uppercase tracking-widest mb-4">
-                                        1. Édition du site
-                                    </h3>
-                                    <p className="text-sm">
-                                        Propriétaire : <strong>[NOM DE TA SOCIÉTÉ]</strong><br />
-                                        Statut : SAS / SARL au capital de [MONTANT] €<br />
-                                        SIRET : [NUMÉRO SIRET] - RCS : [VILLE]<br />
-                                        Adresse : [ADRESSE COMPLÈTE]<br />
-                                        Contact : [EMAIL]
-                                    </p>
-                                </section>
-
-                                {/* Section 2 */}
-                                <section>
-                                    <h3 className="text-sm font-sans font-bold text-[#FFD700] uppercase tracking-widest mb-4">
-                                        2. Hébergement
-                                    </h3>
-                                    <p className="text-sm">
-                                        Le site est hébergé par <strong>Vercel Inc.</strong><br />
-                                        440 N Barranca Ave #4133 Covina, CA 91723<br />
-                                        privacy@vercel.com
-                                    </p>
-                                </section>
-
-                                {/* Section 3 */}
-                                <section>
-                                    <h3 className="text-sm font-sans font-bold text-[#FFD700] uppercase tracking-widest mb-4">
-                                        3. Propriété Intellectuelle
-                                    </h3>
-                                    <p className="text-sm">
-                                        Tous les contenus présents sur ce site (textes, vidéos, images, sons, logos) sont protégés par le droit d'auteur. Toute reproduction, même partielle, est strictement interdite sans autorisation écrite préalable.
-                                    </p>
-                                </section>
-
-                                {/* Section 4 */}
-                                <section>
-                                    <h3 className="text-sm font-sans font-bold text-[#FFD700] uppercase tracking-widest mb-4">
-                                        4. Données Personnelles
-                                    </h3>
-                                    <p className="text-sm">
-                                        Conformément au RGPD, vous disposez d'un droit d'accès et de rectification aux données vous concernant. Aucune donnée n'est vendue à des tiers. Pour exercer ce droit : [TON EMAIL].
-                                    </p>
-                                </section>
-
-                                <div className="pt-8 border-t border-white/10 text-center text-xs text-white/40 font-sans">
-                                    Dernière mise à jour : {new Date().toLocaleDateString('fr-FR')}
+                                <div className="pt-8 mt-10 border-t border-white/10 text-center text-xs text-white/40 font-sans">
+                                    {/* Footer du modal (Date ou Copyright si besoin) */}
                                 </div>
                             </div>
                         </motion.div>
