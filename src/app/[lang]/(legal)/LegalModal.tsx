@@ -44,8 +44,9 @@ export default function LegalModal({ isOpen, onClose, lang, title, content }: Le
             // Titres de section: ex "1) Éditeur..." ou "1. Éditeur..."
             // On vérifie si la ligne commence par un chiffre suivi d'une parenthèse ou d'un point
             if (/^\d+[\)\.]/.test(trimmed)) {
+                const isRTL = lang === 'he';
                 return (
-                    <h3 key={index} className="text-[#FFD700] font-sans font-bold text-lg uppercase tracking-wider mt-10 mb-6 border-l-4 border-[#FFD700] pl-4">
+                    <h3 key={index} className={`text-[#FFD700] font-sans font-bold text-lg uppercase tracking-wider mt-10 mb-6 border-[#FFD700] ${isRTL ? 'border-r-4 pr-4' : 'border-l-4 pl-4'}`}>
                         {trimmed}
                     </h3>
                 );
