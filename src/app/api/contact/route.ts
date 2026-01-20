@@ -1,20 +1,24 @@
 import { NextResponse } from 'next/server';
-import { resend } from '@/lib/resend';
 import { z } from 'zod';
 
-// Define Validation Schema
+// -----------------------------
+// 0. Configuration Runtime
+// -----------------------------
+export const runtime = 'edge';
+
+// -----------------------------
+// 1. Validation Schema (Inchangé)
+// -----------------------------
 const contactSchema = z.object({
     name: z.string().min(2),
     email: z.string().email(),
-    //phone: z.string().optional(),
     projectType: z.string().min(1),
     artistType: z.string().optional(),
-    artistName: z.string().optional(), // Specific artist request
+    artistName: z.string().optional(),
     demo: z.string().optional(),
     message: z.string().min(4),
-    lang: z.string().optional(), // Receive language context
+    lang: z.string().optional(),
 }).superRefine((data, ctx) => {
-    // Management Branch: Demo is REQUIRED
     if (data.projectType === 'artist_management') {
         if (!data.demo || data.demo.length < 5) {
             ctx.addIssue({
@@ -24,7 +28,6 @@ const contactSchema = z.object({
             });
         }
     }
-    // Booking Branch: Artist Type is REQUIRED (Only if NOT booking a specific Seder artist)
     if (data.projectType === 'booking_talent' && !data.artistType) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
@@ -34,11 +37,19 @@ const contactSchema = z.object({
     }
 });
 
+// -----------------------------
+// 2. API Handler
+// -----------------------------
 export async function POST(req: Request) {
     try {
+        const resendApiKey = process.env.RESEND_API_KEY;
+        if (!resendApiKey) {
+            return NextResponse.json({ success: false, error: 'Config Error' }, { status: 500 });
+        }
+
         const body = await req.json();
 
-        // 1. Validate Data
+        // 1. Validation des données
         const result = contactSchema.safeParse(body);
         if (!result.success) {
             return NextResponse.json({ success: false, errors: result.error.issues }, { status: 400 });
@@ -46,9 +57,21 @@ export async function POST(req: Request) {
 
         const data = result.data;
 
-        // 2. Format Email Content for Admin
-        const subject = `[New Lead - ${data.lang?.toUpperCase() || 'Web'}] ${data.projectType} - ${data.name}`;
+        // 2. Helper technique pour l'envoi via Fetch
+        const sendEmail = async (payload: object) => {
+            const res = await fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${resendApiKey}`,
+                },
+                body: JSON.stringify(payload),
+            });
+            return res.ok;
+        };
 
+        // 3. Préparation des contenus (Contenu inchangé)
+        const subject = `[New Lead - ${data.lang?.toUpperCase() || 'Web'}] ${data.projectType} - ${data.name}`;
         const adminHtmlContent = `
             <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
                 <h2 style="color: #FFD700; background: #000; padding: 10px;">New Contact Submission</h2>
@@ -66,7 +89,6 @@ export async function POST(req: Request) {
             </div>
         `;
 
-        // 3. Format Auto-Reply Content
         const autoReplySubject = "We received your message - Seder Music";
         const autoReplyHtmlContent = `
             <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
@@ -81,18 +103,18 @@ export async function POST(req: Request) {
             </div>
         `;
 
-        // 4. Send Emails in Parallel
-        const [adminEmail, userEmail] = await Promise.all([
-            // Send to Admin
-            resend.emails.send({
+        // 4. Envoi en parallèle (Fetch natif)
+        const results = await Promise.allSettled([
+            // Envoi Admin
+            sendEmail({
                 from: 'Seder Music <contact@seder-music.com>',
-                to: ['contact@seder-music.com', 'yoel.obadia.yo@gmail.com', 'rd.skouri@gmail.com'], // Send to contact alias + fallback/personal if needed
-                replyTo: data.email,
+                to: ['contact@seder-music.com'],
+                reply_to: data.email, // Attention : l'API REST utilise reply_to (snake_case)
                 subject: subject,
                 html: adminHtmlContent,
             }),
-            // Send Auto-Reply to User
-            resend.emails.send({
+            // Envoi Auto-Reply
+            sendEmail({
                 from: 'Seder Music <contact@seder-music.com>',
                 to: [data.email],
                 subject: autoReplySubject,
@@ -100,17 +122,13 @@ export async function POST(req: Request) {
             })
         ]);
 
-        if (adminEmail.error || userEmail.error) {
-            console.error('Resend Error:', adminEmail.error || userEmail.error);
-            // We still consider it a success if at least one works, but ideally both should.
-            // For now, let's return success but log the error.
-        }
-
-        return NextResponse.json({ success: true, message: 'Email sent successfully' });
+        return NextResponse.json({
+            success: true,
+            message: 'Process completed'
+        });
 
     } catch (error) {
         console.error('Email API Error:', error);
         return NextResponse.json({ success: false, message: 'Internal Server Error' }, { status: 500 });
     }
 }
-
