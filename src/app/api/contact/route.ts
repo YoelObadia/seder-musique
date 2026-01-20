@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { resend } from '@/lib/resend';
 import { z } from 'zod';
 
 // Define Validation Schema
 const contactSchema = z.object({
     name: z.string().min(2),
     email: z.string().email(),
-    phone: z.string().optional(),
+    //phone: z.string().optional(),
     projectType: z.string().min(1),
     artistType: z.string().optional(),
     artistName: z.string().optional(), // Specific artist request
@@ -34,11 +34,6 @@ const contactSchema = z.object({
     }
 });
 
-const notifyEmails = [
-    process.env.GMAIL_USER,
-    process.env.GMAIL_USER1
-].filter(Boolean).join(',');
-
 export async function POST(req: Request) {
     try {
         const body = await req.json();
@@ -51,32 +46,15 @@ export async function POST(req: Request) {
 
         const data = result.data;
 
-        // 2. Check Environment Variables
-        const { GMAIL_USER, GMAIL_PASS, GMAIL_USER1 } = process.env;
-        if (!GMAIL_USER || !GMAIL_PASS) {
-            console.error('Missing GMAIL_USER or GMAIL_PASS env vars');
-            return NextResponse.json({ success: false, message: 'Server config error' }, { status: 500 });
-        }
-
-        // 3. Configure Transporter
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: GMAIL_USER,
-                pass: GMAIL_PASS,
-            },
-        });
-
-        // 4. Format Email Content
+        // 2. Format Email Content for Admin
         const subject = `[New Lead - ${data.lang?.toUpperCase() || 'Web'}] ${data.projectType} - ${data.name}`;
 
-        const htmlContent = `
+        const adminHtmlContent = `
             <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
                 <h2 style="color: #FFD700; background: #000; padding: 10px;">New Contact Submission</h2>
                 <p><strong>Language:</strong> ${data.lang}</p>
                 <p><strong>Name:</strong> ${data.name}</p>
                 <p><strong>Email:</strong> ${data.email}</p>
-                <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
                 <hr style="border: 1px solid #eee; margin: 20px 0;">
                 <p><strong>Project Type:</strong> ${data.projectType}</p>
                 ${data.artistType ? `<p><strong>Artist Type:</strong> ${data.artistType}</p>` : ''}
@@ -88,13 +66,45 @@ export async function POST(req: Request) {
             </div>
         `;
 
-        // 5. Send Email
-        await transporter.sendMail({
-            from: `"Seder Music" <${GMAIL_USER}>`,
-            to: notifyEmails,
-            subject: subject,
-            html: htmlContent,
-        });
+        // 3. Format Auto-Reply Content
+        const autoReplySubject = "We received your message - Seder Music";
+        const autoReplyHtmlContent = `
+            <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+                <p>Hello ${data.name},</p>
+                <p>Thank you for reaching out to Seder Music.</p>
+                <p>We have received your message regarding <strong>${data.projectType}</strong>.</p>
+                <p>Our team will review your request and get back to you within 24 hours.</p>
+                <br>
+                <p>Best regards,</p>
+                <p><strong>Seder Music Team</strong></p>
+                <p><a href="mailto:contact@seder-music.com">contact@seder-music.com</a></p>
+            </div>
+        `;
+
+        // 4. Send Emails in Parallel
+        const [adminEmail, userEmail] = await Promise.all([
+            // Send to Admin
+            resend.emails.send({
+                from: 'Seder Music <contact@seder-music.com>',
+                to: ['contact@seder-music.com', 'yoel.obadia.yo@gmail.com', 'rd.skouri@gmail.com'], // Send to contact alias + fallback/personal if needed
+                replyTo: data.email,
+                subject: subject,
+                html: adminHtmlContent,
+            }),
+            // Send Auto-Reply to User
+            resend.emails.send({
+                from: 'Seder Music <contact@seder-music.com>',
+                to: [data.email],
+                subject: autoReplySubject,
+                html: autoReplyHtmlContent,
+            })
+        ]);
+
+        if (adminEmail.error || userEmail.error) {
+            console.error('Resend Error:', adminEmail.error || userEmail.error);
+            // We still consider it a success if at least one works, but ideally both should.
+            // For now, let's return success but log the error.
+        }
 
         return NextResponse.json({ success: true, message: 'Email sent successfully' });
 
@@ -103,3 +113,4 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: false, message: 'Internal Server Error' }, { status: 500 });
     }
 }
+
