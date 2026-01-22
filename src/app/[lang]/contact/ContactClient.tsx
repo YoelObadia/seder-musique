@@ -38,9 +38,10 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
     let defaultType = '';
     if (urlType === 'booking') defaultType = 'booking_talent'; // Client seeking Artist
     else if (urlType === 'management') defaultType = 'artist_management'; // Artist seeking Manager
-    else if (urlType === 'talents') defaultType = 'talents_rd'; // Old mapping, keep if needed
+    else if (urlType === 'talents') defaultType = 'artist_management'; // Application
     else if (urlType === 'influence') defaultType = 'marketing';
-    else if (urlType && ['production', 'booking_rd'].includes(urlType)) defaultType = urlType;
+    else if (urlType === 'booking_rd') defaultType = 'booking_seder';
+    else if (urlType && ['production'].includes(urlType)) defaultType = urlType;
 
 
     // Zod Schema with Conditional Logic
@@ -185,7 +186,7 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
     };
 
     return (
-        <main ref={containerRef} className="min-h-screen bg-[#050505] text-white overflow-hidden relative selection:bg-[#FFD700] selection:text-black">
+        <main ref={containerRef} className="min-h-screen bg-[#050505] text-white overflow-hidden relative selection:bg-[#FFD700] selection:text-black" dir={isRTL ? 'rtl' : 'ltr'}>
 
             {/* Background Ambient Noise & Gradient */}
             <div className="absolute inset-0 z-0 pointer-events-none">
@@ -406,7 +407,7 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
                             </div>
 
                             {/* Submit Button */}
-                            <div className={`anim-entry pt-6 flex justify-center ${isRTL ? 'md:justify-start' : 'md:justify-end'}`}>
+                            <div className="anim-entry pt-6 flex justify-center md:justify-end">
                                 <SonicButton
                                     type="submit"
                                     variant="booking"

@@ -19,6 +19,51 @@ export async function generateStaticParams() {
     ];
 }
 
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { lang, slug } = await params;
+    const dict = await getDictionary(lang);
+    const artistDict = await getArtistDictionary(lang);
+
+    const t = dict.talents.cards;
+    const grainesList = t.graines.list || [];
+    const artistesList = t.artistes.list || [];
+    const graineFound = grainesList.find((p: any) => p.slug === slug);
+    const artisteFound = artistesList.find((p: any) => p.slug === slug);
+    const foundData = graineFound || artisteFound;
+
+    if (!foundData) {
+        return {
+            title: 'Artist Not Found | Seder Music',
+        };
+    }
+
+    const richData = (artistDict as any)[slug];
+    const role = foundData.role;
+    const name = foundData.name;
+    const bioQuery = richData?.bio?.[0] || "";
+    const description = bioQuery.slice(0, 160) + (bioQuery.length > 160 ? '...' : '');
+
+    return {
+        title: `${name} - ${role} | Seder Music`,
+        description: description,
+        openGraph: {
+            title: `${name} | Seder Music`,
+            description: description,
+            images: [
+                {
+                    url: `https://www.seder-music.com${foundData.image.replace('.webp', '-p.webp')}`,
+                    width: 1200,
+                    height: 630,
+                    alt: name,
+                },
+            ],
+            type: 'profile',
+        },
+    };
+}
+
 export default async function ArtistPage({ params }: Props) {
     const { lang, slug } = await params;
     const dict = await getDictionary(lang);

@@ -62,7 +62,7 @@ export default function FinalManifesto({ dict }: FinalManifestoProps) {
                         delay: 1.5, // Wait for text to resolve
                         ease: 'easeOut',
                     }}
-                    className="mt-12 flex justify-end pr-8 md:pr-16"
+                    className="mt-12 flex justify-end pe-8 md:pe-16"
                 >
                     <span
                         className="text-xs md:text-sm font-display font-medium uppercase tracking-[0.3em] md:tracking-[0.5em]"

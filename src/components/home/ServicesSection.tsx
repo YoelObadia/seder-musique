@@ -62,7 +62,7 @@ export default function ServicesSection({
     lang: Locale;
 }) {
     return (
-        <section id="services" className="relative py-40 overflow-hidden bg-[#050505]">
+        <section id="services" className="relative py-24 md:py-40 overflow-hidden bg-[#050505]">
             {/* Background elements */}
             <div className="absolute top-1/4 start-1/4 w-[600px] h-[600px] bg-emerald-500/10 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />
             <div className="absolute bottom-1/4 end-1/4 w-[600px] h-[600px] bg-purple-500/10 blur-[120px] rounded-full animate-pulse pointer-events-none mix-blend-screen" />

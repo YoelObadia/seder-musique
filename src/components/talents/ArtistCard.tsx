@@ -50,7 +50,7 @@ export default function ArtistCard({ name, role, image, slug, lang, variant = 'g
         <Link href={`/${lang}/artistes/${slug}`} className="block h-full">
             <div
                 ref={cardRef}
-                className={`group relative h-[400px] w-full overflow-hidden bg-[#111] border border-white/10 ${hoverBorder} transition-colors duration-500 cursor-pointer`}
+                className={`group relative aspect-[3/5] md:aspect-[3/4] w-full overflow-hidden bg-[#111] border border-white/10 ${hoverBorder} transition-colors duration-500 cursor-pointer`}
             >
                 {/* Image */}
                 <div className="absolute inset-0 overflow-hidden">

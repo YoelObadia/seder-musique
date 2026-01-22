@@ -69,13 +69,17 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
     return (
         <>
             <motion.footer
-                className="border-t border-white/5 py-20 px-6 pb-[calc(5rem+var(--safe-bottom))]"
+                className="relative border-t border-white/5 py-24 px-6 pb-[calc(5rem+var(--safe-bottom))] overflow-hidden"
                 style={{ background: '#050505' }}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={containerVariants}
             >
+                {/* Background Beam Effect */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
+                <div className="absolute -top-[200px] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#FFD700]/5 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
+
                 <div className="w-full max-w-[1800px] mx-auto px-6 md:px-12 lg:px-24 relative z-10 text-start">
                     <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-0">
                         {/* Brand */}
@@ -106,19 +110,21 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                             >
                                 {content.headings.services}
                             </h4>
-                            <ul className="space-y-3 text-sm text-start">
+                            <ul className="space-y-4 text-sm text-start">
                                 {services.map((item) => (
                                     <li key={item.href}>
                                         <Link
                                             href={item.href}
-                                            className="text-gray-400 transition-colors inline-block"
+                                            className="text-gray-400 transition-colors inline-block group"
                                         >
-                                            <motion.span
-                                                whileHover={{ color: '#FFFFFF', textShadow: "0 0 8px rgba(255,255,255,0.5)" }}
-                                                transition={{ duration: 0.2 }}
-                                            >
-                                                {item.label}
-                                            </motion.span>
+                                            <span className="relative overflow-hidden inline-block">
+                                                <span className="block translate-y-0 group-hover:-translate-y-full transition-transform duration-300">
+                                                    {item.label}
+                                                </span>
+                                                <span className="absolute top-full left-0 block translate-y-0 group-hover:-translate-y-full transition-transform duration-300 text-white">
+                                                    {item.label}
+                                                </span>
+                                            </span>
                                         </Link>
                                     </li>
                                 ))}
@@ -133,20 +139,22 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                             >
                                 {content.headings.legal}
                             </h4>
-                            <ul className="space-y-3 text-sm text-start">
+                            <ul className="space-y-4 text-sm text-start">
                                 {/* 1. Les liens classiques (Agence, Contact) */}
                                 {legalLinks.map((item) => (
                                     <li key={item.href}>
                                         <Link
                                             href={item.href}
-                                            className="text-gray-400 transition-colors inline-block"
+                                            className="text-gray-400 transition-colors inline-block group"
                                         >
-                                            <motion.span
-                                                whileHover={{ color: '#FFFFFF', textShadow: "0 0 8px rgba(255,255,255,0.5)" }}
-                                                transition={{ duration: 0.2 }}
-                                            >
-                                                {item.label}
-                                            </motion.span>
+                                            <span className="relative overflow-hidden inline-block">
+                                                <span className="block translate-y-0 group-hover:-translate-y-full transition-transform duration-300">
+                                                    {item.label}
+                                                </span>
+                                                <span className="absolute top-full left-0 block translate-y-0 group-hover:-translate-y-full transition-transform duration-300 text-white">
+                                                    {item.label}
+                                                </span>
+                                            </span>
                                         </Link>
                                     </li>
                                 ))}
@@ -155,14 +163,16 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                                 <li>
                                     <button
                                         onClick={() => setActiveLegalContent('mentions')}
-                                        className="text-gray-400 hover:text-white transition-colors text-start inline-block"
+                                        className="text-gray-400 hover:text-white transition-colors text-start inline-block group relative"
                                     >
-                                        <motion.span
-                                            whileHover={{ color: '#FFFFFF', textShadow: "0 0 8px rgba(255,255,255,0.5)" }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            {content.links.legal_notice}
-                                        </motion.span>
+                                        <span className="relative overflow-hidden inline-block">
+                                            <span className="block translate-y-0 group-hover:-translate-y-full transition-transform duration-300">
+                                                {content.links.legal_notice}
+                                            </span>
+                                            <span className="absolute top-full left-0 block translate-y-0 group-hover:-translate-y-full transition-transform duration-300 text-white">
+                                                {content.links.legal_notice}
+                                            </span>
+                                        </span>
                                     </button>
                                 </li>
 
@@ -170,14 +180,16 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                                 <li>
                                     <button
                                         onClick={() => setActiveLegalContent('privacy')}
-                                        className="text-gray-400 hover:text-white transition-colors text-start inline-block"
+                                        className="text-gray-400 hover:text-white transition-colors text-start inline-block group relative"
                                     >
-                                        <motion.span
-                                            whileHover={{ color: '#FFFFFF', textShadow: "0 0 8px rgba(255,255,255,0.5)" }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            {content.links.privacy_policy}
-                                        </motion.span>
+                                        <span className="relative overflow-hidden inline-block">
+                                            <span className="block translate-y-0 group-hover:-translate-y-full transition-transform duration-300">
+                                                {content.links.privacy_policy}
+                                            </span>
+                                            <span className="absolute top-full left-0 block translate-y-0 group-hover:-translate-y-full transition-transform duration-300 text-white">
+                                                {content.links.privacy_policy}
+                                            </span>
+                                        </span>
                                     </button>
                                 </li>
                             </ul>
@@ -187,20 +199,18 @@ export default function FooterClient({ content, lang }: FooterClientProps) {
                     {/* Bottom Bar */}
                     <motion.div
                         variants={itemVariants}
-                        className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4"
+                        className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6"
                     >
                         <div className="flex flex-col md:flex-row items-center gap-6">
-                            <p className="text-gray-600 text-xs text-start">
+                            <p className="text-gray-600 text-xs text-start font-mono uppercase tracking-wider">
                                 {content.copyright}
                             </p>
-                            <div className="hidden md:block w-px h-3 bg-white/10" />
-                            <LocaleSwitcher className="md:opacity-60 hover:opacity-100 transition-opacity" />
                         </div>
 
-                        <div className="flex gap-6">
-                            <a href="https://instagram.com/sedermusic" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors text-xs">Instagram</a>
-                            <a href="https://linkedin.com/company/sedermusic" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors text-xs">LinkedIn</a>
-                            <a href="https://spotify.com/sedermusic" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors text-xs">Spotify</a>
+                        <div className="flex items-center gap-8">
+                            <a href="https://instagram.com/sedermusic" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FFD700] transition-colors text-xs uppercase tracking-widest font-mono">Instagram</a>
+                            <a href="https://linkedin.com/company/sedermusic" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FFD700] transition-colors text-xs uppercase tracking-widest font-mono">LinkedIn</a>
+                            <a href="https://spotify.com/sedermusic" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FFD700] transition-colors text-xs uppercase tracking-widest font-mono">Spotify</a>
                         </div>
                     </motion.div>
                 </div>

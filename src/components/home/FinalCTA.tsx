@@ -16,9 +16,10 @@ interface FinalCTAProps {
             sub: string;
         };
     };
+    lang: any;
 }
 
-export default function FinalCTA({ dict }: FinalCTAProps) {
+export default function FinalCTA({ dict, lang }: FinalCTAProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -58,7 +59,7 @@ export default function FinalCTA({ dict }: FinalCTAProps) {
                 transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
                 className="relative z-10"
             >
-                <Link href="/contact" className="group relative inline-block cursor-pointer">
+                <Link href={`/${lang}/contact`} className="group relative inline-block cursor-pointer">
                     {/* Background Glow */}
                     <div className="absolute inset-0 bg-[#CBA135] rounded-full blur-xl opacity-20 group-hover:opacity-60 transition-opacity duration-500 scale-75 group-hover:scale-110" />
 

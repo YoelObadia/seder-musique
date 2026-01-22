@@ -76,7 +76,7 @@ export default async function Page({ params }: { params: Promise<{ lang: Locale 
             <FinalManifesto dict={dict} />
 
             {/* FINAL CTA */}
-            <FinalCTA dict={dict} />
+            <FinalCTA dict={dict} lang={lang} />
 
             {/* Spacer - Footer handles separation but keeping safety margin */}
             <div className="h-24" />
