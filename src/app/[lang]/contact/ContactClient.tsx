@@ -101,8 +101,8 @@ export default function ContactClient({ dict, lang }: ContactClientProps) {
         {
             icon: <Mail className="w-6 h-6" />,
             label: dict.contact.info.email_label || 'Email',
-            value: "rds.event.production@gmail.com",
-            action: "mailto:rds.event.production@gmail.com"
+            value: "contact@seder-music.com",
+            action: "mailto:contact@seder-music.com"
         },
         {
             icon: <MapPin className="w-6 h-6" />,

@@ -144,9 +144,12 @@ export default function TalentsClient({ content, lang, initialViewMode }: Talent
                 tl.to(`.card-${otherType}`, {
                     opacity: 0,
                     width: 0,
+                    height: 0, // Fix mobile vertical gap
                     padding: 0,
-                    flex: 0,
                     margin: 0,
+                    borderWidth: 0, // Ensure borders don't take space
+                    flex: 0,
+                    display: 'none', // Critical: Remove from flow to kill gap
                     duration: 0.6,
                     ease: 'power2.inOut'
                 })
@@ -242,7 +245,7 @@ export default function TalentsClient({ content, lang, initialViewMode }: Talent
                     <div
                         onClick={() => !selectedCard && handleCardSelect('graines')}
                         className={`interactive-card card-graines relative bg-[#0a0a0a] border border-white/10 hover:border-[#3B82F6]/50 transition-colors cursor-pointer overflow-hidden flex flex-col
-                        ${selectedCard === 'graines' ? 'w-full cursor-default border-[#3B82F6]' : selectedCard === 'artistes' ? 'w-0 flex-none overflow-hidden opacity-0' : 'flex-1 h-[350px] lg:h-auto'}
+                        ${selectedCard === 'graines' ? 'w-full cursor-default border-[#3B82F6]' : selectedCard === 'artistes' ? 'w-0 h-0 flex-none overflow-hidden opacity-0' : 'flex-1 h-[350px] lg:h-auto'}
                         `}
                     >
                         {/* Background Visual */}
@@ -328,7 +331,7 @@ export default function TalentsClient({ content, lang, initialViewMode }: Talent
                     <div
                         onClick={() => !selectedCard && handleCardSelect('artistes')}
                         className={`interactive-card card-artistes relative bg-[#0a0a0a] border border-white/10 hover:border-[#FFD700]/50 transition-colors cursor-pointer overflow-hidden flex flex-col
-                        ${selectedCard === 'artistes' ? 'w-full cursor-default border-[#FFD700]' : selectedCard === 'graines' ? 'w-0 flex-none overflow-hidden opacity-0' : 'flex-1 h-[350px] lg:h-auto'}
+                        ${selectedCard === 'artistes' ? 'w-full cursor-default border-[#FFD700]' : selectedCard === 'graines' ? 'w-0 h-0 flex-none overflow-hidden opacity-0' : 'flex-1 h-[350px] lg:h-auto'}
                         `}
                     >
                         {/* Background Visual */}

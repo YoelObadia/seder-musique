@@ -132,7 +132,7 @@ export default function BookingForm({ dict, lang }: BookingFormProps) {
     const InputWrapper = ({ children, icon: Icon, error }: { children: React.ReactNode, icon: any, error?: string }) => (
         <div className="relative group">
             <div className={cn(
-                "absolute top-11 start-4 z-10 transition-colors duration-300 pointer-events-none",
+                "absolute top-1/2 -translate-y-1/2 start-4 z-10 transition-colors duration-300 pointer-events-none",
                 error ? "text-red-400" : "text-white/30 group-focus-within:text-[#A855F7]"
             )}>
                 <Icon className="w-5 h-5" />
