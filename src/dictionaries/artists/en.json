@@ -51,6 +51,12 @@
         "gallery": [
             "/images/raphael.webp",
             "/images/placeholders/concert-lights.jpg"
+        ],
+        "socials": [
+            {
+                "platform": "website",
+                "url": "https://raphaelskouri.com"
+            }
         ]
     }
 }
