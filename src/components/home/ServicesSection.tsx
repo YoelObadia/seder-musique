@@ -23,15 +23,6 @@ const SERVICES_CONFIG = [
         glowColor: '#A855F7',
     },
     {
-        id: 'influence',
-        href: '/services/influence',
-        icon: <Users className="w-6 h-6" />,
-        videoSrc: '/videos/influence.webm',
-        posterSrc: '/images/influence-poster.webp',
-        gradient: 'radial-gradient(circle at center, #3B82F6 0%, #1E3A8A 100%)',
-        glowColor: '#3B82F6',
-    },
-    {
         id: 'production',
         href: '/services/production',
         icon: <Music className="w-6 h-6" />,
@@ -48,6 +39,15 @@ const SERVICES_CONFIG = [
         posterSrc: '/images/talents-poster.webp',
         gradient: 'radial-gradient(circle at center, #EF4444 0%, #991B1B 100%)',
         glowColor: '#EF4444',
+    },
+    {
+        id: 'influence',
+        href: '/services/influence',
+        icon: <Users className="w-6 h-6" />,
+        videoSrc: '/videos/influence.webm',
+        posterSrc: '/images/influence-poster.webp',
+        gradient: 'radial-gradient(circle at center, #3B82F6 0%, #1E3A8A 100%)',
+        glowColor: '#3B82F6',
     },
 ];
 

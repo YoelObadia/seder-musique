@@ -64,12 +64,6 @@ export default function Header({ nav }: HeaderProps) {
             icon: <Calendar className="w-5 h-5 group-hover:text-black transition-colors" />
         },
         {
-            href: `/${lang}/services/influence`,
-            label: t.submenu?.influence || 'Influence',
-            key: 'influence',
-            icon: <Users className="w-5 h-5 group-hover:text-black transition-colors" />
-        },
-        {
             href: `/${lang}/services/production`,
             label: t.submenu?.production || 'Production',
             key: 'production',
@@ -80,6 +74,12 @@ export default function Header({ nav }: HeaderProps) {
             label: t.submenu?.talents || 'Talents',
             key: 'talents',
             icon: <Star className="w-5 h-5 group-hover:text-black transition-colors" />
+        },
+        {
+            href: `/${lang}/services/influence`,
+            label: t.submenu?.influence || 'Influence',
+            key: 'influence',
+            icon: <Users className="w-5 h-5 group-hover:text-black transition-colors" />
         },
     ];
 
