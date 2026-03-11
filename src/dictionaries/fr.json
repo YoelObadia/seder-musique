@@ -204,6 +204,31 @@
         "intro": {
             "p1": "R&D Records est né d’une idée simple : donner à Seder Music un vrai moteur de découverte et de développement artistique.",
             "p2": "Dans le cadre de l’expansion du groupe, nous avons créé un label dédié pour ouvrir une section entièrement tournée vers les nouveaux talents et les artistes en pleine ascension. Notre rôle : repérer, sélectionner, accompagner, puis signer les profils qui ont un potentiel réel — artistique, vocal, scénique et humain — et leur offrir une structure solide pour passer un cap.",
+            "rd_records": {
+                "title": "🎵 R&D Records",
+                "desc": "Le label musical de Seder Group, dédié à la production artistique et à l’expression musicale."
+            },
+            "rd_method": {
+                "title": "🎙 R&D Method",
+                "desc": "Une méthode unique de développement artistique et vocal, née de l’expérience de la scène, intégrant :",
+                "bullets": [
+                    "travail de la voix",
+                    "performance émotionnelle",
+                    "discipline physique et mentale",
+                    "alignement intérieur"
+                ]
+            },
+            "philosophy": {
+                "title": "Une philosophie unique, deux terrains d’application",
+                "p1": "Que ce soit dans l’univers artistique ou dans le monde professionnel, la logique reste la même :",
+                "bullets": [
+                    "Structurer l’énergie créative.",
+                    "Incarner sa présence.",
+                    "Aligner ses actions."
+                ],
+                "p2": "La Méthode Seder ne propose pas un modèle théorique.",
+                "p3": "Elle est le résultat d’un parcours où l’artiste et l’entrepreneur ne s’opposent plus — mais deviennent deux expressions d’une même recherche d’équilibre."
+            },
             "p3": "R&D Records s’adresse aussi aux artistes déjà présents dans l’industrie, dotés d’une identité forte et d’un public en croissance. Pour eux, nous proposons une prise en charge complète et concrète : une stratégie de promotion, une mise en avant cohérente, la création d’opportunités, et une représentation active auprès des bons partenaires — producteurs, organisateurs, marques, médias, scènes et événements.",
             "welcome": "Seder Music porte la vision d’ensemble. R&D Records en est le relais sur le terrain : le label qui repère, accompagne, structure et propulse les artistes, qu’ils soient révélations en devenir ou talents confirmés en pleine ascension."
         },

@@ -204,6 +204,31 @@
         "intro": {
             "p1": "R&D Records is the label of Seder Music — a house designed to reveal artists, build strong identities, and produce tracks that last.",
             "p2": "At the crossroads of the artistic and the strategic, we support every project from A to Z: artistic direction, production, recording, mix & mastering, distribution, and marketing deployment. Our signature: premium sound standards, a clear vision, and teamwork dedicated to emotion.",
+            "rd_records": {
+                "title": "🎵 R&D Records",
+                "desc": "Seder Group's music label, dedicated to artistic production and musical expression."
+            },
+            "rd_method": {
+                "title": "🎙 R&D Method",
+                "desc": "A unique method of artistic and vocal development, born from stage experience, integrating:",
+                "bullets": [
+                    "voice work",
+                    "emotional performance",
+                    "physical and mental discipline",
+                    "inner alignment"
+                ]
+            },
+            "philosophy": {
+                "title": "One unique philosophy, two fields of application",
+                "p1": "Whether in the artistic universe or the professional world, the logic remains the same:",
+                "bullets": [
+                    "Structure creative energy.",
+                    "Embody one's presence.",
+                    "Align one's actions."
+                ],
+                "p2": "The Seder Method does not offer a theoretical model.",
+                "p3": "It is the result of a journey where the artist and the entrepreneur no longer oppose each other — but become two expressions of the same search for balance."
+            },
             "p3": "R&D Records is also dedicated to established artists with a strong identity and a growing audience. We provide them with comprehensive, hands-on support: promotional strategy, exposure, opportunity creation, and—crucially—representation with the right partners (producers, organizers, brands, media, venues, and events).",
             "welcome": "Welcome to R&D Records — where talent becomes a project… and the project, a success."
         },

@@ -213,15 +213,64 @@ export default function TalentsClient({ content, lang, initialViewMode }: Talent
                             {content.title}
                         </h1>
 
-                        <div className="space-y-6 text-white/70 font-serif text-lg md:text-xl leading-relaxed">
-                            {/* <p className="border-s-2 border-[#FFD700] ps-6 italic text-[#FFD700]">{content.subtitle}</p> */}
+                        <div className="space-y-8 text-white/70 font-serif text-lg md:text-xl leading-relaxed">
                             <p>{content.intro.p1}</p>
                             <p>{content.intro.p2}</p>
-                            <p>{content.intro.p3}</p>
-                            <p className="font-bold text-white">{content.intro.welcome}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* R&D METHOD & PHILOSOPHY SECTION */}
+            <section className="relative py-24 px-4 md:px-12 lg:px-24 bg-[#050505] border-t border-white/5">
+                <div className="max-w-7xl mx-auto">
+                    {/* R&D Method Section */}
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 lg:p-16 space-y-12 relative overflow-hidden backdrop-blur-sm shadow-2xl">
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#3B82F6]/10 blur-[120px] rounded-full pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FFD700]/5 blur-[120px] rounded-full pointer-events-none" />
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+                            <div className="space-y-4 relative z-10 border-s-2 border-white/10 ps-6 lg:ps-8">
+                                <h3 className="text-3xl md:text-4xl font-display text-white">{content.intro.rd_records.title}</h3>
+                                <p className="text-lg md:text-xl text-white/80 font-serif leading-relaxed pt-2">{content.intro.rd_records.desc}</p>
+                            </div>
+                            <div className="space-y-4 relative z-10 border-s-2 border-[#3B82F6] ps-6 lg:ps-8 bg-gradient-to-r from-[#3B82F6]/5 to-transparent p-4 lg:p-6 rounded-r-xl">
+                                <h3 className="text-3xl md:text-4xl font-display text-[#3B82F6]">{content.intro.rd_method.title}</h3>
+                                <p className="text-lg md:text-xl text-white/80 font-serif leading-relaxed pt-2">{content.intro.rd_method.desc}</p>
+                                <ul className="space-y-3 mt-6">
+                                    {content.intro.rd_method.bullets.map((bullet: string, i: number) => (
+                                        <li key={i} className="flex items-center gap-4 text-base md:text-lg text-white/70 font-serif">
+                                            <span className="w-2 h-2 rounded-full bg-[#FFD700] flex-shrink-0" />
+                                            {bullet}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div className="border-t border-white/10 pt-12 mt-12 space-y-8 relative z-10">
+                            <h3 className="text-2xl md:text-3xl font-display text-white uppercase tracking-wider text-center mb-10">{content.intro.philosophy.title}</h3>
+                            <p className="text-lg md:text-xl text-white/80 font-serif text-center max-w-3xl mx-auto">{content.intro.philosophy.p1}</p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10 max-w-5xl mx-auto">
+                                {content.intro.philosophy.bullets.map((item: string, i: number) => (
+                                    <div key={i} className="bg-black/40 border border-white/5 hover:border-[#3B82F6]/30 transition-colors p-6 rounded-xl flex items-center justify-center text-center shadow-lg group">
+                                        <span className="text-base md:text-lg font-medium text-white/90 group-hover:text-[#3B82F6] transition-colors">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="space-y-6 text-lg md:text-xl italic text-white/60 font-serif max-w-4xl mx-auto text-center pt-6">
+                                <p>{content.intro.philosophy.p2}</p>
+                                <p className="text-white/90 font-medium">{content.intro.philosophy.p3}</p>
+                            </div>
                         </div>
                     </div>
 
+                    <div className="mt-16 space-y-8 text-white/70 font-serif text-lg md:text-xl leading-relaxed max-w-4xl mx-auto text-center">
+                        <p>{content.intro.p3}</p>
+                        <p className="font-bold text-white text-2xl mt-8 pt-8 border-t border-white/10">{content.intro.welcome}</p>
+                    </div>
                 </div>
             </section>
 
