@@ -187,7 +187,7 @@ export default function ProductionClient({ content, lang }: ProductionClientProp
                 <div className="absolute inset-0 z-0">
                     {/* Abstract architectural image background */}
                     <Image
-                        src="/images/uhnwi.webp"
+                        src="/images/uhnwi.png"
                         alt="Background"
                         fill
                         className="uhnwi-img object-cover opacity-20 scale-110"
