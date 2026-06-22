@@ -22,7 +22,26 @@ function getLocale(request: NextRequest): string | undefined {
     }
 }
 
+// Regex pour bloquer les bots agressifs et scrapers qui consomment du CPU
+const badBotRegex = /Baiduspider|YandexBot|AhrefsBot|SemrushBot|MJ12bot|DotBot|MegaIndex|BLEXBot|PetalBot|ZoominfoBot|DataForSeoBot|Omgilibot|Bytespider|CCBot|Amazonbot|ClaudeBot|GPTBot/i;
+
+// Regex pour les bots classiques (Google, Bing, etc.)
+const goodBotRegex = /bot|crawler|spider|googlebot|bingbot|facebookexternalhit|twitterbot/i;
+
 export function middleware(request: NextRequest) {
+    // 1. Ignorer les requêtes non-GET (ex: POST formulaires, Server Actions)
+    // Cela évite de calculer la langue et d'exécuter du code pour rien
+    if (request.method !== 'GET' && request.method !== 'HEAD') {
+        return NextResponse.next();
+    }
+
+    const userAgent = request.headers.get("user-agent") || "";
+
+    // 2. Bloquer immédiatement les mauvais bots (coût CPU quasi-nul)
+    if (badBotRegex.test(userAgent)) {
+        return new NextResponse(null, { status: 403 });
+    }
+
     const pathname = request.nextUrl.pathname;
 
     // Check if there is any supported locale in the pathname
@@ -32,6 +51,16 @@ export function middleware(request: NextRequest) {
 
     // Redirect if there is no locale
     if (pathnameIsMissingLocale) {
+        // 3. Si c'est un bot classique, on évite Negotiator (très gourmand en CPU)
+        if (goodBotRegex.test(userAgent)) {
+            return NextResponse.redirect(
+                new URL(
+                    `/${i18n.defaultLocale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
+                    request.url
+                )
+            );
+        }
+
         const locale = getLocale(request);
 
         // Redirect to the same path with locale
@@ -42,9 +71,11 @@ export function middleware(request: NextRequest) {
             )
         );
     }
+
+    return NextResponse.next();
 }
 
 export const config = {
-    // Matcher ignoring `/_next/`, `/api/` and static files
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
+    // Matcher excluding API, static files, images, and bot probes (wp-admin)
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images|wp-admin|wp-login|.*\\..*).*)'],
 };

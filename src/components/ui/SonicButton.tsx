@@ -186,7 +186,7 @@ export default function SonicButton({
             case 'booking':
                 return (
                     <>
-                        <div className="absolute inset-x-0 bottom-0 h-full flex flex-col items-center justify-end pointer-events-none pb-1 pointer-events-none z-0">
+                        <div className="absolute inset-x-0 bottom-0 h-full flex flex-col items-center justify-end pointer-events-none pb-1 z-0">
                             {/* Notes */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center overflow-visible">
                                 <div className="music-note text-current text-xs">♪</div>
